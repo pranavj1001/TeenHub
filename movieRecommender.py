@@ -41,7 +41,16 @@ for i in range(0, len(getRatings.index)):
     # print (sims)
     # Now scale its similarity by how well I rated this movie
     # Logic: the values of all movies that are rated by the user in the correlation matrix are scaled by the rating given by user to that movie
-    sims = sims.map(lambda x: x * getRatings[i])
+    # scale code as per the ratings given by the user to give more accurate results
+    # also penalize the scores if the rating is given too low, so that we can avoid such recommendations
+    if getRatings[i] > 4.0:
+        sims = sims.map(lambda x: 2 * x * getRatings[i])
+    elif getRatings[i] <= 4.0 and getRatings[i] > 3.0:
+        sims = sims.map(lambda x: x * getRatings[i])
+    elif getRatings[i] <= 3.0 and getRatings[i] > 2.5:
+        sims = sims.map(lambda x: x + getRatings[i])
+    elif getRatings[i] <= 2.5:
+        sims = sims.map(lambda x: (-1) * x - getRatings[i])
     # print (sims)
     # Add the score to the list of similarity candidates
     simCandidates = simCandidates.append(sims)
@@ -57,6 +66,6 @@ simCandidates = simCandidates.groupby(simCandidates.index).sum()
 simCandidates.sort_values(inplace = True, ascending = False)
 
 # filter out movies that the user already rated
-filteredSims = simCandidates.drop(myRatings.index)
+filteredSims = simCandidates.drop(getRatings.index)
 filteredSims.head(10) # top 10 recommended movies
 
