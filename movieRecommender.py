@@ -33,39 +33,39 @@ corrMatrix = userRatings.corr(method='pearson', min_periods=100) # consider scor
 getRatings = userRatings.loc[0].dropna() # get ratings of an user
 
 # The Series is the datastructure for a single column of a DataFrame, not only conceptually, but literally i.e. the data in a DataFrame is actually stored in memory as a collection of Series. 
-simCandidates = pd.Series()
+similarCandidates = pd.Series()
 for i in range(0, len(getRatings.index)):
-    # print ("Adding sims for " + getRatings.index[i] + "...")
+    # print ("Adding recommendationList for " + getRatings.index[i] + "...")
     # Retrieve similar movies to this one that I rated
-    sims = corrMatrix[getRatings.index[i]].dropna()
-    # print (sims)
+    recommendationList = corrMatrix[getRatings.index[i]].dropna()
+    # print (recommendationList)
     # Now scale its similarity by how well I rated this movie
     # Logic: the values of all movies that are rated by the user in the correlation matrix are scaled by the rating given by user to that movie
     # scale code as per the ratings given by the user to give more accurate results
     # also penalize the scores if the rating is given too low, so that we can avoid such recommendations
     if getRatings[i] > 4.0:
-        sims = sims.map(lambda x: 2 * x * getRatings[i])
+        recommendationList = recommendationList.map(lambda x: 2 * x * getRatings[i])
     elif getRatings[i] <= 4.0 and getRatings[i] > 3.0:
-        sims = sims.map(lambda x: x * getRatings[i])
+        recommendationList = recommendationList.map(lambda x: x * getRatings[i])
     elif getRatings[i] <= 3.0 and getRatings[i] > 2.5:
-        sims = sims.map(lambda x: x + getRatings[i])
+        recommendationList = recommendationList.map(lambda x: x + getRatings[i])
     elif getRatings[i] <= 2.5:
-        sims = sims.map(lambda x: (-1) * x - getRatings[i])
-    # print (sims)
+        recommendationList = recommendationList.map(lambda x: (-1) * x - getRatings[i])
+    # print (recommendationList)
     # Add the score to the list of similarity candidates
-    simCandidates = simCandidates.append(sims)
+    similarCandidates = similarCandidates.append(recommendationList)
     
 #Glance at our results so far:
 # print ("sorting...")
-simCandidates.sort_values(inplace = True, ascending = False) # sort the results
-# print (simCandidates.head(10))
+similarCandidates.sort_values(inplace = True, ascending = False) # sort the results
+# print (similarCandidates.head(10))
 
 # use groupby() to add together the scores from movies that show up more than once
-simCandidates = simCandidates.groupby(simCandidates.index).sum()
+similarCandidates = similarCandidates.groupby(similarCandidates.index).sum()
 
-simCandidates.sort_values(inplace = True, ascending = False)
+similarCandidates.sort_values(inplace = True, ascending = False)
 
 # filter out movies that the user already rated
-filteredSims = simCandidates.drop(getRatings.index)
-filteredSims.head(10) # top 10 recommended movies
+filteredRecommendationList = similarCandidates.drop(getRatings.index)
+filteredRecommendationList.head(10) # top 10 recommended movies
 
