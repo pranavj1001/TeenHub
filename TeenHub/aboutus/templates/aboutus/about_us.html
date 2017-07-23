@@ -8,13 +8,275 @@
 
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/Chart.js' %}"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
 </head>
-<body>
+<body data-spy="scroll" data-offset="0" data-target="#theMenu">
 
-    <p>Hey there</p>
+	<!-- Menu -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="#">TeenHub</a></h1>
+			<i class="icon-remove menu-close"></i>
+			<a href="#home" class="smoothScroll">Home</a>
+			<a href="#applications" class="smoothScroll">Applications</a>
+			<a href="#about" class="smoothScroll">About US</a>
+			<a href="#contact" class="smoothScroll">Contact</a>
+			<a href="#"><i class="icon-facebook"></i></a>
+			<a href="#"><i class="icon-twitter"></i></a>
+			<a href="#"><i class="icon-dribbble"></i></a>
+			<a href="#"><i class="icon-envelope"></i></a>
+		</div>
+
+		<!-- Menu button -->
+		<div id="menuToggle"><i class="icon-reorder"></i></div>
+	</nav>
+
+
+
+	<!-- ========== HEADER SECTION ========== -->
+	<section id="home" name="home"></section>
+	<div id="background">
+		<div class="container">
+			<h1>TeenHub</h1>
+			<h2>One Place for your Entertainment</h2>
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+
+
+	<!-- ========== Intro Message ========== -->
+	<div id="whiteContainer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+				<h3>WELCOME TO <strong>TeenHub</strong>. A PLACE <strong>HANGOUT, RELAX</strong> AND <strong>ENJOY LIFE</strong> . CRAFTED WITH LOVE BY <strong>TEAMNAME</strong>. <br/></h3>
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /whiteContainer -->
+
+	<!-- ========== Applications ========== -->
+	<section id="applications" name="applications"></section>
+	<div id="greyContainer">
+		<div class="container">
+			<div class="row">
+				<h3>OUR APPLICATIONS</h3>
+				<br>
+				<br>
+				<div class="col-lg-3 col-md-6">
+                    <img id="applicationImage" src="{% static 'img/svg/movies.svg' %}">
+					<h4>Movies</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				</div>
+				<div class="col-lg-3 col-md-6">
+                    <img id="applicationImage" src="{% static 'img/svg/music.svg' %}">
+					<h4>Songs</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				</div>
+				<div class="col-lg-3 col-md-6">
+                    <img id="applicationImage" src="{% static 'img/svg/game-controller.svg' %}">
+					<h4>Games</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				</div>
+				<div class="col-lg-3 col-md-6">
+                    <img id="applicationImage" src="{% static 'img/svg/news.svg' %}">
+					<h4>News</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /greyContainer -->
+
+	<!-- ========== Languages used ========== -->
+	<div id="darkGreyContainer">
+		<div class="container">
+			<div class="row">
+				<h3>LANGUAGES USED IN OUR PROJECT</h3>
+				<br>
+				<br>
+				<div class="col-lg-4">
+					<canvas id="javascript" height="130" width="130"></canvas>
+					<br>
+					<h4>Javascript</h4>
+					<br>
+					<script>
+						var doughnutData = [
+								{
+									value: 30,
+									color:"#f85c37"
+								},
+								{
+									value : 70,
+									color : "#ecf0f1"
+								}
+							];
+							var myDoughnut = new Chart(document.getElementById("javascript").getContext("2d")).Doughnut(doughnutData);
+					</script>
+
+				</div>
+				<div class="col-lg-4">
+					<canvas id="bootstrap" height="130" width="130"></canvas>
+					<br>
+					<h4>Python</h4>
+					<br>
+					<script>
+						var doughnutData = [
+								{
+									value: 40,
+									color:"#f85c37"
+								},
+								{
+									value : 60,
+									color : "#ecf0f1"
+								}
+							];
+							var myDoughnut = new Chart(document.getElementById("bootstrap").getContext("2d")).Doughnut(doughnutData);
+					</script>
+				</div>
+				<div class="col-lg-4">
+					<canvas id="wordpress" height="130" width="130"></canvas>
+					<br>
+					<h4>HTML & CSS</h4>
+					<br>
+					<script>
+						var doughnutData = [
+								{
+									value: 30,
+									color:"#f85c37"
+								},
+								{
+									value : 70,
+									color : "#ecf0f1"
+								}
+							];
+							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
+					</script>
+				</div>
+
+			</div>
+		</div><!-- /container -->
+	</div><!-- /darkGreyContainer -->
+
+	<!-- ========== ABOUT - GREY SECTION ========== -->
+	<section id="about" name="about"></section>
+	<div id="greyContainer">
+		<div class="container">
+			<div class="row">
+				<h3>ABOUT US</h3>
+				<br>
+				<br>
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lectus elit, tincidunt nec turpis sed, accumsan iaculis ipsum. Nulla at augue auctor, tristique erat in, ultricies nunc. Mauris eget metus leo. Ut in mi lacinia, mattis nisl non, ultrices risus. Vestibulum aliquet aliquam ipsum ut ullamcorper. Pellentesque fringilla, massa vel rutrum consequat, nulla velit fermentum dolor, sed scelerisque.</p>
+				<br>
+				<br>
+				</div>
+				<div class="col-lg-2"></div>
+				<div class="col-lg-3 team">
+					<img class="img-circle" src="" height="90" width="90">
+					<h4>Pranav Jain</h4>
+					<h5><i>Supreme Leader</i></h5>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p>
+						<a href=""><i class="icon-facebook"></i></a>
+						<a href=""><i class="icon-twitter"></i></a>
+						<a href=""><i class="icon-envelope"></i></a>
+
+					</p>
+				</div>
+
+				<div class="col-lg-3 team">
+					<img class="img-circle" src="" height="90" width="90">
+					<h4>Kedae Kale</h4>
+					<h5><i>Web Designer</i></h5>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p>
+						<a href=""><i class="icon-facebook"></i></a>
+						<a href=""><i class="icon-twitter"></i></a>
+						<a href=""><i class="icon-envelope"></i></a>
+
+					</p>
+				</div>
+
+				<div class="col-lg-3 team">
+					<img class="img-circle" src="" height="90" width="90">
+					<h4>Ganesh Choudhary</h4>
+					<h5><i>Web Designer</i></h5>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p>
+						<a href=""><i class="icon-facebook"></i></a>
+						<a href=""><i class="icon-twitter"></i></a>
+						<a href=""><i class="icon-envelope"></i></a>
+
+					</p>
+				</div>
+
+				<div class="col-lg-3 team">
+					<img class="img-circle" src="" height="90" width="90">
+					<h4>Paresh Aher</h4>
+					<h5><i>Web Designer</i></h5>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p>
+						<a href=""><i class="icon-facebook"></i></a>
+						<a href=""><i class="icon-twitter"></i></a>
+						<a href=""><i class="icon-envelope"></i></a>
+
+					</p>
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /greyContainer -->
+
+	<!-- ========== FOOTER SECTION ========== -->
+	<section id="contact" name="contact"></section>
+	<div id="footer">
+		<div class="container">
+			<div class="row">
+					<h3><b>CONTACT US</b></h3>
+					<br>
+					<div class="col-lg-4">
+						<h3><b>Send Us A Message:</b></h3>
+						<h3>sample@email.com</h3>
+						<br>
+					</div>
+
+					<div class="col-lg-4">
+						<h3><b>Call Us:</b></h3>
+						<h3>911</h3>
+						<br>
+					</div>
+
+					<div class="col-lg-4">
+						<h3><b>We Are Social</b></h3>
+						<p>
+							<a href=""><i class="icon-facebook"></i></a>
+							<a href=""><i class="icon-twitter"></i></a>
+							<a href=""><i class="icon-envelope"></i></a>
+						</p>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /footer -->
+
+	<div id="creator">
+		<div class="container">
+			<p>Created by <a href="https://github.com/pranavj1001">Pranav Jain</a></p>
+		</div>
+	</div>
+
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="{% static 'js/smoothscroll.js' %}"></script>
+    <script src="{% static 'js/classie.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
 </body>
 </html>

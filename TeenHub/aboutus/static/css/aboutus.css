@@ -1,0 +1,394 @@
+/*
+ * Author: Carlos Alvarez
+ * URL: http://alvarez.is
+ *
+ * Project Name: Onassis - Free Bootstrap 3 Theme
+ * Version: 1.0
+ * URL: http://blacktie.co
+ */
+
+body {
+  background-color: #f2f2f2;
+    font-family: "Lato";
+    font-weight: 300;
+    font-size: 16px;
+    color: #555;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Titles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway";
+    font-weight: 300;
+    color: #333;
+}
+
+
+/* Paragraph & Typographic */
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #f85c37;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+ hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+/* ==========================================================================
+   Wrap Sections
+   ========================================================================== */
+
+#background {
+	background: url(../img/entertainment.jpg) no-repeat center top;
+	margin-top: -10px;
+	padding-top:20px;
+	text-align:center;
+	min-height: 700px;
+	width: 100%;
+    height: 100%;
+	background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+#background h1 {
+	color: white;
+	font-weight: 700;
+	letter-spacing: 3px;
+    font-size: 5rem;
+    margin-top: 10rem;
+}
+
+@media (min-width: 420px){
+
+    #background h1{
+        margin-top: 15rem;
+        font-size: 8.75rem;
+    }
+
+}
+
+#background h2 {
+	color: white;
+	font-size: 3.5rem;
+	font-weight: 100;
+    /*margin-top: 70px;*/
+}
+
+@media (min-width: 420px){
+
+    #background h2{
+        margin-top: 10rem;
+        font-size: 3.125rem;
+        letter-spacing: 2px;
+    }
+
+}
+
+/* White Wrap */
+
+#whiteContainer {
+	background: #ffffff;
+	padding-top: 35px;
+	padding-bottom: 35px;
+	text-align: center;
+}
+
+#whiteContainer h3 {
+	font-weight: 700;
+	color: #7b7b7b;
+	letter-spacing: 1px;
+}
+
+#whiteContainer strong {
+	color: #2f2f2f;
+}
+
+/*Application Images*/
+#applicationImage{
+	height: 90px;
+	width: 90px;
+
+}
+
+/* Grey Wrap */
+
+#greyContainer {
+	background: #f2f2f2;
+	padding-top: 35px;
+	padding-bottom: 35px;
+	text-align: center;
+}
+
+/* Dark Grey Wrap */
+#darkGreyContainer {
+	background: #e0e0e0;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	text-align: center;
+}
+
+/* Footer Wrap */
+
+#footer {
+	background: #2f2f2f;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	text-align: center
+}
+
+#footer h3 {
+	color: white;
+}
+
+#footer i {
+	font-size: 26px;
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* Copyright Wrap */
+
+#creator {
+	background: #222222;
+	padding-top: 15px;
+	text-align: right;
+}
+
+#creator p {
+	color: white
+}
+
+/* MENU CONF*/
+
+.menu {
+	position: fixed;
+	right: -200px;
+	width: 260px;
+	height: 100%;
+	top: 0;
+	z-index: 10;
+	text-align: left;
+}
+
+.menu.menu-open {
+	right: 0px;
+}
+
+.menu-wrap {
+	position: absolute;
+	top: 0;
+	left: 60px;
+	background: #1a1a1a;
+	width: 200px;
+	height: 100%;
+}
+
+.menu h1.logo a {
+	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 800;
+	letter-spacing: 0.15em;
+	line-height: 40px;
+	text-transform: uppercase;
+	color: #ffffff;
+	margin-top: 20px;
+}
+
+.menu h1.logo a:hover {
+	color: #f85c37;
+}
+
+.menu img.logo {
+	margin: 20px 0;
+	max-width: 160px;
+}
+
+.menu a {
+	margin-left: 20px;
+	color: #808080;
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 40px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.menu a:hover {
+	color: #ffffff;
+}
+
+.menu a:active {
+	color: #ffffff;
+}
+
+.menu a > i {
+	float: left;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	width: 25px;
+	font-size: 14px;
+	line-height: 40px;
+	margin: 25px 2px;
+}
+
+.menu-close {
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	font-size: 14px;
+	color: #808080;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	top: 20px;
+	right: 5px;
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+.menu-close:hover {
+	color: #ffffff;
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+/* Push the body after clicking the menu button */
+.body-push {
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+}
+
+.body-push-toright {
+	left: 200px;
+}
+
+.body-push-toleft {
+	left: -200px;
+}
+
+.menu,
+.body-push {
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+		-ms-transition: all .3s ease;
+		 -o-transition: all .3s ease;
+			transition: all .3s ease;
+}
+
+#menuToggle {
+	position: absolute;
+	top: 20px;
+	left: 0;
+	z-index: 11;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.25);
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+#menuToggle:hover {
+	color: #ffffff;
+	background: rgba(0,0,0,0.2);
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+
+/* BUTTON CONF */
+
+.btn-theme {
+	color: #fff;
+	background-color: #1abc9c;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-weight: 700;
+	border-radius: 3px;
+}
+
+.btn-theme:hover {
+	cursor: pointer;
+	color: white;
+	background-color: #16a085;
+
+}
+
+/* TEAM CONF */
+
+.team {
+	padding-top: 20px;
+}
+
+.team:hover {
+	background: white;
+}
+
+.team a {
+	padding-right: 10px;
+	padding-left: 10px;
+}
