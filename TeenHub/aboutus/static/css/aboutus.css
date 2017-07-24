@@ -79,7 +79,7 @@ a:after {
    ========================================================================== */
 
 #background {
-	background: url(../img/entertainment.jpg) no-repeat center top;
+	background: url(../img/entertainment-Mobile.jpg) no-repeat center top;
 	margin-top: -10px;
 	padding-top:20px;
 	text-align:center;
@@ -89,6 +89,51 @@ a:after {
 	background-attachment: fixed;
     background-position: center;
     background-size: cover;
+}
+
+@media (min-width: 500px){
+  #background{
+    background: url(../img/entertainment-Tablet.jpg) no-repeat center top;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media (min-width: 800px){
+  #background{
+    background: url(../img/entertainment-Laptop.jpg) no-repeat center top;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media (min-width: 1280px){
+  #background{
+	background: url(../img/entertainment-Desktop.jpg) no-repeat center top;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media (min-width: 1920px){
+  #background{
+    background: url(../img/entertainment-1080p.jpg) no-repeat center top;
+	background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media (min-width: 3000px){
+  #background{
+    background: url(../img/entertainment-hi-dpi.jpg) no-repeat center top;
+	background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
 }
 
 #background h1 {
