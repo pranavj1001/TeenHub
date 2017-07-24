@@ -220,7 +220,7 @@ a:after {
 	position: absolute;
 	top: 0;
 	left: 60px;
-	background: #1a1a1a;
+	background: rgba(26,26,26, 0.9);
 	width: 200px;
 	height: 100%;
 }
