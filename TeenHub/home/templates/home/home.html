@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TeenHub - About US</title>
+    <title>TeenHub - Home</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/Chart.js' %}"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
@@ -24,10 +23,10 @@
 		<div class="menu-wrap">
 			<h1 class="logo"><a href="#">TeenHub</a></h1>
 			<i class="icon-remove menu-close"></i>
-			<a href="#home" class="smoothScroll">Home</a>
-			<a href="#applications" class="smoothScroll">Applications</a>
-			<a href="#about" class="smoothScroll">About US</a>
-			<a href="#contact" class="smoothScroll">Contact</a>
+			<a href="#">Home</a>
+			<a href="#applications">Applications</a>
+			<a href="{% url 'show_aboutus' %}">About US</a>
+			<a href="#contact">Contact</a>
 			<a href="#"><i class="icon-facebook"></i></a>
 			<a href="#"><i class="icon-twitter"></i></a>
 			<a href="#"><i class="icon-dribbble"></i></a>
@@ -43,6 +42,20 @@
         <div id="searchBox" class="inner-addon right-addon">
           <i class="glyphicon glyphicon-search"></i>
           <input type="text" class="form-control" placeholder="Search" />
+          <div id="applications" class="row">
+              <div class="col-sm-3">
+                  <a href="#">Movies</a>
+              </div>
+              <div class="col-sm-3">
+                  <a href="#">Songs</a>
+              </div>
+              <div class="col-sm-3">
+                  <a href="#">Games</a>
+              </div>
+              <div class="col-sm-3">
+                  <a href="#">News</a>
+              </div>
+          </div>
         </div>
     </div>
 
@@ -54,8 +67,6 @@
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="{% static 'js/smoothscroll.js' %}"></script>
-    <script src="{% static 'js/classie.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 
 </body>

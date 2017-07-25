@@ -285,10 +285,19 @@ a:after {
 }
 
 /* align glyph */
-.right-addon .glyphicon { right: 0px;}
+.right-addon .glyphicon {
+	right: 0px;
+}
 
 /* add padding  */
-.right-addon input { padding-right: 30px; }
+.right-addon input {
+	padding-right: 30px;
+}
+
+#applications{
+	margin-top: 20px;
+	text-align: center;
+}
 
 .footer {
   position: absolute;
