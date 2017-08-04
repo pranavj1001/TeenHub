@@ -16,26 +16,23 @@
                             {% csrf_token %}
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Name" name="name" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your name" name="name" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Address" name="adress" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your email address" name="email" type="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="email" name="email" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your username" name="username" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Date" name="DOB" type="text" id="datepicker" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your Date of Birth" name="DOB" type="text" id="datepicker" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Mobile Number" name="mob_no" type="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Password" name="password" type="password" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your Password" name="password" type="password" required>
                                 </div>
                                 <input class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" type="submit" value="Signup">
                                 <p id="optionLoginOrSignup" class="whiteText">Already a member?</p>
-                                <input class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" value="Login">
+                                <button class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" onclick="location.href='{% url 'show_login' %}'" value="Login">Login</button>
                             </fieldset>
                         </form>
                     </div>

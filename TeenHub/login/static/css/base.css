@@ -22,21 +22,21 @@ body {
 
 @media (min-width: 600px) {
 	body{
-		background: url(../img/loginPage-800p.png) center no-repeat;
+		background: url(../img/loginPage-800p.png) no-repeat center center fixed;
 		background-size: cover;
 	}
 }
 
 @media (min-width: 1000px) {
 	body{
-		background: url(../img/loginPage-1080p.png) center no-repeat;
+		background: url(../img/loginPage-1080p.png) no-repeat center center fixed;
 		background-size: cover;
 	}
 }
 
 @media (min-width: 4000px) {
 	body{
-		background: url(../img/loginPage-hi-dpi.png) center no-repeat;
+		background: url(../img/loginPage-hi-dpi.png) no-repeat center center fixed;
 		background-size: cover;
 	}
 }

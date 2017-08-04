@@ -2,6 +2,34 @@
 
 {% block form %}
 
-    Hey
+    <h2 class="headingReg whiteText">Please login to continue</h2>
+
+    <div class="fluid-container form">
+        <div class="row vertical-offset-100">
+            <div class="col-sm-4 col-sm-offset-8">
+                <div class="panel panel-default grayBg noBorder">
+                    <div class="panel-heading grayBg noBorder">
+                        <h3 class="panel-title whiteText">Please enter your credentials</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/enterData" method="post" Content-Type="application/json">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your username" name="username" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Enter your Password" name="password" type="password" required>
+                                </div>
+                                <input class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" type="submit" value="Login">
+                                <p id="optionLoginOrSignup" class="whiteText">Already a member?</p>
+                                <button class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" onclick="location.href='{% url 'show_signup' %}'" value="Login">Signup</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
