@@ -2,6 +2,43 @@
 
 {% block form %}
 
-    Hey
+    <h2 class="headingReg">Please signup to continue</h2>
+
+    <div class="fluid-container form">
+        <div class="row vertical-offset-100">
+            <div class="col-sm-4 col-sm-offset-8">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please register</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/enterData" method="post" Content-Type="application/json">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Name" name="name" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Address" name="adress" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="email" name="email" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Date" name="DOB" type="text" id="datepicker" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Mobile Number" name="mob_no" type="text" required>
+                                </div>
+                                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Signup">
+                                <p>Already a member?</p>
+                                <input class="btn btn-lg btn-primary btn-block" value="Login">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

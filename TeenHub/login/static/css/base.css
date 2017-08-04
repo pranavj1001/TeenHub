@@ -242,34 +242,35 @@ a:after {
 			transition: all .1s ease-in-out;
 }
 
-#searchContainer{
-	margin-top: 200px;
+.headingReg{
+    margin-top: 20px;
 }
 
-#searchHeading{
-	text-align: center;
+.form{
+    margin-top: 50px;
 }
 
-#searchBox{
-	margin-left: auto;
-	margin-right: auto;
+.form, .headingReg{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-@media (min-width: 600px) {
-	#searchBox{
-		width: 70%;
-	}
+@media (min-width: 450px) {
+    .headingReg{
+        margin-top: 30px;
+    }
 
-	#searchHeading{
-		font-size: 5rem;
-	}
+    .form, .headingReg{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 
 }
 
-@media (min-width: 800px) {
-	#searchBox{
-		width: 60%;
-	}
+@media (min-width: 768px) {
+    .headingReg{
+        margin-top: 60px;
+    }
 }
 
 /* enable absolute positioning */
@@ -299,13 +300,19 @@ a:after {
 	text-align: center;
 }
 
+.wrapper{
+    min-height:100%;
+    margin-bottom: -60px;
+    padding-bottom: 60px;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #f5f5f5;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+    position: fixed;
 }
