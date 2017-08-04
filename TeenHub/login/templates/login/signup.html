@@ -2,37 +2,37 @@
 
 {% block form %}
 
-    <h2 class="headingReg">Please signup to continue</h2>
+    <h2 class="headingReg whiteText">Please signup to continue</h2>
 
     <div class="fluid-container form">
         <div class="row vertical-offset-100">
             <div class="col-sm-4 col-sm-offset-8">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please register</h3>
+                <div class="panel panel-default grayBg noBorder">
+                    <div class="panel-heading grayBg noBorder">
+                        <h3 class="panel-title whiteText">Please register</h3>
                     </div>
                     <div class="panel-body">
                         <form action="/enterData" method="post" Content-Type="application/json">
                             {% csrf_token %}
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Name" name="name" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Name" name="name" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Address" name="adress" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Address" name="adress" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="email" name="email" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="email" name="email" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Date" name="DOB" type="text" id="datepicker" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Date" name="DOB" type="text" id="datepicker" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Mobile Number" name="mob_no" type="text" required>
+                                    <input class="form-control lightGrayBg noBorder whiteText noBlueFocus" placeholder="Mobile Number" name="mob_no" type="text" required>
                                 </div>
-                                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Signup">
-                                <p>Already a member?</p>
-                                <input class="btn btn-lg btn-primary btn-block" value="Login">
+                                <input class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" type="submit" value="Signup">
+                                <p id="optionLoginOrSignup" class="whiteText">Already a member?</p>
+                                <input class="btn btn-lg btn-primary btn-block noBorder darkGrayBg noBlueHover" value="Login">
                             </fieldset>
                         </form>
                     </div>
