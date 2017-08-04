@@ -10,10 +10,26 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+    <script>
+        $(document).ready(function() {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                yearRange: "1910:2017",
+                showAnim: "slideDown",
+                showButtonPanel: true,
+                defaultDate: '01-01-1990'
+            });
+        });
+    </script>
 
 </head>
 <body data-spy="scroll" data-offset="0" data-target="#theMenu">
@@ -25,7 +41,7 @@
             <div class="menu-wrap">
                 <h1 class="logo"><a href="#">TeenHub</a></h1>
                 <i class="icon-remove menu-close"></i>
-                <a href="#">Home</a>
+                <a href="{% url 'show_home' %}">Home</a>
                 <a href="#applications">Applications</a>
                 <a href="{% url 'show_aboutus' %}">About US</a>
                 <a href="#contact">Contact</a>
