@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TeenHub - Home</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+
+	<!-- Menu -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="#">TeenHub</a></h1>
+			<i class="icon-remove menu-close"></i>
+			<a href="#">Home</a>
+			<a href="#applications">Applications</a>
+			<a href="{% url 'show_aboutus' %}">About US</a>
+			<a href="#contact">Contact</a>
+			<a href="#"><i class="icon-facebook"></i></a>
+			<a href="#"><i class="icon-twitter"></i></a>
+			<a href="#"><i class="icon-dribbble"></i></a>
+			<a href="#"><i class="icon-envelope"></i></a>
+		</div>
+
+		<!-- Menu button -->
+		<div id="menuToggle"><i class="icon-reorder"></i></div>
+	</nav>
+
+    {% block form %}
+    {% endblock %}
+
+	<footer class="footer">
+      <div class="container">
+          <span class="text-muted">&copy; <a href="https://github.com/pranavj1001/TeenHub">TeenHUB team</a></span>
+      </div>
+    </footer>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
