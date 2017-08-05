@@ -37,4 +37,18 @@ def signup_user(request):
             return HttpResponse("you're in")
 
 def login_user(request):
-    return render("logged in")
+    if request.method == 'GET':
+        # return render_to_response('alertmessage.html', {"message": 'all feilds are neccesory'})
+        return HttpResponse("Don't use GET method")
+    if request.POST:
+        print('login, everything is fine')
+        username = request.POST['username']
+        password = request.POST['password']
+        if User.objects.filter(username=username).exists():
+            userDetails = User.objects.get(username=username)
+            if password == str(userDetails.password):
+                return HttpResponse("Welcome Back")
+            else:
+                return HttpResponse("Wrong Password")
+        else:
+            return HttpResponse("Could not find this user")
