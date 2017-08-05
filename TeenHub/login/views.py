@@ -13,7 +13,8 @@ def show_signup(request):
 
 def signup_user(request):
     if request.method == 'GET':
-        return render(request, "register.html", {})
+        # return render_to_response('alertmessage.html', {"message": 'all feilds are neccesory'})
+        return HttpResponse("Don't use GET method")
     if request.POST:
         print('signup, everything is fine')
         name = request.POST['name']
@@ -23,8 +24,8 @@ def signup_user(request):
         password = request.POST['password']
         today = date.today()
         age = today.year - dateofbirth.year - ((today.month, today.day) < (dateofbirth.month, dateofbirth.day))
-        if (len(name) == 0 or len(email) == 0):
-            print("User already exists")
+        if (len(name) == 0 or len(email) == 0 or len(password) == 0):
+            print("name, email password not entered yet")
             # return render_to_response('alertmessage.html', {"message": 'all feilds are neccesory'})
         if User.objects.filter(username=username).exists():
             return HttpResponse("user already exists")
