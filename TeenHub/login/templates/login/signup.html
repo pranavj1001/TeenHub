@@ -12,7 +12,7 @@
                         <h3 class="panel-title whiteText">Please register</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="/enterData" method="post" Content-Type="application/json">
+                        <form action="{% url 'signup_user' %}" method="post" Content-Type="application/json">
                             {% csrf_token %}
                             <fieldset>
                                 <div class="form-group">
