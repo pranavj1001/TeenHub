@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,redirect
 from .models import User
 import datetime
 from datetime import date
@@ -34,7 +34,7 @@ def signup_user(request):
             existing_number_of_users += 1
             newUser = User(user_number=existing_number_of_users, name=name, username=username, dob=dateofbirth, age=age, email=email, password=password)
             newUser.save()
-            return HttpResponse("you're in")
+            return redirect('/movies/S')
 
 def login_user(request):
     if request.method == 'GET':
@@ -47,7 +47,7 @@ def login_user(request):
         if User.objects.filter(username=username).exists():
             userDetails = User.objects.get(username=username)
             if password == str(userDetails.password):
-                return HttpResponse("Welcome Back")
+                return redirect('/movies/S')
             else:
                 return HttpResponse("Wrong Password")
         else:

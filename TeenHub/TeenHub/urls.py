@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^aboutus/', include('aboutus.urls')),
     url(r'^', include('home.urls')),
     url(r'^reg/', include('login.urls')),
+    url(r'^movies/', include('movies.urls')),
 ]
