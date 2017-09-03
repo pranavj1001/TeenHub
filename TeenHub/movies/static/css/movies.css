@@ -237,7 +237,181 @@ a:after {
 }
 
 .first-carousel{
-	back
+	background: url("../img/captain-america-640p.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 200px;
+}
+
+.second-carousel{
+	background: url("../img/interstellar-640p.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 200px;
+}
+
+.third-carousel{
+	background: url("../img/hunger-games-640p.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 200px;
+}
+
+.carousel-inner{
+	height: 200px;
+}
+
+@media (min-width: 640px) {
+
+	.carousel-inner{
+		height: 350px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 350px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 350px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 350px;
+	}
+
+}
+
+@media (min-width: 800px) {
+
+	.carousel-inner{
+		height: 450px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 450px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 450px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 450px;
+	}
+
+}
+
+@media (min-width: 1280px) {
+
+	.carousel-inner{
+		height: 550px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1280p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 550px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1280p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 550px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1280p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 550px;
+	}
+
+}
+
+@media (min-width: 1366px) {
+
+	.carousel-inner{
+		height: 650px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1366p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 650px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1366p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 650px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1366p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 650px;
+	}
+
+}
+
+@media (min-width: 1600px) {
+
+	.carousel-inner{
+		height: 700px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1600p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1600p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1600p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+}
+
+@media (min-width: 1920px) {
+
+	.carousel-inner{
+		height: 700px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1920p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1920p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1920p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
 }
 
 .headingReg{
