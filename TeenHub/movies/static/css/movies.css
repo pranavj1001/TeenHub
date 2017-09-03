@@ -236,6 +236,10 @@ a:after {
 			transition: all .1s ease-in-out;
 }
 
+.first-carousel{
+	back
+}
+
 .headingReg{
     margin-top: 20px;
 }
