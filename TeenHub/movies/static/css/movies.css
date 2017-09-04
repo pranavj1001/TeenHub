@@ -1,9 +1,9 @@
 body {
-  background-color: #f2f2f2;
     font-family: "Lato";
     font-weight: 300;
     font-size: 16px;
     color: #555;
+	overflow-x: hidden;
 
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -498,8 +498,24 @@ a:after {
 }
 
 #applications{
-	margin-top: 20px;
 	text-align: center;
+}
+
+.current-app{
+	background-color: #111;
+}
+
+.app{
+	padding: 15px;
+}
+
+.app:hover{
+	background-color: #111;
+}
+
+.navbar{
+	min-height: 0;
+	border: none;
 }
 
 .wrapper{
@@ -521,5 +537,4 @@ a:after {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
     background-color: #222;
-    position: fixed;
 }
