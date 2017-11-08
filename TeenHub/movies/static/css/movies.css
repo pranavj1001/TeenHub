@@ -499,10 +499,15 @@ a:after {
 
 #applications{
 	text-align: center;
+	height: 100%;
 }
 
 .current-app{
 	background-color: #111;
+}
+
+.noPadding{
+	padding: 0;
 }
 
 .app{
