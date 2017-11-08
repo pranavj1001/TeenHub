@@ -3,7 +3,7 @@
 {% block check %}
 
     {% if request.session.id %}
-        <p>Hey User</p>
+        <p>Hey {{ request.session.id }}</p>
     {% else %}
         <p>Not Logged in!</p>
     {% endif %}

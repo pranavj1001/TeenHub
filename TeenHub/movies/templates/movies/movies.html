@@ -30,6 +30,12 @@
 			<a href="#applications" class="smoothScroll">Applications</a>
 			<a href="#about" class="smoothScroll">About US</a>
 			<a href="#contact" class="smoothScroll">Contact</a>
+            {% if request.session.id %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'show_login' %}">Login</a>
+                <a href="{% url 'show_signup' %}">Signup</a>
+            {% endif %}
 			<a href="#"><i class="icon-facebook"></i></a>
 			<a href="#"><i class="icon-twitter"></i></a>
 			<a href="#"><i class="icon-dribbble"></i></a>
