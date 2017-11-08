@@ -34,7 +34,9 @@ def signup_user(request):
             existing_number_of_users += 1
             newUser = User(user_number=existing_number_of_users, name=name, username=username, dob=dateofbirth, age=age, email=email, password=password)
             newUser.save()
-            return redirect('/movies/S')
+            userDetails = User.objects.get(username=username)
+            request.session["id"] = userDetails.id
+            return redirect('/movies')
 
 def login_user(request):
     if request.method == 'GET':
@@ -47,7 +49,8 @@ def login_user(request):
         if User.objects.filter(username=username).exists():
             userDetails = User.objects.get(username=username)
             if password == str(userDetails.password):
-                return redirect('/movies/S')
+                request.session["id"] = userDetails.id
+                return redirect('/movies')
             else:
                 return HttpResponse("Wrong Password")
         else:

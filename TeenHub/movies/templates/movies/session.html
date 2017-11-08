@@ -1,0 +1,11 @@
+{% extends 'movies/movies.html' %}
+
+{% block check %}
+
+    {% if request.session.id %}
+        <p>Hey User</p>
+    {% else %}
+        <p>Not Logged in!</p>
+    {% endif %}
+
+{% endblock %}
