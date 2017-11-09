@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from django.contrib.auth.hashers import make_password, check_password
 from .models import User
 import datetime
 from datetime import date
@@ -36,6 +37,9 @@ def signup_user(request):
             newUser.save()
             userDetails = User.objects.get(username=username)
             request.session["id"] = userDetails.id
+            hashedPasssword = make_password(password)
+            newUser.password = hashedPasssword
+            newUser.save()
             return redirect('/movies')
 
 def login_user(request):
@@ -48,7 +52,7 @@ def login_user(request):
         password = request.POST['password']
         if User.objects.filter(username=username).exists():
             userDetails = User.objects.get(username=username)
-            if password == str(userDetails.password):
+            if check_password(password, str(userDetails.password)):
                 request.session["id"] = userDetails.id
                 return redirect('/movies')
             else:
