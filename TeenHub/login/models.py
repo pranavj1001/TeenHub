@@ -9,4 +9,4 @@ class User(models.Model):
     dob = models.DateField(blank=False)
     age = models.IntegerField(blank=False)
     email = models.CharField(max_length=20, unique=True)
-    password = models.CharField(max_length=20, unique=True)
+    password = models.CharField(max_length=80, unique=True)
