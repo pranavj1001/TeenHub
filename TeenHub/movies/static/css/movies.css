@@ -534,6 +534,60 @@ a:after {
 	margin: 15px;
 }
 
+.genre{
+	margin: 15px;
+	background-color: #222;
+	box-shadow: 5px 5px 5px #000;
+}
+
+.genreImg{
+	height: 150px;
+}
+
+.heightAuto{
+	height: auto;
+}
+
+.mobile{
+	display: block;
+}
+.tablet{
+	display: none;
+}
+.desktop{
+	display: none;
+}
+
+@media (min-width: 700px) {
+	.mobile{
+		display: none;
+	}
+	.tablet{
+		display: block;
+	}
+	.desktop{
+		display: none;
+	}
+	.genreImg{
+		height: 250px;
+	}
+}
+
+@media (min-width: 1000px) {
+	.tablet{
+		display: none;
+	}
+	.mobile{
+		display: none;
+	}
+	.desktop{
+		display: block;
+	}
+	.genreImg{
+		height: 300px;
+	}
+}
+
 .footer {
     bottom: 0;
     width: 100%;
