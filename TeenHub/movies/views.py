@@ -7,5 +7,5 @@ def logout(request):
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
-    return render(request, 'movies/movies.html', {})
+    return render(request, 'movies/session.html', {})
 
