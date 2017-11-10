@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2017 at 03:38 PM
+-- Generation Time: Nov 10, 2017 at 06:21 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -202,7 +202,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (11, 'auth', '0007_alter_validators_add_error_messages', '2017-08-05 06:39:07.359978'),
 (12, 'auth', '0008_alter_user_username_max_length', '2017-08-05 06:39:07.819012'),
 (13, 'login', '0001_initial', '2017-08-05 06:39:08.119725'),
-(14, 'sessions', '0001_initial', '2017-08-05 06:39:08.814375');
+(14, 'sessions', '0001_initial', '2017-08-05 06:39:08.814375'),
+(15, 'login', '0002_auto_20171109_1129', '2017-11-09 06:00:16.602339');
 
 -- --------------------------------------------------------
 
@@ -215,6 +216,15 @@ CREATE TABLE `django_session` (
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('ajnmphahz160ugzwirhgz7dn3cw7iwl9', 'ZWVhOWQyNmVlOGRjMGY4ZTdkOWQ2MGNhMWM3ZWZkZTA2NjEzMGVjYzp7ImlkIjoxfQ==', '2017-11-22 08:59:33.397064'),
+('fxgl0nheg4gllz6k8b22uuh9gyw00sw6', 'ZWVhOWQyNmVlOGRjMGY4ZTdkOWQ2MGNhMWM3ZWZkZTA2NjEzMGVjYzp7ImlkIjoxfQ==', '2017-11-22 08:28:59.350936'),
+('vl39pblqcb97n4u3wo05fwkfnfcwwcjt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2017-11-24 05:17:37.815374');
 
 -- --------------------------------------------------------
 
@@ -230,7 +240,7 @@ CREATE TABLE `login_user` (
   `dob` date NOT NULL,
   `age` int(11) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -239,7 +249,12 @@ CREATE TABLE `login_user` (
 
 INSERT INTO `login_user` (`id`, `user_number`, `name`, `username`, `dob`, `age`, `email`, `password`) VALUES
 (1, 1, 'Pranav', 'user1', '1992-01-01', 25, 'user1@user1.com', 'user1'),
-(2, 2, 'Dovah', 'user2', '1999-01-28', 18, 'user2@user2.com', 'user2');
+(2, 2, 'Dovah', 'user2', '1999-01-28', 18, 'user2@user2.com', 'user2'),
+(3, 3, 'User1', 'user3', '1990-01-17', 27, 'user3@user3.com', 'user3'),
+(4, 4, 'User4', 'user4', '1990-01-04', 27, 'user4@user4.com', 'user4'),
+(5, 5, 'User5', 'user5', '1990-01-04', 27, 'user5@user5.com', 'user5'),
+(6, 6, 'User6', 'user6', '1990-01-18', 27, 'user6@user6.com', 'pbkdf2_sha256$36000$'),
+(7, 7, 'User7', 'user7', '1990-01-31', 27, 'user7@user7.com', 'pbkdf2_sha256$36000$nmLOTX0BIUfG$cpZQv5AYCZtrFs67EAlsMxCUHsbEo1iJm79vjmrAMvc=');
 
 --
 -- Indexes for dumped tables
@@ -375,12 +390,12 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `login_user`
 --
 ALTER TABLE `login_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
