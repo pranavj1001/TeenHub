@@ -1,11 +1,138 @@
 {% extends 'movies/movies.html' %}
 
-{% block check %}
+{% block popularMovies %}
 
-    {% if request.session.id %}
-        <p>Hey {{ request.session.id }}</p>
-    {% else %}
-        <p>Not Logged in!</p>
-    {% endif %}
+    <h2>Popular Movies</h2>
+
+    <section id="popularMovies">
+    <div id="pm" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="popularMoviesIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="pmItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev" href="#pm" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#pm" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
+{% if request.session.id %}
+    {% block recommendations %}
+
+
+
+    {% endblock %}
+{% endif %}
+
+{% block ourTopPicks %}
+
+    <h2>Our Top Picks</h2>
+
+    <section id="ourTopPicks">
+    <div id="otp" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="otpIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="otpItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev" href="#otp" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#otp" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+
+{% endblock %}
+
+{% block moviesNews %}
+
+
+{% endblock %}
+
+{% block ajaxBlock %}
+
+    <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $.ajax({
+        type: "GET",
+        url: "https://api.themoviedb.org/3/movie/popular?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
+        dataType: "json",
+        success: function(result){
+            var movieDetails = result.results;
+            var posterURLs = [];
+            var titles = [];
+            for(var i = 0; i < movieDetails.length; i++){
+                posterURLs[i] = "https://image.tmdb.org/t/p/w342" + movieDetails[i].poster_path;
+                titles[i] = movieDetails[i].original_title;
+            }
+            var carousel = 'pm';
+            getPoster(posterURLs, titles, carousel);
+        }
+    });
+
+    function getPoster(posterURLs, titles, carousel) {
+        var device;
+        var carouselItems;
+        var numberOfCards;
+        var counter = 0;
+        var width;
+        if($('.desktop').css('display') === 'block'){
+            device = "desktop";
+            carouselItems = 4;
+            numberOfCards = 5;
+            width = 20;
+        }else if($('.tablet').css('display') === 'block') {
+            device = "tablet";
+            carouselItems = 7;
+            numberOfCards = 3;
+            width = 33.3;
+        }else if($('.mobile').css('display') === 'block') {
+            device = "mobile";
+            carouselItems = 10;
+            numberOfCards = 2;
+            width = 50;
+        }
+        $('#popularMovies').addClass(device);
+        // make carousel
+        var start = '<div class="carousel-item active">';
+        var string = '';
+        var list = '<li data-target="#pm" data-slide-to="0" class="active"></li>';
+        for(var j = 0; j < numberOfCards; j++){
+            string += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title">' + titles[counter] + '</h4> </div></div>';
+            counter++;
+        }
+        var final = start + string + '</div>';
+        for(var i = 1; i < carouselItems; i++){
+                var start1 = '<div class="carousel-item">';
+                var string1 = '';
+                list += '<li data-target="#pm" data-slide-to="' + i + '" class="active"></li>';
+                for (var j = 0; j < numberOfCards; j++) {
+                    if(counter === 20)
+                        break;
+                    string1 += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title">' + titles[counter] + '</h4> </div></div>';
+                    counter++;
+                }
+                final += start1 + string1 + '</div>';
+        }
+        $('#popularMoviesIndicators').html(list);
+        $('#pmItems').html(final);
+    }
+
+    </script>
 
 {% endblock %}
