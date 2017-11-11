@@ -621,6 +621,36 @@ a:after {
 	color: #999;
 }
 
+#searchContainer{
+	margin-top: 20px;
+}
+
+#searchHeading{
+	text-align: center;
+}
+
+#searchBox{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (min-width: 600px) {
+	#searchBox{
+		width: 70%;
+	}
+
+	#searchHeading{
+		font-size: 5rem;
+	}
+
+}
+
+@media (min-width: 800px) {
+	#searchBox{
+		width: 60%;
+	}
+}
+
 .footer {
     bottom: 0;
     width: 100%;
