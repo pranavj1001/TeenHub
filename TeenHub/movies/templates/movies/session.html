@@ -2,7 +2,7 @@
 
 {% block popularMovies %}
 
-    <h2>Popular Movies</h2>
+    <h2 class="sectionHeading veryLightGrayText">Popular Movies</h2>
 
     <section id="popularMovies">
     <div id="pm" class="carousel slide" data-ride="carousel">
@@ -35,7 +35,7 @@
 
 {% block ourTopPicks %}
 
-    <h2>Our Top Picks</h2>
+    <h2 class="sectionHeading veryLightGrayText">Our Top Picks</h2>
 
     <section id="ourTopPicks">
     <div id="otp" class="carousel slide" data-ride="carousel">
@@ -61,6 +61,13 @@
 
 {% block moviesNews %}
 
+    <h2 class="sectionHeading veryLightGrayText">Todays Top News</h2>
+
+    <section class="moviesNews">
+        <div id="mNews" class="sectionAlignment veryLightGrayText">
+            <!-- News go here -->
+        </div>
+    </section>
 
 {% endblock %}
 
@@ -102,6 +109,28 @@
         }
     });
 
+    $.ajax({
+        type: "GET",
+        url: "https://newsapi.org/v1/articles?source=mashable&sortBy=top&apiKey=bdbcae478d174e04ba1504b2914cc143",
+        dataType: "json",
+        success: function(result){
+            var newsData = result.articles;
+            var news = {
+                authors: [],
+                titles: [],
+                description: [],
+                urls: []
+            };
+            for(var i = 0; i < 3; i++){
+                news.titles[i] = newsData[i].title;
+                news.authors[i] = newsData[i].author;
+                news.description[i] = newsData[i].description;
+                news.urls[i] = newsData[i].url;
+            }
+            postNews(news);
+        }
+    });
+
     function getPoster(posterURLs, titles, carousel) {
         var device;
         var carouselItems;
@@ -136,13 +165,14 @@
             cardID = '#otpItems';
             indicatorsID = '#otpIndicators';
         }
+        carousel = '#' + carousel;
         $(sectionID).addClass(device);
         // make carousel
         var start = '<div class="carousel-item active">';
         var string = '';
         var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
         for(var j = 0; j < numberOfCards; j++){
-            string += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title">' + titles[counter] + '</h4> </div></div>';
+            string += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
             counter++;
         }
         var final = start + string + '</div>';
@@ -153,14 +183,21 @@
                 for (var j = 0; j < numberOfCards; j++) {
                     if(counter === 20)
                         break;
-                    string1 += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title">' + titles[counter] + '</h4> </div></div>';
+                    string1 += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                     counter++;
                 }
                 final += start1 + string1 + '</div>';
         }
         $(indicatorsID).html(list);
-        console.log($(indicatorsID));
         $(cardID).html(final);
+    }
+    
+    function postNews(news) {
+        var final = '';
+        for(var i = 0; i < 4; i++){
+            final += '<h4 class="veryLightGrayText">' + news.titles[i] + '</h4><p>' + news.authors[i] + '</p><p>' + news.description[i] + '</p><a target="_blank" href="' + news.urls[i] + '">More Info</a>';
+        }
+        $('#mNews').html(final);
     }
 
     </script>
