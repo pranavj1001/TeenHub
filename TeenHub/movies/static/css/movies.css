@@ -598,6 +598,29 @@ a:after {
 	}
 }
 
+.sectionHeading{
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+}
+
+.sectionAlignment{
+	margin-left: 1em;
+	margin-top: 1.5em;
+}
+
+.sectionAlignment p{
+	margin-bottom: 5px;
+}
+
+.sectionAlignment a{
+	margin-bottom: 25px;
+	display: block;
+}
+
+.veryLightGrayText{
+	color: #999;
+}
+
 .footer {
     bottom: 0;
     width: 100%;
