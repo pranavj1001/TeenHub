@@ -1,5 +1,17 @@
 {% extends 'movies/movies.html' %}
 
+{% block searchBox %}
+
+    <div id="searchContainer" class="container">
+        <h3 id="searchHeading">Teen<strong>HUB</strong></h3>
+        <div id="searchBox" class="inner-addon right-addon">
+          <i class="glyphicon glyphicon-search"></i>
+          <input type="text" class="form-control lightGrayBg" placeholder="Search" />
+        </div>
+    </div>
+
+{% endblock %}
+
 {% block popularMovies %}
 
     <h2 class="sectionHeading veryLightGrayText">Popular Movies</h2>
@@ -121,7 +133,7 @@
                 description: [],
                 urls: []
             };
-            for(var i = 0; i < 3; i++){
+            for(var i = 0; i < 4; i++){
                 news.titles[i] = newsData[i].title;
                 news.authors[i] = newsData[i].author;
                 news.description[i] = newsData[i].description;
