@@ -28,6 +28,38 @@
 
 {% endblock %}
 
+{% block similarMovies %}
+
+    <section class="mobile">
+    </section>
+    <section class="tablet">
+    </section>
+    <section class="desktop">
+    </section>
+
+    <h2 class="sectionHeading veryLightGrayText">Similar Movies</h2>
+
+    <section id="similarMovies">
+    <div id="sm" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="smIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="smItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev" href="#sm" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#sm" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
 {% block ajaxInfoMovieBlock %}
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -90,6 +122,94 @@
                 $('#movieCompanies').html(companies);
             }
         });
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/similar?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
+            dataType: "json",
+            success: function(result){
+                var movieDetails = result.results;
+                var posterURLs = [];
+                var titles = [];
+                for(var i = 0; i < movieDetails.length; i++){
+                    posterURLs[i] = "https://image.tmdb.org/t/p/w342" + movieDetails[i].poster_path;
+                    titles[i] = movieDetails[i].original_title;
+                }
+                var carousel = 'sm';
+                console.log(posterURLs);
+                getPoster(posterURLs, titles, carousel);
+            }
+        });
+
+        function getPoster(posterURLs, titles, carousel) {
+            var device;
+            var carouselItems;
+            var numberOfCards;
+            var counter = 0;
+            var width;
+            var sectionID = '';
+            var cardID = '';
+            var indicatorsID = '';
+            if($('.desktop').css('display') === 'block'){
+                device = "desktop";
+                carouselItems = 4;
+                numberOfCards = 5;
+                width = 20;
+            }else if($('.tablet').css('display') === 'block') {
+                device = "tablet";
+                carouselItems = 7;
+                numberOfCards = 3;
+                width = 33.3;
+            }else if($('.mobile').css('display') === 'block') {
+                device = "mobile";
+                carouselItems = 10;
+                numberOfCards = 2;
+                width = 50;
+            }
+            if(carousel === 'pm'){
+                sectionID = '#popularMovies';
+                cardID = '#pmItems';
+                indicatorsID = '#pmIndicators';
+            }else if(carousel === 'otp'){
+                sectionID = '#ourTopPicks';
+                cardID = '#otpItems';
+                indicatorsID = '#otpIndicators';
+            }else if(carousel === 'um'){
+                sectionID = '#upcomingMovies';
+                cardID = '#umItems';
+                indicatorsID = '#umIndicators';
+            }else if(carousel === 'sm'){
+                sectionID = '#similarMovies';
+                cardID = '#smItems';
+                indicatorsID = '#smIndicators';
+            }
+            carousel = '#' + carousel;
+            $(sectionID).addClass(device);
+            // make carousel
+            var start = '<div class="carousel-item active">';
+            var string = '';
+            var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
+            for(var j = 0; j < numberOfCards; j++){
+                string += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                counter++;
+            }
+            var final = start + string + '</div>';
+            for(var i = 1; i < carouselItems; i++){
+                    var start1 = '<div class="carousel-item">';
+                    var string1 = '';
+                    list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
+                    for (var j = 0; j < numberOfCards; j++) {
+                        if(counter === 20)
+                            break;
+                        string1 += '<div class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                        counter++;
+                    }
+                    final += start1 + string1 + '</div>';
+            }
+            $(indicatorsID).html(list);
+            $(cardID).html(final);
+        }
+
     </script>
 
 {% endblock %}

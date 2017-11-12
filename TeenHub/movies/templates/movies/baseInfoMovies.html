@@ -49,6 +49,9 @@
     {% block info %}
     {% endblock %}
 
+    {% block similarMovies %}
+    {% endblock %}
+
 	<footer class="footer">
         <div class="container">
             <span class="text-muted">&copy; <a href="https://github.com/pranavj1001/TeenHub">TeenHUB team</a></span>
@@ -63,9 +66,6 @@
     <script src="{% static 'js/main.js' %}"></script>
 
     {% block ajaxInfoMovieBlock %}
-    {% endblock %}
-
-    {% block ajaxBlock %}
     {% endblock %}
 
 </body>
