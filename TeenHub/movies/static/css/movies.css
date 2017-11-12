@@ -634,6 +634,10 @@ a:after {
 	margin-right: auto;
 }
 
+.subHeading{
+	font-size: 0.5em;
+}
+
 @media (min-width: 600px) {
 	#searchBox{
 		width: 70%;
