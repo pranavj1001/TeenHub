@@ -544,6 +544,10 @@ a:after {
 	height: 150px;
 }
 
+.movieThumbnail{
+	height: 165px;
+}
+
 .heightAuto{
 	height: auto;
 }
@@ -572,11 +576,17 @@ a:after {
 	.desktop{
 		display: none;
 	}
-	.genreImg{
+	.genreImg, .movieThumbnail{
 		height: 250px;
 	}
 	.card-title{
 		font-size: 1.5em;
+	}
+	.detailSpace{
+		padding-top: 60px;
+	}
+	.description{
+		font-size: 18px;
 	}
 }
 
@@ -590,11 +600,29 @@ a:after {
 	.desktop{
 		display: block;
 	}
-	.genreImg{
+	.genreImg, .movieThumbnail{
 		height: 300px;
 	}
 	.card-title{
 		font-size: 2em;
+	}
+	.detailSpace{
+		padding-top: 60px;
+	}
+	.description{
+		font-size: 18px;
+	}
+}
+
+@media (min-width: 1400px) {
+	.movieThumbnail{
+		height: 400px;
+	}
+	.detailSpace{
+		padding-top: 60px;
+	}
+	.description{
+		font-size: 18px;
 	}
 }
 
@@ -636,6 +664,14 @@ a:after {
 
 .subHeading{
 	font-size: 0.5em;
+}
+
+.titleSpace{
+	margin-top: 10px;
+}
+
+.description{
+	line-height: 20px;
 }
 
 @media (min-width: 600px) {

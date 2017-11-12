@@ -1,0 +1,42 @@
+{% extends 'movies/baseInfoMovies.html' %}
+
+{% block info %}
+
+    <section id="infoMovie">
+        <div class="row container-fluid detailSpace">
+            <div class="col-sm-3 col-6">
+                <div class="card genre" id="thumbnail">
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 id="movieName" class="whiteText titleSpace"></h1>
+                <p id="movieDescription" class="whiteText description"></p>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block ajaxInfoMovieBlock %}
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
+            dataType: "json",
+            success: function(result){
+                console.log(result);
+                var wallpaper = "https://image.tmdb.org/t/p/original" + result.backdrop_path;
+                var img = "https://image.tmdb.org/t/p/w342" + result.poster_path;
+                $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + wallpaper + ') no-repeat center center fixed');
+                $('#infoMovie').css('background-size', 'cover');
+                $('#thumbnail').html('<img class="card-img-top movieThumbnail" src="' + img + '" alt="action">');
+                $('#movieName').html(result.original_title);
+                $('#movieDescription').html(result.overview);
+            }
+        });
+    </script>
+
+{% endblock %}
