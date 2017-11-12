@@ -12,6 +12,16 @@
             <div class="col-md-9">
                 <h1 id="movieName" class="whiteText titleSpace"></h1>
                 <p id="movieDescription" class="whiteText description"></p>
+                <p id="movieLanguage" class="whiteText description"></p>
+                <p id="movieReleaseDate" class="whiteText description"></p>
+                <p id="movieGenres" class="whiteText description"></p>
+                <p id="moviePopularity" class="whiteText description"></p>
+                <p id="movieAdultRated" class="whiteText description"></p>
+                <p id="movieStatus" class="whiteText description"></p>
+                <p id="movieBudget" class="whiteText description"></p>
+                <p id="movieCountry" class="whiteText description"></p>
+                <p class="whiteText description"><strong>Production Companies</strong></p>
+                <ul id="movieCompanies" class="whiteText description lessLeftPadding"></ul>
             </div>
         </div>
     </section>
@@ -30,11 +40,54 @@
                 console.log(result);
                 var wallpaper = "https://image.tmdb.org/t/p/original" + result.backdrop_path;
                 var img = "https://image.tmdb.org/t/p/w342" + result.poster_path;
+                var genres = '<strong>Genres:</strong> ';
+                var popularity = '<strong>Popularity:</strong> ';
+                var adultRated = '<strong>Adult Rated:</strong> ';
+                var budget = '<strong>Budget:</strong> ';
+                var companies = '';
                 $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + wallpaper + ') no-repeat center center fixed');
                 $('#infoMovie').css('background-size', 'cover');
                 $('#thumbnail').html('<img class="card-img-top movieThumbnail" src="' + img + '" alt="action">');
                 $('#movieName').html(result.original_title);
                 $('#movieDescription').html(result.overview);
+                $('#movieLanguage').html('<strong>Language:</strong> ' + result.original_language);
+                $('#movieReleaseDate').html('<strong>Release Date:</strong> ' + result.release_date);
+                for(var i = 0; i < result.genres.length; i++){
+                    if (i === result.genres.length - 1 ) {
+                        genres += result.genres[i].name + '.';
+                    }else{
+                        genres += result.genres[i].name + ', ';
+                    }
+                }
+                $('#movieGenres').html(genres);
+                if(result.popularity >= 90){
+                    popularity += 'Very Popular';
+                }else if(result.popularity >= 80){
+                    popularity += 'Popular';
+                }else if(result.popularity >= 65){
+                    popularity += 'Mildly Popular';
+                }else if(result.popularity >= 50){
+                    popularity += 'Average';
+                }else if(result.popularity >= 40) {
+                    popularity += 'Below Average';
+                }else{
+                    popularity += 'Not well known';
+                }
+                $('#moviePopularity').html(popularity);
+                if(result.adult){
+                    adultRated += 'Yes';
+                }else{
+                    adultRated += 'No';
+                }
+                $('#movieAdultRated').html(adultRated);
+                $('#movieStatus').html('<strong>Status:</strong> ' + result.status);
+                budget += result.budget.toLocaleString();
+                $('#movieBudget').html(budget);
+                $('#movieCountry').html('<strong>Production Country:</strong> ' + result.production_countries[0].name);
+                for(var i = 0; i < result.production_companies.length; i++){
+                    companies += '<li>' + result.production_companies[i].name + '</li>';
+                }
+                $('#movieCompanies').html(companies);
             }
         });
     </script>

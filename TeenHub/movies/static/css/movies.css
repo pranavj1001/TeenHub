@@ -566,6 +566,15 @@ a:after {
 	font-size: 1em;
 }
 
+.description{
+	line-height: 20px;
+	margin-bottom: 1rem;
+}
+
+.lessLeftPadding{
+	padding-left: 15px;
+}
+
 @media (min-width: 700px) {
 	.mobile{
 		display: none;
@@ -668,10 +677,6 @@ a:after {
 
 .titleSpace{
 	margin-top: 10px;
-}
-
-.description{
-	line-height: 20px;
 }
 
 @media (min-width: 600px) {
