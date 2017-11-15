@@ -624,6 +624,9 @@ a:after {
 	.fivePercentWidthOnDesktop{
 		width: 5%;
 	}
+	.spaceOnDesktop{
+		margin-bottom: 75px;
+	}
 }
 
 @media (min-width: 1400px) {

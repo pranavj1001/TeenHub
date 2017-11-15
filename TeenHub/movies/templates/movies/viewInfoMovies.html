@@ -9,7 +9,7 @@
 
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 spaceOnDesktop">
                 <h1 id="movieName" class="whiteText titleSpace"></h1>
                 <p id="movieDescription" class="whiteText description"></p>
                 <p id="movieLanguage" class="whiteText description"></p>
@@ -155,18 +155,16 @@
                 device = "desktop";
                 carouselItems = 4;
                 numberOfCards = 6;
-                width = 16.666667;
             }else if($('.tablet').css('display') === 'block') {
                 device = "tablet";
                 carouselItems = 7;
                 numberOfCards = 3;
-                width = 33.3;
             }else if($('.mobile').css('display') === 'block') {
                 device = "mobile";
                 carouselItems = 10;
                 numberOfCards = 2;
-                width = 50;
             }
+            width = 100/ numberOfCards;
             if(carousel === 'pm'){
                 sectionID = '#popularMovies';
                 cardID = '#pmItems';
