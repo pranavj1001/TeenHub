@@ -69,7 +69,6 @@
             url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
             dataType: "json",
             success: function(result){
-                console.log(result);
                 var wallpaper = "https://image.tmdb.org/t/p/original" + result.backdrop_path;
                 var img = "https://image.tmdb.org/t/p/w342" + result.poster_path;
                 var genres = '<strong>Genres:</strong> ';
@@ -153,8 +152,8 @@
             if($('.desktop').css('display') === 'block'){
                 device = "desktop";
                 carouselItems = 4;
-                numberOfCards = 5;
-                width = 20;
+                numberOfCards = 6;
+                width = 16.666667;
             }else if($('.tablet').css('display') === 'block') {
                 device = "tablet";
                 carouselItems = 7;
