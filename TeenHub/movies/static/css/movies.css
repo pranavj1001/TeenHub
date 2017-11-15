@@ -621,6 +621,9 @@ a:after {
 	.description{
 		font-size: 18px;
 	}
+	.fivePercentWidthOnDesktop{
+		width: 5%;
+	}
 }
 
 @media (min-width: 1400px) {
