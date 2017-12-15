@@ -576,6 +576,22 @@ a:after {
 	padding-left: 15px;
 }
 
+.cast{
+	width: 46%;
+}
+
+@media (min-width: 450px) {
+	.cast{
+		width: 30%;
+	}
+}
+
+@media (min-width: 600px) {
+	.cast{
+		width: 23%;
+	}
+}
+
 @media (min-width: 700px) {
 	.mobile{
 		display: none;
@@ -628,6 +644,9 @@ a:after {
 	.spaceOnDesktop{
 		margin-bottom: 75px;
 	}
+	.cast{
+		width: 15%;
+	}
 }
 
 @media (min-width: 1400px) {
@@ -639,6 +658,9 @@ a:after {
 	}
 	.description{
 		font-size: 18px;
+	}
+	.cast{
+		width: 10%;
 	}
 }
 
@@ -726,7 +748,6 @@ a:after {
 }
 
 .cast {
-	width: 10%;
 	display: inline-flex;
 	margin: 5px;
 }
