@@ -725,6 +725,21 @@ a:after {
     color: #fff !important;
 }
 
+.cast {
+	width: 10%;
+	display: inline-flex;
+	margin: 5px;
+}
+
+.small-block {
+	padding: 0.5rem;
+}
+
+.small-title{
+	font-size: 1.5em;
+	margin: 0;
+}
+
 .footer {
     bottom: 0;
     width: 100%;
