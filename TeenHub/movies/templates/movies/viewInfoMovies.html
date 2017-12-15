@@ -22,6 +22,8 @@
                 <p id="movieCountry" class="whiteText description"></p>
                 <p class="whiteText description"><strong>Production Companies</strong></p>
                 <ul id="movieCompanies" class="whiteText description lessLeftPadding"></ul>
+                <p class="whiteText description"><strong>Cast:</strong></p>
+                <div id="cast"></div>
             </div>
         </div>
     </section>
@@ -140,6 +142,33 @@
                 getPoster(posterURLs, titles, ids, carousel);
             }
         });
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/credits?api_key=867611d6b3f8882764c7aec28bc288ed",
+            dataType: "json",
+            success: function(result){
+                var cast = result.cast;
+                var maxCards = 10;
+                var realNames = [];
+                var charNames = [];
+                var profileImages = [];
+                for(var i = 0; i < cast.length; i++){
+                    realNames[i] = cast[i].name;
+                    charNames[i] = cast[i].character;
+                    profileImages[i] = "https://image.tmdb.org/t/p/w92" + cast[i].profile_path;
+                }
+                makePeopleCards(realNames, charNames, profileImages, maxCards);
+            }
+        });
+
+        function makePeopleCards(realNames, charNames, profileImages, maxCards){
+            var card = '';
+            for(var i = 0; i < (realNames.length > maxCards ? maxCards : realNames.length); i++) {
+                card += '<div class="card genre cast"><img class="card-img-top" src="' + profileImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + realNames[i] + '</h4></div></div>"';
+            }
+            $('#cast').html(card);
+        }
 
         function getPoster(posterURLs, titles, ids, carousel) {
             var device;
