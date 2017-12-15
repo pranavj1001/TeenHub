@@ -24,6 +24,9 @@
                 <ul id="movieCompanies" class="whiteText description lessLeftPadding"></ul>
                 <p class="whiteText description"><strong>Cast:</strong></p>
                 <div id="cast"></div>
+                <p class="whiteText description"><strong>Crew:</strong></p>
+                <p class="whiteText description">Director:</p>
+                <div id="crew-director"></div>
             </div>
         </div>
     </section>
@@ -149,25 +152,42 @@
             dataType: "json",
             success: function(result){
                 var cast = result.cast;
+                var crew = result.crew;
+                console.log(crew);
                 var maxCards = 10;
                 var realNames = [];
                 var charNames = [];
                 var profileImages = [];
+                var directors = [];
+                var directorsImages = [];
                 for(var i = 0; i < cast.length; i++){
                     realNames[i] = cast[i].name;
                     charNames[i] = cast[i].character;
                     profileImages[i] = "https://image.tmdb.org/t/p/w92" + cast[i].profile_path;
                 }
-                makePeopleCards(realNames, charNames, profileImages, maxCards);
+                var j = 0;
+                for(var i = 0; i < crew.length; i++){
+                    if(crew[i].job === 'Director'){
+                        directors[j] = crew[i].name;
+                        directorsImages[j] = "https://image.tmdb.org/t/p/w92" + crew[i].profile_path;
+                        j++;
+                    }
+                }
+                makePeopleCards(realNames, charNames, profileImages, maxCards, directors, directorsImages);
             }
         });
 
-        function makePeopleCards(realNames, charNames, profileImages, maxCards){
-            var card = '';
+        function makePeopleCards(realNames, charNames, profileImages, maxCards, directors, directorsImages){
+            var cast = '';
+            var crewDirectors = '';
             for(var i = 0; i < (realNames.length > maxCards ? maxCards : realNames.length); i++) {
-                card += '<div class="card genre cast"><img class="card-img-top" src="' + profileImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + realNames[i] + '</h4></div></div>"';
+                cast += '<div class="card genre cast"><img class="card-img-top" src="' + profileImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + realNames[i] + '</h4></div></div>';
             }
-            $('#cast').html(card);
+            for(var i = 0; i < (directors.length > maxCards ? maxCards : directors.length); i++) {
+                crewDirectors += '<div class="card genre cast"><img class="card-img-top" src="' + directorsImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + directors[i] + '</h4></div></div>';
+            }
+            $('#cast').html(cast);
+            $('#crew-director').html(crewDirectors);
         }
 
         function getPoster(posterURLs, titles, ids, carousel) {
