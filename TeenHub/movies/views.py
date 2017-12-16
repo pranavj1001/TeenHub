@@ -5,8 +5,11 @@ from .models import Links
 # Create your views here.
 def logout(request):
     del request.session["id"]
-    if 'recommendationsMovies1' or 'recommendationsMovies2' or 'recommendationsMovies3' or 'recommendationsMovies4' or 'recommendationsMovies5' or 'recommendationsMovies6' or 'recommendationsMovies7' or 'recommendationsMovies8' or 'recommendationsMovies9' or 'recommendationsMovies10' in request.session:
-        del request.session["recommendationsMovies1"]
+    for i in range(1, 11):
+        string = 'recommendationsMovies'
+        string += str(i)
+        if (string) in request.session:
+            del request.session[string]
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
