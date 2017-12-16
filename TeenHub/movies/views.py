@@ -16,16 +16,16 @@ def show_movies(request):
 
     if 'id' in request.session:
         userRatings = pd.read_csv('D:/PRANAV/Machine Learning/MovieRecommender/TeenHub/movies/datasets/userRatings.csv')
+        corrMatrix = userRatings.corr(method='pearson', min_periods=20)
 
-        if 'movieRecommender' not in request.session:
-            print("computing")
-            corrMatrix = userRatings.corr(method='pearson', min_periods=20)
-            request.session.movieRecommender = corrMatrix
-            request.session.save()
-            print("computing")
-        else:
-            print("not computing")
-            corrMatrix = request.session["movieRecommender"]
+        # if 'movieRecommender' not in request.session:
+        #     print("computing")
+        #     corrMatrix = userRatings.corr(method='pearson', min_periods=20)
+        #     request.session.movieRecommender = corrMatrix
+        #     print("computing")
+        # else:
+        #     print("not computing")
+        #     corrMatrix = request.session["movieRecommender"]
 
         getRatings = userRatings.loc[0].dropna()
 
@@ -48,7 +48,6 @@ def show_movies(request):
         similarCandidates = similarCandidates.groupby(similarCandidates.index).sum()
 
         similarCandidates.sort_values(inplace=True, ascending=False)
-        print(similarCandidates)
 
         # filter out movies that the user already rated
         filteredRecommendationList = similarCandidates.drop(getRatings.index)
