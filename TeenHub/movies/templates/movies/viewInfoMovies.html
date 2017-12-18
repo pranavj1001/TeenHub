@@ -290,12 +290,12 @@
             $('.rating input').click(function () {
                 $(".rating span").removeClass('checked');
                 $(this).parent().addClass('checked');
-                location.href='{% url 'show_signup' %}
             });
 
             $('input:radio').change(
             function(){
                 var userRating = this.value;
+                window.location.href = 'http://127.0.0.1:8000/movies/save/movie/rating/' + userRating + '/';
             });
         });
 

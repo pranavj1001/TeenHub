@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 import pandas as pd
-from .models import Links
+from .models import Links, Ratings
 
 # Create your views here.
 def logout(request):
@@ -76,4 +76,16 @@ def show_movies(request):
 
 def show_movie_info(request, movieid):
     request.session["movieid"] = movieid
+    return render(request, 'movies/viewInfoMovies.html', {})
+
+def save_movie_rating(request, movie_rating):
+    if 'id' in request.session:
+        if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating).exists():
+          print('rating already exists')
+          return render(request, 'movies/viewInfoMovies.html', {})
+        elif Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
+            print('user wants to enter a new rating for a movie which he/she already rated')
+            Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).delete()
+        newRating = Ratings(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating)
+        newRating.save()
     return render(request, 'movies/viewInfoMovies.html', {})
