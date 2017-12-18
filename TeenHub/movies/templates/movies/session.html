@@ -238,7 +238,6 @@
                                                                                     titles[++index] = result.title;
                                                                                     posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
                                                                                     ids[index] = {{ request.session.recommendationsMovies10 }};
-                                                                                    console.log(ids);
                                                                                     getPoster(posterURLs, titles, ids, carousel);
                                                                                 }
                                                                             });
