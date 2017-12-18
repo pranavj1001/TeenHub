@@ -165,9 +165,7 @@
             success: function(result){
                 titles[++index] = result.title;
                 posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                {%  if request.session.recommendationsMovie1 %}
                 ids[index] = {{ request.session.recommendationsMovies1 }};
-                {% endif %}
                 $.ajax({
                     type: "GET",
                     url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies2 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -175,9 +173,7 @@
                     success: function(result){
                         titles[++index] = result.title;
                         posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                        {%  if request.session.recommendationsMovie2 %}
                         ids[index] = {{ request.session.recommendationsMovies2 }};
-                        {% endif %}
                         $.ajax({
                             type: "GET",
                             url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies3 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -185,9 +181,7 @@
                             success: function(result){
                                 titles[++index] = result.title;
                                 posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                {%  if request.session.recommendationsMovie3 %}
                                 ids[index] = {{ request.session.recommendationsMovies3 }};
-                                {% endif %}
                                 $.ajax({
                                     type: "GET",
                                     url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies4 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -195,9 +189,7 @@
                                     success: function(result){
                                         titles[++index] = result.title;
                                         posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                        {%  if request.session.recommendationsMovie4 %}
                                         ids[index] = {{ request.session.recommendationsMovies4 }};
-                                        {% endif %}
                                         $.ajax({
                                             type: "GET",
                                             url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies5 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -205,9 +197,7 @@
                                             success: function(result){
                                                 titles[++index] = result.title;
                                                 posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                                {%  if request.session.recommendationsMovie5 %}
                                                 ids[index] = {{ request.session.recommendationsMovies5 }};
-                                                {% endif %}
                                                 $.ajax({
                                                     type: "GET",
                                                     url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies6 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -215,9 +205,7 @@
                                                     success: function(result){
                                                         titles[++index] = result.title;
                                                         posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                                        {%  if request.session.recommendationsMovie6 %}
                                                         ids[index] = {{ request.session.recommendationsMovies6 }};
-                                                        {% endif %}
                                                         $.ajax({
                                                         type: "GET",
                                                         url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies7 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -225,9 +213,7 @@
                                                         success: function(result){
                                                             titles[++index] = result.title;
                                                             posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                                            {%  if request.session.recommendationsMovie7 %}
                                                             ids[index] = {{ request.session.recommendationsMovies7 }};
-                                                            {% endif %}
                                                             $.ajax({
                                                                 type: "GET",
                                                                 url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies8 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -235,9 +221,7 @@
                                                                 success: function(result){
                                                                     titles[++index] = result.title;
                                                                     posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                                                    {%  if request.session.recommendationsMovie8 %}
                                                                     ids[index] = {{ request.session.recommendationsMovies8 }};
-                                                                    {% endif %}
                                                                     $.ajax({
                                                                         type: "GET",
                                                                         url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies9 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -245,9 +229,7 @@
                                                                         success: function(result){
                                                                             titles[++index] = result.title;
                                                                             posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                                                            {%  if request.session.recommendationsMovie9 %}
                                                                             ids[index] = {{ request.session.recommendationsMovies9 }};
-                                                                            {% endif %}
                                                                             $.ajax({
                                                                                 type: "GET",
                                                                                 url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.recommendationsMovies10 }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -255,9 +237,8 @@
                                                                                 success: function(result){
                                                                                     titles[++index] = result.title;
                                                                                     posterURLs[index] = "https://image.tmdb.org/t/p/w342" + result.poster_path;
-                                                                                    {%  if request.session.recommendationsMovie10 %}
                                                                                     ids[index] = {{ request.session.recommendationsMovies10 }};
-                                                                                    {% endif %}
+                                                                                    console.log(ids);
                                                                                     getPoster(posterURLs, titles, ids, carousel);
                                                                                 }
                                                                             });
