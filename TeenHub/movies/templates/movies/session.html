@@ -152,6 +152,7 @@
         }
     });
 
+    {% if request.session.id %}
     function prepareRecommendationsCard() {
         var posterURLs = [];
         var titles = [];
@@ -260,8 +261,7 @@
             }
         });
     }
-
-    {% if request.session.id %}
+    
     prepareRecommendationsCard();
     {% endif %}
 
