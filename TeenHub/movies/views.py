@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 import pandas as pd
 from .models import Links, Ratings
+import os
+from TeenHub.settings import PROJECT_ROOT
 
 # Create your views here.
 def logout(request):
@@ -15,7 +17,7 @@ def logout(request):
 def show_movies(request):
 
     if 'id' in request.session:
-        userRatings = pd.read_csv('D:/PRANAV/Machine Learning/MovieRecommender/TeenHub/movies/datasets/userRatings.csv')
+        userRatings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/userRatings.csv')
         corrMatrix = userRatings.corr(method='pearson', min_periods=20)
 
         # if 'movieRecommender' not in request.session:
