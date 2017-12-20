@@ -1,0 +1,304 @@
+{% extends 'movies/baseInfoMovies.html' %}
+
+{% block info %}
+
+    <section id="infoMovie">
+        <div class="row container-fluid detailSpace">
+            <div class="col-sm-3 col-6">
+                <div class="card genre" id="thumbnail"></div>
+                <div class="rating">
+                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
+                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
+                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
+                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
+                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+                </div>
+            </div>
+            <div class="col-md-9 spaceOnDesktop">
+                <h1 id="movieName" class="whiteText titleSpace"></h1>
+                <p id="movieDescription" class="whiteText description"></p>
+                <p id="movieLanguage" class="whiteText description"></p>
+                <p id="movieReleaseDate" class="whiteText description"></p>
+                <p id="movieGenres" class="whiteText description"></p>
+                <p id="moviePopularity" class="whiteText description"></p>
+                <p id="movieAdultRated" class="whiteText description"></p>
+                <p id="movieStatus" class="whiteText description"></p>
+                <p id="movieBudget" class="whiteText description"></p>
+                <p id="movieCountry" class="whiteText description"></p>
+                <p class="whiteText description"><strong>Production Companies</strong></p>
+                <ul id="movieCompanies" class="whiteText description lessLeftPadding"></ul>
+                <p class="whiteText description"><strong>Cast:</strong></p>
+                <div id="cast"></div>
+{#                <p class="whiteText description"><strong>Crew:</strong></p>#}
+{#                <p class="whiteText description">Director:</p>#}
+{#                <div id="crew-director"></div>#}
+{#                <p class="whiteText description">Producers:</p>#}
+{#                <div id="crew-producer"></div>#}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block similarMovies %}
+
+    <section class="mobile">
+    </section>
+    <section class="tablet">
+    </section>
+    <section class="desktop">
+    </section>
+
+    <h2 class="sectionHeading veryLightGrayText">Similar Movies</h2>
+
+    <section id="similarMovies">
+    <div id="sm" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="smIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="smItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#sm" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next fivePercentWidthOnDesktop" href="#sm" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
+{% block ajaxInfoMovieBlock %}
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
+            dataType: "json",
+            success: function(result){
+                var wallpaper = "https://image.tmdb.org/t/p/original" + result.backdrop_path;
+                var img = "https://image.tmdb.org/t/p/w342" + result.poster_path;
+                var genres = '<strong>Genres:</strong> ';
+                var popularity = '<strong>Popularity:</strong> ';
+                var adultRated = '<strong>Adult Rated:</strong> ';
+                var budget = '<strong>Budget:</strong> ';
+                var companies = '';
+                $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + wallpaper + ') no-repeat center center fixed');
+                $('#infoMovie').css('background-size', 'cover');
+                $('#thumbnail').html('<img class="card-img-top movieThumbnail" src="' + img + '" alt="action">');
+                $('#movieName').html(result.original_title);
+                $('#movieDescription').html(result.overview);
+                $('#movieLanguage').html('<strong>Language:</strong> ' + result.original_language);
+                $('#movieReleaseDate').html('<strong>Release Date:</strong> ' + result.release_date);
+                for(var i = 0; i < result.genres.length; i++){
+                    if (i === result.genres.length - 1 ) {
+                        genres += result.genres[i].name + '.';
+                    }else{
+                        genres += result.genres[i].name + ', ';
+                    }
+                }
+                $('#movieGenres').html(genres);
+                if(result.popularity >= 90){
+                    popularity += 'Very Popular';
+                }else if(result.popularity >= 80){
+                    popularity += 'Popular';
+                }else if(result.popularity >= 65){
+                    popularity += 'Mildly Popular';
+                }else if(result.popularity >= 50){
+                    popularity += 'Average';
+                }else if(result.popularity >= 40) {
+                    popularity += 'Below Average';
+                }else{
+                    popularity += 'Not well known';
+                }
+                $('#moviePopularity').html(popularity);
+                if(result.adult){
+                    adultRated += 'Yes';
+                }else{
+                    adultRated += 'No';
+                }
+                $('#movieAdultRated').html(adultRated);
+                $('#movieStatus').html('<strong>Status:</strong> ' + result.status);
+                budget += result.budget.toLocaleString();
+                $('#movieBudget').html(budget);
+                $('#movieCountry').html('<strong>Production Country:</strong> ' + result.production_countries[0].name);
+                for(var i = 0; i < result.production_companies.length; i++){
+                    companies += '<li>' + result.production_companies[i].name + '</li>';
+                }
+                $('#movieCompanies').html(companies);
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/similar?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
+            dataType: "json",
+            success: function(result){
+                var movieDetails = result.results;
+                var posterURLs = [];
+                var titles = [];
+                var ids = [];
+                for(var i = 0; i < movieDetails.length; i++){
+                    posterURLs[i] = "https://image.tmdb.org/t/p/w342" + movieDetails[i].poster_path;
+                    titles[i] = movieDetails[i].original_title;
+                    ids[i] = movieDetails[i].id;
+                }
+                var carousel = 'sm';
+                getPoster(posterURLs, titles, ids, carousel);
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/credits?api_key=867611d6b3f8882764c7aec28bc288ed",
+            dataType: "json",
+            success: function(result){
+                var cast = result.cast;
+                var crew = result.crew;
+                console.log(crew);
+                var maxCards = 10;
+                var realNames = [];
+                var charNames = [];
+                var profileImages = [];
+                var directors = [];
+                var directorsImages = [];
+                var producers = [];
+                var producersImages = [];
+                for(var i = 0; i < cast.length; i++){
+                    realNames[i] = cast[i].name;
+                    charNames[i] = cast[i].character;
+                    profileImages[i] = "https://image.tmdb.org/t/p/w92" + cast[i].profile_path;
+                }
+{#                var j = 0, k = 0;#}
+{#                for(var i = 0; i < crew.length; i++){#}
+{#                    if(crew[i].job === 'Director'){#}
+{#                        directors[j] = crew[i].name;#}
+{#                        directorsImages[j] = "https://image.tmdb.org/t/p/w92" + crew[i].profile_path;#}
+{#                        j++;#}
+{#                    }#}
+{#                    if(crew[i].job === 'Producer'){#}
+{#                        producers[k] = crew[i].name;#}
+{#                        producersImages[k] = "https://image.tmdb.org/t/p/w92" + crew[i].profile_path;#}
+{#                        k++;#}
+{#                    }#}
+{#                }#}
+                makePeopleCards(realNames, charNames, profileImages, maxCards, directors, directorsImages, producers, producersImages);
+            }
+        });
+
+        function makePeopleCards(realNames, charNames, profileImages, maxCards, directors, directorsImages, producers, producersImages){
+            var cast = '';
+            var crewDirectors = '';
+            var crewProducers = '';
+            for(var i = 0; i < (realNames.length > maxCards ? maxCards : realNames.length); i++) {
+                cast += '<div class="card genre cast"><img class="card-img-top" src="' + profileImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + realNames[i] + '</h4></div></div>';
+            }
+{#            for(var i = 0; i < (directors.length > maxCards ? maxCards : directors.length); i++) {#}
+{#                crewDirectors += '<div class="card genre cast"><img class="card-img-top" src="' + directorsImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + directors[i] + '</h4></div></div>';#}
+{#            }#}
+{#            for(var i = 0; i < (producers.length > maxCards ? maxCards : producers.length); i++) {#}
+{#                crewProducers += '<div class="card genre cast"><img class="card-img-top" src="' + producersImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + producers[i] + '</h4></div></div>';#}
+{#            }#}
+            $('#cast').html(cast);
+{#            $('#crew-director').html(crewDirectors);#}
+{#            $('#crew-producer').html(crewProducers);#}
+        }
+
+        function getPoster(posterURLs, titles, ids, carousel) {
+            var device;
+            var carouselItems;
+            var numberOfCards;
+            var counter = 0;
+            var width;
+            var sectionID = '';
+            var cardID = '';
+            var indicatorsID = '';
+            var urls = [];
+            if($('.desktop').css('display') === 'block'){
+                device = "desktop";
+                carouselItems = 4;
+                numberOfCards = 6;
+            }else if($('.tablet').css('display') === 'block') {
+                device = "tablet";
+                carouselItems = 7;
+                numberOfCards = 3;
+            }else if($('.mobile').css('display') === 'block') {
+                device = "mobile";
+                carouselItems = 10;
+                numberOfCards = 2;
+            }
+            width = 100/ numberOfCards;
+            if(carousel === 'pm'){
+                sectionID = '#popularMovies';
+                cardID = '#pmItems';
+                indicatorsID = '#pmIndicators';
+            }else if(carousel === 'otp'){
+                sectionID = '#ourTopPicks';
+                cardID = '#otpItems';
+                indicatorsID = '#otpIndicators';
+            }else if(carousel === 'um'){
+                sectionID = '#upcomingMovies';
+                cardID = '#umItems';
+                indicatorsID = '#umIndicators';
+            }else if(carousel === 'sm'){
+                sectionID = '#similarMovies';
+                cardID = '#smItems';
+                indicatorsID = '#smIndicators';
+            }
+            for(var i = 0; i < ids.length; i++){
+                urls[i] = 'infoMovies/' + ids[i] + '/';
+            }
+            carousel = '#' + carousel;
+            $(sectionID).addClass(device);
+            // make carousel
+            var start = '<div class="carousel-item active">';
+            var string = '';
+            var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
+            for(var j = 0; j < numberOfCards; j++){
+                string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                counter++;
+            }
+            var final = start + string + '</div>';
+            for(var i = 1; i < carouselItems; i++){
+                    var start1 = '<div class="carousel-item">';
+                    var string1 = '';
+                    list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
+                    for (var j = 0; j < numberOfCards; j++) {
+                        if(counter === 20)
+                            break;
+                        string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                        counter++;
+                    }
+                    final += start1 + string1 + '</div>';
+            }
+            $(indicatorsID).html(list);
+            $(cardID).html(final);
+        }
+
+        function showLink(element){
+            window.location.href = 'http://127.0.0.1:8000/movies/' + element.attributes.link.value;
+        }
+
+        $(document).ready(function(){
+        //  Check Radio-box
+            $(".rating input:radio").attr("checked", false);
+            $('.rating input').click(function () {
+                $(".rating span").removeClass('checked');
+                $(this).parent().addClass('checked');
+            });
+
+            $('input:radio').change(
+            function(){
+                var userRating = this.value;
+                window.location.href = 'http://127.0.0.1:8000/movies/save/movie/rating/' + userRating + '/';
+            });
+        });
+
+    </script>
+
+{% endblock %}
