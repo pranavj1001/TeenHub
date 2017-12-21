@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import pandas as pd
 from .models import Links, Ratings
-import os
+import simplejson as json
 from TeenHub.settings import PROJECT_ROOT
 
 # Create your views here.
@@ -83,7 +83,7 @@ def show_movie_info(request, movieid):
     if 'id' in request.session:
         if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
             ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
-            request.session["movie_rating"] = ratingRow.ratings 
+            request.session["movie_rating"] = json.dumps(ratingRow.ratings)
     return render(request, 'movies/viewInfoMovies.html', {})
 
 def save_movie_rating(request, movie_rating):

@@ -301,6 +301,10 @@
             });
         });
 
+        {% if request.session.movie_rating %}
+            console.log({{ request.session.movie_rating }});
+        {% endif %}
+
     </script>
 
 {% endblock %}
