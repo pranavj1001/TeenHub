@@ -7,13 +7,7 @@
             <div class="col-sm-3 col-6">
                 <div class="card genre" id="thumbnail"></div>
                 {% if request.session.id %}
-                <div class="rating">
-                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
-                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
-                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
-                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
-                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
-                </div>
+                <div class="rating" id="ratings"></div>
                 {% endif %}
             </div>
             <div class="col-md-9 spaceOnDesktop">
@@ -286,11 +280,26 @@
             window.location.href = 'http://127.0.0.1:8000/movies/' + element.attributes.link.value;
         }
 
+        function showRatings(){
+            var ratingHTML = '';
+            for(var i = 5; i >= 1; i--){
+                {% if request.session.movie_rating %}
+                    if(i === {{ request.session.movie_rating }}) {
+                        ratingHTML += '<span class="checked"><input type="radio" name="rating" id="str' + i + '" value="' + i + '"><label for="str' + i + '"></label></span>';
+                    }else{
+                        ratingHTML += '<span><input type="radio" name="rating" id="str' + i + '" value="' + i + '"><label for="str' + i + '"></label></span>';
+                    }
+                {% else %}
+                    ratingHTML += '<span><input type="radio" name="rating" id="str' + i + '" value="' + i + '"><label for="str' + i + '"></label></span>';
+                {% endif %}
+            }
+            $('#ratings').html(ratingHTML);
+        }
+
+        showRatings();
+
         $(document).ready(function(){
-        //  Check Radio-box
-            $(".rating input:radio").attr("checked", false);
             $('.rating input').click(function () {
-                $(".rating span").removeClass('checked');
                 $(this).parent().addClass('checked');
             });
 
@@ -300,10 +309,6 @@
                 window.location.href = 'http://127.0.0.1:8000/movies/save/movie/rating/' + userRating + '/';
             });
         });
-
-        {% if request.session.movie_rating %}
-            console.log({{ request.session.movie_rating }});
-        {% endif %}
 
     </script>
 

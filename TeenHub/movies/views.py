@@ -18,6 +18,9 @@ def logout(request):
 
 def show_movies(request):
 
+    if 'movie_rating' in request.session:
+        del request.session['movie_rating']
+
     if 'id' in request.session:
         userRatings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/userRatings.csv')
         corrMatrix = userRatings.corr(method='pearson', min_periods=20)
@@ -80,6 +83,8 @@ def show_movies(request):
 
 def show_movie_info(request, movieid):
     request.session["movieid"] = movieid
+    if 'movie_rating' in request.session:
+        del request.session['movie_rating']
     print("here")
     if 'id' in request.session:
         if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
