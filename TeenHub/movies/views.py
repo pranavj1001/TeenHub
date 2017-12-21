@@ -80,6 +80,7 @@ def show_movies(request):
 
 def show_movie_info(request, movieid):
     request.session["movieid"] = movieid
+    print("here")
     if 'id' in request.session:
         if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
             ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
@@ -96,4 +97,5 @@ def save_movie_rating(request, movie_rating):
             Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).delete()
         newRating = Ratings(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating)
         newRating.save()
+        show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})
