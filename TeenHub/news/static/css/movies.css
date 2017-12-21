@@ -1,0 +1,805 @@
+body {
+    font-family: "Lato";
+    font-weight: 300;
+    font-size: 16px;
+    color: #555;
+	overflow-x: hidden;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+
+	background-color: #111;
+}
+
+/* Titles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway";
+    font-weight: 300;
+    color: #333;
+}
+
+
+/* Paragraph & Typographic */
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #f85c37;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+ hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/* Copyright Wrap */
+
+#creator {
+	background: #222222;
+	padding-top: 15px;
+	text-align: right;
+}
+
+#creator p {
+	color: white
+}
+
+/* MENU CONF*/
+
+.menu {
+	position: fixed;
+	right: -200px;
+	width: 260px;
+	height: 10%;
+	top: 0;
+	z-index: 10;
+	text-align: left;
+}
+
+.menu.menu-open {
+	right: 0px;
+	height: 100%;
+}
+
+.menu-wrap {
+	position: absolute;
+	top: 0;
+	left: 60px;
+	background: rgba(26,26,26, 0.9);
+	width: 200px;
+	height: 100%;
+}
+
+.menu h1.logo a {
+	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 800;
+	letter-spacing: 0.15em;
+	line-height: 40px;
+	text-transform: uppercase;
+	color: #ffffff;
+	margin-top: 20px;
+}
+
+.menu h1.logo a:hover {
+	color: #f85c37;
+}
+
+.menu img.logo {
+	margin: 20px 0;
+	max-width: 160px;
+}
+
+.menu a {
+	margin-left: 20px;
+	color: #808080;
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 40px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.menu a:hover {
+	color: #ffffff;
+}
+
+.menu a:active {
+	color: #ffffff;
+}
+
+.menu a > i {
+	float: left;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	width: 25px;
+	font-size: 14px;
+	line-height: 40px;
+	margin: 25px 2px;
+}
+
+.menu-close {
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	font-size: 14px;
+	color: #808080;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	top: 20px;
+	right: 5px;
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+.menu-close:hover {
+	color: #ffffff;
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+/* Push the body after clicking the menu button */
+.body-push {
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+}
+
+.body-push-toright {
+	left: 200px;
+}
+
+.body-push-toleft {
+	left: -200px;
+}
+
+.menu,
+.body-push {
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+		-ms-transition: all .3s ease;
+		 -o-transition: all .3s ease;
+			transition: all .3s ease;
+}
+
+#menuToggle {
+	position: absolute;
+	top: 20px;
+	left: 0;
+	z-index: 11;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.25);
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+#menuToggle:hover {
+	color: #ffffff;
+	background: rgba(0,0,0,0.2);
+	-webkit-transition: all .1s ease-in-out;
+	   -moz-transition: all .1s ease-in-out;
+		-ms-transition: all .1s ease-in-out;
+		 -o-transition: all .1s ease-in-out;
+			transition: all .1s ease-in-out;
+}
+
+.first-carousel{
+	background: url("../img/captain-america-640p.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 200px;
+}
+
+.second-carousel{
+	background: url("../img/interstellar-640p.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 200px;
+}
+
+.third-carousel{
+	background: url("../img/hunger-games-640p.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 200px;
+}
+
+.carousel-inner{
+	height: 200px;
+}
+
+@media (min-width: 640px) {
+
+	.carousel-inner{
+		height: 350px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 350px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 350px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 350px;
+	}
+
+}
+
+@media (min-width: 800px) {
+
+	.carousel-inner{
+		height: 450px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 450px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 450px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-800p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 450px;
+	}
+
+}
+
+@media (min-width: 1280px) {
+
+	.carousel-inner{
+		height: 550px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1280p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 550px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1280p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 550px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1280p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 550px;
+	}
+
+}
+
+@media (min-width: 1366px) {
+
+	.carousel-inner{
+		height: 650px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1366p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 650px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1366p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 650px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1366p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 650px;
+	}
+
+}
+
+@media (min-width: 1600px) {
+
+	.carousel-inner{
+		height: 700px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1600p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1600p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1600p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+}
+
+@media (min-width: 1920px) {
+
+	.carousel-inner{
+		height: 700px;
+	}
+
+	.first-carousel{
+		background: url("../img/captain-america-1920p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.second-carousel{
+		background: url("../img/interstellar-1920p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+	.third-carousel{
+		background: url("../img/hunger-games-1920p.jpg") no-repeat center center fixed;
+		background-size: cover;
+		height: 700px;
+	}
+
+}
+
+.headingReg{
+    margin-top: 20px;
+}
+
+.whiteText{
+	color: #fff;
+}
+
+.noBlueHover:hover{
+	background-color: #1e1e1e;
+}
+
+.noBlueFocus:focus{
+	box-shadow: none;
+	transform: scale(1.03);
+	transition: transform 0.3s ease;
+}
+
+.darkGrayBg{
+	background-color: #111;
+}
+
+.grayBg{
+	background-color: #222 !important;
+}
+
+.lightGrayBg{
+	background-color: #555 !important;
+}
+
+.noBorder{
+	border: 0px;
+}
+
+.form{
+    margin-top: 50px;
+}
+
+.form, .headingReg{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@media (min-width: 450px) {
+    .headingReg{
+        margin-top: 30px;
+    }
+
+    .form, .headingReg{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+}
+
+@media (min-width: 768px) {
+    .headingReg{
+        margin-top: 60px;
+    }
+}
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align glyph */
+.right-addon .glyphicon {
+	right: 0px;
+}
+
+/* add padding  */
+.right-addon input {
+	padding-right: 30px;
+}
+
+#applications{
+	text-align: center;
+	height: 100%;
+}
+
+.current-app{
+	background-color: #111;
+}
+
+.noPadding{
+	padding: 0;
+}
+
+.app{
+	padding: 15px;
+}
+
+.app:hover{
+	background-color: #111;
+}
+
+.navbar{
+	min-height: 0;
+	border: none;
+}
+
+.wrapper{
+    min-height:100%;
+    margin-bottom: 10px;
+    padding-bottom: 60px;
+}
+
+#optionLoginOrSignup{
+	text-align: center;
+	margin: 15px;
+}
+
+.genre{
+	margin: 15px;
+	background-color: #222;
+	box-shadow: 5px 5px 5px #000;
+	cursor: pointer;
+}
+
+.genreImg{
+	height: 150px;
+}
+
+.movieThumbnail{
+	height: 165px;
+}
+
+.heightAuto{
+	height: auto;
+}
+
+.mobile{
+	display: block;
+}
+.tablet{
+	display: none;
+}
+.desktop{
+	display: none;
+}
+
+.card-title{
+	font-size: 1em;
+}
+
+.description{
+	line-height: 20px;
+	margin-bottom: 1rem;
+}
+
+.lessLeftPadding{
+	padding-left: 15px;
+}
+
+.cast{
+	width: 46%;
+}
+
+@media (min-width: 450px) {
+	.cast{
+		width: 30%;
+	}
+}
+
+@media (min-width: 600px) {
+	.cast{
+		width: 23%;
+	}
+}
+
+@media (min-width: 700px) {
+	.mobile{
+		display: none;
+	}
+	.tablet{
+		display: block;
+	}
+	.desktop{
+		display: none;
+	}
+	.genreImg, .movieThumbnail{
+		height: 250px;
+	}
+	.card-title{
+		font-size: 1.5em;
+	}
+	.detailSpace{
+		padding-top: 60px;
+	}
+	.description{
+		font-size: 18px;
+	}
+}
+
+@media (min-width: 1000px) {
+	.tablet{
+		display: none;
+	}
+	.mobile{
+		display: none;
+	}
+	.desktop{
+		display: block;
+	}
+	.genreImg, .movieThumbnail{
+		height: 300px;
+	}
+	.card-title{
+		font-size: 2em;
+	}
+	.detailSpace{
+		padding-top: 60px;
+	}
+	.description{
+		font-size: 18px;
+	}
+	.fivePercentWidthOnDesktop{
+		width: 5%;
+	}
+	.spaceOnDesktop{
+		margin-bottom: 75px;
+	}
+	.cast{
+		width: 15%;
+	}
+}
+
+@media (min-width: 1400px) {
+	.movieThumbnail{
+		height: 400px;
+	}
+	.detailSpace{
+		padding-top: 60px;
+	}
+	.description{
+		font-size: 18px;
+	}
+	.cast{
+		width: 10%;
+	}
+}
+
+.sectionHeading{
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+}
+
+.sectionAlignment{
+	margin-left: 1em;
+	margin-top: 1.5em;
+}
+
+.sectionAlignment p{
+	margin-bottom: 5px;
+}
+
+.sectionAlignment a{
+	margin-bottom: 25px;
+	display: block;
+}
+
+.veryLightGrayText{
+	color: #999;
+}
+
+#searchContainer{
+	margin-top: 20px;
+}
+
+#searchHeading{
+	text-align: center;
+}
+
+#searchBox{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.subHeading{
+	font-size: 0.5em;
+}
+
+.titleSpace{
+	margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+	#searchBox{
+		width: 70%;
+	}
+
+	#searchHeading{
+		font-size: 5rem;
+	}
+
+}
+
+@media (min-width: 800px) {
+	#searchBox{
+		width: 60%;
+	}
+}
+
+.form-control::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #999;
+}
+.form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #999;
+   opacity:  1;
+}
+.form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #999;
+   opacity:  1;
+}
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #999;
+}
+.form-control:-ms-input-placeholder { /* Microsoft Edge */
+   color:    #999;
+}
+
+.searchText{
+    color: #fff !important;
+}
+
+.cast {
+	display: inline-flex;
+	margin: 5px;
+}
+
+.small-block {
+	padding: 0.5rem;
+}
+
+.small-title{
+	font-size: 1.5em;
+	margin: 0;
+}
+
+.rating {
+	float:left;
+	min-width: 160px;
+	margin: 15px;
+}
+.rating span { float:right; position:relative; }
+.rating span input {
+    position:absolute;
+    top:0px;
+    left:0px;
+    opacity:0;
+}
+.rating span label {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    text-align:center;
+    color:#FFF;
+    background:#ccc;
+    font-size:30px;
+    margin-right:2px;
+    line-height:30px;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+}
+.rating span:hover ~ span label,
+.rating span:hover label,
+.rating span.checked label,
+.rating span.checked ~ span label {
+    background:#F90;
+    color:#FFF;
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #222;
+}
