@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2017 at 03:18 PM
+-- Generation Time: Dec 21, 2017 at 08:32 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -244,7 +244,7 @@ CREATE TABLE `django_session` (
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('ajnmphahz160ugzwirhgz7dn3cw7iwl9', 'ZWVhOWQyNmVlOGRjMGY4ZTdkOWQ2MGNhMWM3ZWZkZTA2NjEzMGVjYzp7ImlkIjoxfQ==', '2017-11-22 08:59:33.397064'),
 ('fxgl0nheg4gllz6k8b22uuh9gyw00sw6', 'ZWVhOWQyNmVlOGRjMGY4ZTdkOWQ2MGNhMWM3ZWZkZTA2NjEzMGVjYzp7ImlkIjoxfQ==', '2017-11-22 08:28:59.350936'),
-('p83g5b86aveu0umu6j5pokpzy96tog5q', 'ZTNhZTlhMGRmZjM5NmNhNmJkNzVhZTFkODc0MzMwMTM5MGE5YjBkNTp7InJlY29tbWVuZGF0aW9uc01vdmllczgiOjUxMCwiaWQiOjcsInJlY29tbWVuZGF0aW9uc01vdmllczkiOjE1MywicmVjb21tZW5kYXRpb25zTW92aWVzMyI6Mjc1LCJtb3ZpZWlkIjoiNTEwIiwicmVjb21tZW5kYXRpb25zTW92aWVzMSI6MTQzMCwicmVjb21tZW5kYXRpb25zTW92aWVzNyI6ODM1OCwicmVjb21tZW5kYXRpb25zTW92aWVzMiI6MTQ2LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM0IjoyNjc1LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM2IjoxODkzLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxMCI6MjUwMSwicmVjb21tZW5kYXRpb25zTW92aWVzNSI6NTUwM30=', '2018-01-01 14:14:56.068254'),
+('p83g5b86aveu0umu6j5pokpzy96tog5q', 'OTlkMWIyOTFmNDE1YWUwZThmZjBiOTYyMjYzNWVmN2M3OTQ1ZTA3NDp7Im1vdmllX3JhdGluZyI6IjQuMCIsInJlY29tbWVuZGF0aW9uc01vdmllczMiOjI3NSwicmVjb21tZW5kYXRpb25zTW92aWVzNiI6MTg5MywicmVjb21tZW5kYXRpb25zTW92aWVzMiI6MTQ2LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxIjoxNDMwLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM1Ijo1NTAzLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM5IjoxNTMsInJlY29tbWVuZGF0aW9uc01vdmllczgiOjUxMCwibW92aWVpZCI6IjI4MTMzOCIsImlkIjo4LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM0IjoyNjc1LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM3Ijo4MzU4LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxMCI6MjUwMX0=', '2018-01-04 07:30:55.341428'),
 ('vl39pblqcb97n4u3wo05fwkfnfcwwcjt', 'OGJkODg5MjhjMmYwMTYyMzhlYjIyMmJiYmYzODZiNTQ0NDA2YmQ4MTp7Im1vdmllaWQiOiI0ODIzMSJ9', '2017-11-29 15:03:43.676640');
 
 -- --------------------------------------------------------
@@ -275,7 +275,8 @@ INSERT INTO `login_user` (`id`, `user_number`, `name`, `username`, `dob`, `age`,
 (4, 4, 'User4', 'user4', '1990-01-04', 27, 'user4@user4.com', 'user4'),
 (5, 5, 'User5', 'user5', '1990-01-04', 27, 'user5@user5.com', 'user5'),
 (6, 6, 'User6', 'user6', '1990-01-18', 27, 'user6@user6.com', 'pbkdf2_sha256$36000$'),
-(7, 7, 'User7', 'user7', '1990-01-31', 27, 'user7@user7.com', 'pbkdf2_sha256$36000$nmLOTX0BIUfG$cpZQv5AYCZtrFs67EAlsMxCUHsbEo1iJm79vjmrAMvc=');
+(7, 7, 'User7', 'user7', '1990-01-31', 27, 'user7@user7.com', 'pbkdf2_sha256$36000$nmLOTX0BIUfG$cpZQv5AYCZtrFs67EAlsMxCUHsbEo1iJm79vjmrAMvc='),
+(8, 8, 'User8', 'user8', '1979-01-30', 38, 'user8@user8.com', 'pbkdf2_sha256$36000$LM0LMiyVV5DF$KEd9G1gdKaDUFq9SHAiWcFEfcR3nPzzz9DFJ5oAp1i0=');
 
 -- --------------------------------------------------------
 
@@ -9437,6 +9438,16 @@ CREATE TABLE `movies_ratings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `movies_ratings`
+--
+
+INSERT INTO `movies_ratings` (`id`, `user_id`, `movie_id`, `ratings`) VALUES
+(27, 7, 281338, '3.0'),
+(30, 7, 13, '5.0'),
+(31, 7, 281957, '4.0'),
+(32, 8, 281338, '4.0');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -9587,7 +9598,7 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `login_user`
 --
 ALTER TABLE `login_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `movies_links`
 --
@@ -9597,7 +9608,7 @@ ALTER TABLE `movies_links`
 -- AUTO_INCREMENT for table `movies_ratings`
 --
 ALTER TABLE `movies_ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- Constraints for dumped tables
 --
