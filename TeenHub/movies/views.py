@@ -12,6 +12,8 @@ def logout(request):
         string += str(i)
         if (string) in request.session:
             del request.session[string]
+    if 'movie_rating' in request.session:
+        del request.session['movie_rating']
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
@@ -78,6 +80,10 @@ def show_movies(request):
 
 def show_movie_info(request, movieid):
     request.session["movieid"] = movieid
+    if 'id' in request.session:
+        if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
+            ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
+            request.session["movie_rating"] = ratingRow.ratings 
     return render(request, 'movies/viewInfoMovies.html', {})
 
 def save_movie_rating(request, movie_rating):
