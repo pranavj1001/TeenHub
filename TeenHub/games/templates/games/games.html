@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Movies</title>
+    <title>Games</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
@@ -76,7 +76,7 @@
     <nav class="navbar navbar-inverse lightGrayBg noPadding">
       <div id="applications" class="row container-fluid">
           <div class="col-3 app ">
-            <a href="#">Movies</a>
+            <a href="{% url 'show_movies_page' %}">Movies</a>
           </div>
           <div class="col-3 app">
             <a href="#">Songs</a>
@@ -85,12 +85,12 @@
             <a href="#">Games</a>
           </div>
           <div class="col-3 app">
-            <a href="#">News</a>
+            <a href="{% url 'show_news_page'%}">News</a>
           </div>
       </div>
     </nav>
 
-    {% block searchBox %}
+    {% block searchBar %}
     {% endblock %}
 
     <h2 class="sectionHeading veryLightGrayText">Top Genres</h2>
