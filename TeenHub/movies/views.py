@@ -99,8 +99,11 @@ def save_movie_rating(request, movie_rating):
           return render(request, 'movies/viewInfoMovies.html', {})
         elif Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
             print('user wants to enter a new rating for a movie which he/she already rated')
-            Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).delete()
-        newRating = Ratings(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating)
-        newRating.save()
+            oldRating = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
+            oldRating.ratings = movie_rating
+            oldRating.save()
+        else:
+            newRating = Ratings(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating)
+            newRating.save()
         show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})
