@@ -14,12 +14,17 @@ def logout(request):
             del request.session[string]
     if 'movie_rating' in request.session:
         del request.session['movie_rating']
+    if 'show_rating_stars' in request.session:
+        del request.session["show_rating_stars"]
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
 
     if 'movie_rating' in request.session:
         del request.session['movie_rating']
+
+    if 'show_rating_stars' in request.session:
+        del request.session["show_rating_stars"]
 
     if 'id' in request.session:
         userRatings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/userRatings.csv')
@@ -28,8 +33,7 @@ def show_movies(request):
         # if 'movieRecommender' not in request.session:
         #     print("computing")
         #     corrMatrix = userRatings.corr(method='pearson', min_periods=20)
-        #     request.session.movieRecommender = corrMatrix
-        #     print("computing")
+        #     request.session["movieRecommender"] = json.dumps(corrMatrix)
         # else:
         #     print("not computing")
         #     corrMatrix = request.session["movieRecommender"]
@@ -90,6 +94,10 @@ def show_movie_info(request, movieid):
         if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
             ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
             request.session["movie_rating"] = json.dumps(ratingRow.ratings)
+        if Links.objects.filter(tmdb_id=movieid).exists():
+            request.session["show_rating_stars"] = True
+        elif 'show_rating_stars' in request.session:
+            del request.session["show_rating_stars"]
     return render(request, 'movies/viewInfoMovies.html', {})
 
 def save_movie_rating(request, movie_rating):

@@ -6,7 +6,7 @@
         <div class="row container-fluid detailSpace">
             <div class="col-sm-3 col-6">
                 <div class="card genre" id="thumbnail"></div>
-                {% if request.session.id %}
+                {% if request.session.show_rating_stars %}
                 <div class="rating" id="ratings"></div>
                 {% endif %}
             </div>
