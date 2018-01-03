@@ -6,8 +6,39 @@
         <h3 id="searchHeading">Teen<strong>HUB</strong><span class="subHeading">News</span></h3>
         <div id="searchBox" class="inner-addon right-addon">
           <i class="glyphicon glyphicon-search"></i>
-          <input type="text" class="form-control lightGrayBg searchText" placeholder="Search" />
+          <input type="text" class="form-control lightGrayBg searchText" placeholder="Search" id="inputBox" />
         </div>
     </div>
+
+{% endblock %}
+
+{% block SearchedNews %}
+    <div id="searchNews"></div>
+{% endblock %}
+
+{% block ajaxBlock %}
+    
+    <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    let APIKEY = "c97376d8658b4d3ebd52b87297491737";
+
+    $("#inputBox").keypress(function(e) {
+        var key = e.keyCode;
+        if(key == 13){
+            var inputText = $("#inputBox").val();
+            //console.log(inputText);
+            $.ajax({
+                method:"GET",
+                url:"https://newsapi.org/v2/everything?q="+inputText+"&apiKey="+APIKEY,
+                dataType: "json",
+                success: function(result){
+                    console.log(result);
+                }
+            });
+        }
+    });
+
+    </script>
 
 {% endblock %}
