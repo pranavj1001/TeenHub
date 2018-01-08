@@ -17,6 +17,64 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
+    <style type="text/css">
+    .news-item{
+      display:  inline-flex;
+      padding: 5px;
+      background-color:#555; 
+      width: 720px;
+      margin: 5px 0;
+    }
+    .news-item-image{
+      margin-right: 10px;
+      height: 115px;
+      width:  204px;
+    }
+    .news-image{
+      height: inherit;
+      width: inherit;
+    }
+    .news-item-info{
+      position: relative;
+    }
+    .source-name{
+      position: absolute;  
+      bottom: 0px;
+    }
+    .published{
+      position: absolute;
+      bottom: 0px;
+      right: 5px;
+    }
+    .news-item-image  img{
+      transition: all 0.3s;;
+    }
+
+    .news-item-image:hover  img{
+      transform: scale(1.03);
+    }
+    .title{
+      font-size: 20px;
+      line-height: 20px;
+    }
+    .description{
+      line-height: 17px;
+      margin: 8px 0 0 0;
+      font-size: 14px;
+    }
+    .description p{
+      line-height: 1.5em;
+      height: 3em;
+      overflow: hidden;
+      color: #111;
+    }
+    .other-detail{
+      margin-top: 10px;
+      font-size: 13px;
+      color: #111;
+    }
+    </style>
+
 </head>
 <body data-spy="scroll" data-offset="0" data-target="#theMenu">
 
@@ -65,6 +123,7 @@
 
     {% block searchBox %}
     {% endblock %}
+
 
 <!--     <h2 class="sectionHeading veryLightGrayText">Top Genres</h2>
 
