@@ -22,23 +22,81 @@
     
     <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
     <script type="text/javascript">
-    
-    let APIKEY = "c97376d8658b4d3ebd52b87297491737";
 
-    $("#inputBox").keypress(function(e) {
-        var key = e.keyCode;
-        if(key == 13){
-            var inputText = $("#inputBox").val();
-            //console.log(inputText);
-            $.ajax({
-                method:"GET",
-                url:"https://newsapi.org/v2/everything?q="+inputText+"&apiKey="+APIKEY,
-                dataType: "json",
-                success: function(result){
-                    console.log(result.articles);
-                    var articles = result.articles;
-                    var articleList="";
-                    $.each(articles,(index,article)=>{
+    var slideIndex = 1;
+    render_feed();
+
+    $("#prev").click(function(){
+         plusSlides(-1);
+    });
+
+    $("#next").click(function(){
+        plusSlides(+1);
+    });
+
+    $("#link1").click(function(){
+        currentSlides(1);
+    });
+
+    $("#link2").click(function(){
+        currentSlides(2);
+    });
+
+    $("#link3").click(function(){
+        currentSlides(3);
+    });
+
+    function plusSlides(n) {
+        showSlides(slideIndex+=n);
+    }
+
+    function currentSlides(n){
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var navs = document.getElementsByClassName(' news-link');
+        //console.log(navs.length);
+        if(n > navs.length){
+          slideIndex = 1;
+        }
+        if (n<1) {
+          slideIndex = navs.length;
+        }
+        //console.log(navs);
+        for (var i = 0; i < navs.length; i++) {
+          navs[i].className=navs[i].className.replace(" current-app","");
+        }
+        //console.log(navs);
+        navs[slideIndex-1].className += " current-app";
+
+        render_feed();
+
+    }
+    
+    function render_feed(){
+        if(slideIndex==1){
+            displayAll();
+        }
+        else if (slideIndex == 2) {
+            displayEntertainment();
+        }
+        else if (slideIndex == 3) {
+            displayTechnology();
+        }
+    }
+
+    function displayAll(){
+        $.ajax({
+            method:"GET",
+            url:"https://newsapi.org/v2/top-headlines?sources=buzzfeed,mashable,mtv-news,the-lad-bible,polygon,ign,daily-mail&apiKey=c97376d8658b4d3ebd52b87297491737",
+            dataType: "json",
+            success: function(result){
+                console.log(result.articles);
+                var articles = result.articles;
+                var articleList="";
+                $.each(articles,(index,article)=>{
                         // console.log(article.author);
                         // console.log(article.title);
                         // console.log(article.description);
@@ -46,8 +104,8 @@
                         // console.log(article.urlToImage);
                         // console.log(article.url);
                         // console.log("-------------");
-                        if(article.urlToImage != "null"){
-                            articleList += `
+                    if(article.urlToImage != "null"){
+                        articleList += `
                             <div class="news-item"><a target="_blank" href="${article.url}">
                                 <div class="news-item-image">
                                     <img class="news-image" src="${article.urlToImage}">
@@ -62,13 +120,61 @@
                                 </div>
                             </div>
                             `;
-                        }
-                    });
-                    $("#searchNews").html(articleList);
-                }
-            });
-        }
-    });
+                    }
+                });
+                $("#searchNews").html(articleList);
+            }
+        });
+    }
+
+
+
+    let APIKEY = "c97376d8658b4d3ebd52b87297491737";
+
+    // $("#inputBox").keypress(function(e) {
+    //     var key = e.keyCode;
+    //     if(key == 13){
+    //         var inputText = $("#inputBox").val();
+    //         //console.log(inputText);
+    //         $.ajax({
+    //             method:"GET",
+    //             url:"https://newsapi.org/v2/everything?q="+inputText+"&apiKey="+APIKEY,
+    //             dataType: "json",
+    //             success: function(result){
+    //                 console.log(result.articles);
+    //                 var articles = result.articles;
+    //                 var articleList="";
+    //                 $.each(articles,(index,article)=>{
+    //                     // console.log(article.author);
+    //                     // console.log(article.title);
+    //                     // console.log(article.description);
+    //                     // console.log(article.source.name);
+    //                     // console.log(article.urlToImage);
+    //                     // console.log(article.url);
+    //                     // console.log("-------------");
+    //                     if(article.urlToImage != "null"){
+    //                         articleList += `
+    //                         <div class="news-item"><a target="_blank" href="${article.url}">
+    //                             <div class="news-item-image">
+    //                                 <img class="news-image" src="${article.urlToImage}">
+    //                             </div></a>
+    //                             <div class="news-item-info">
+    //                                 <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+    //                                 <div class="description"><p>${article.description}</p></div>
+    //                                 <div class="other-detail" >
+    //                                         <div class="source-name">${article.source.name}</div>
+    //                                         <div class="published"">${article.publishedAt}</div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                         `;
+    //                     }
+    //                 });
+    //                 $("#searchNews").html(articleList);
+    //             }
+    //         });
+    //     }
+    // });
 
     </script>
 

@@ -185,56 +185,6 @@
     <script src="{% static 'js/smoothscroll.js' %}"></script>
     <script src="{% static 'js/classie.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    <script type="text/javascript">
-          var slideIndex = 1;
-
-          $("#prev").click(function(){
-            plusSlides(-1);
-          });
-
-          $("#next").click(function(){
-            plusSlides(+1);
-          });
-
-          $("#link1").click(function(){
-            currentSlides(1);
-          });
-
-          $("#link2").click(function(){
-            currentSlides(2);
-          });
-
-          $("#link3").click(function(){
-            currentSlides(3);
-          });
-
-          function plusSlides(n) {
-            showSlides(slideIndex+=n);
-          }
-
-          function currentSlides(n){
-            showSlides(slideIndex = n);
-          }
-
-          function showSlides(n) {
-            var i;
-            var navs = document.getElementsByClassName(' news-link');
-            //console.log(navs.length);
-            if(n > navs.length){
-              slideIndex = 1;
-            }
-            if (n<1) {
-              slideIndex = navs.length;
-            }
-            //console.log(navs);
-            for (var i = 0; i < navs.length; i++) {
-              navs[i].className=navs[i].className.replace(" current-app","");
-            }
-            //console.log(navs);
-            navs[slideIndex-1].className += " current-app";
-
-          }
-    </script>
 
     {% block ajaxBlock %}
     {% endblock %}
