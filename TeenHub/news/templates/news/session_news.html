@@ -90,7 +90,7 @@
     function displayAll(){
         $.ajax({
             method:"GET",
-            url:"https://newsapi.org/v2/top-headlines?sources=buzzfeed,mashable,mtv-news,the-lad-bible,polygon,ign,daily-mail&apiKey=c97376d8658b4d3ebd52b87297491737",
+            url:"https://newsapi.org/v2/top-headlines?sources=buzzfeed,mashable,mtv-news,the-lad-bible,polygon,ign,daily-mail,ars-technica,engadget,hacker-news,recode,gruenderszene,t3n,techcrunch-cn,techradar,the-verge,the-next-web,wired,wired-de,crypto-coins-news&apiKey=c97376d8658b4d3ebd52b87297491737",
             dataType: "json",
             success: function(result){
                 console.log(result.articles);
