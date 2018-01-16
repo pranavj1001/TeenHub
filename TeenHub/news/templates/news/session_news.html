@@ -168,6 +168,46 @@
         });
     }
 
+        function displayTechnology(){
+        $.ajax({
+            method:"GET",
+            url:"https://newsapi.org/v2/top-headlines?sources=ars-technica,engadget,hacker-news,recode,gruenderszene,t3n,techcrunch-cn,techradar,the-verge,the-next-web,wired,wired-de,crypto-coins-news&apiKey=c97376d8658b4d3ebd52b87297491737",
+            dataType: "json",
+            success: function(result){
+                //console.log(result.articles);
+                var articles = result.articles;
+                var articleList="";
+                $.each(articles,(index,article)=>{
+                        // console.log(article.author);
+                        // console.log(article.title);
+                        // console.log(article.description);
+                        // console.log(article.source.name);
+                        // console.log(article.urlToImage);
+                        // console.log(article.url);
+                        // console.log("-------------");
+                    if(article.urlToImage != "null"){
+                        articleList += `
+                            <div class="news-item"><a target="_blank" href="${article.url}">
+                                <div class="news-item-image">
+                                    <img class="news-image" src="${article.urlToImage}">
+                                </div></a>
+                                <div class="news-item-info">
+                                    <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                                    <div class="description"><p>${article.description}</p></div>
+                                    <div class="other-detail" >
+                                            <div class="source-name">${article.source.name}</div>
+                                            <div class="published"">${article.publishedAt}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                    }
+                });
+                $("#searchNews").html(articleList);
+            }
+        });
+    }
+
 
 
 
