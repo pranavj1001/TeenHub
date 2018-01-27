@@ -6,7 +6,8 @@ from TeenHub.settings import PROJECT_ROOT
 
 # Create your views here.
 def logout(request):
-    del request.session["id"]
+    if 'id' in request.session:
+        del request.session["id"]
     for i in range(1, 11):
         string = 'recommendationsMovies'
         string += str(i)
@@ -16,6 +17,8 @@ def logout(request):
         del request.session['movie_rating']
     if 'show_rating_stars' in request.session:
         del request.session["show_rating_stars"]
+    if 'noRatings' in request.session:
+        del request.session["noRatings"]
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
@@ -31,10 +34,11 @@ def show_movies(request):
         dataset_ratings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/movies_ratings_small.csv', usecols=range(3))
 
         currentUserRatings = Ratings.objects.filter(user_id=request.session['id'])
+
         if(len(currentUserRatings) > 0):
             for i in range(0, len(currentUserRatings)):
                 dataset_ratings = dataset_ratings.append({'userId' : 672, 'movieId' : currentUserRatings[i].movie_id, 'rating' : int(currentUserRatings[i].ratings)}, ignore_index=True)
-            print(dataset_ratings)
+            # print(dataset_ratings)
 
             userRatings = dataset_ratings.pivot_table(index=['userId'], columns=['movieId'], values='rating')
             corrMatrix = userRatings.corr(method='pearson', min_periods=20)
@@ -93,6 +97,9 @@ def show_movies(request):
             link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[9])
             request.session["recommendationsMovies10"] = link.tmdb_id
 
+        else:
+            request.session["noRatings"] = 1
+
     return render(request, 'movies/session.html', {})
 
 def show_movie_info(request, movieid):
@@ -111,6 +118,8 @@ def show_movie_info(request, movieid):
     return render(request, 'movies/viewInfoMovies.html', {})
 
 def save_movie_rating(request, movie_rating):
+    if 'noRatings' in request.session:
+        del request.session["noRatings"]
     if 'id' in request.session:
         if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating).exists():
           print('rating already exists')
