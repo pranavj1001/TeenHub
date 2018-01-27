@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2017 at 08:32 AM
+-- Generation Time: Jan 27, 2018 at 04:17 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -242,9 +242,10 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('8fnaaeagvh1m2o5mgjfcjvyxx758v9vy', 'ZDkxZDgyMGJlOTdjYjllNzRmZTQ1M2RkOTY4YWJjNGVhZThlNmZhYjp7Im5vUmF0aW5ncyI6MSwiaWQiOjd9', '2018-02-10 15:15:32.818287'),
 ('ajnmphahz160ugzwirhgz7dn3cw7iwl9', 'ZWVhOWQyNmVlOGRjMGY4ZTdkOWQ2MGNhMWM3ZWZkZTA2NjEzMGVjYzp7ImlkIjoxfQ==', '2017-11-22 08:59:33.397064'),
 ('fxgl0nheg4gllz6k8b22uuh9gyw00sw6', 'ZWVhOWQyNmVlOGRjMGY4ZTdkOWQ2MGNhMWM3ZWZkZTA2NjEzMGVjYzp7ImlkIjoxfQ==', '2017-11-22 08:28:59.350936'),
-('p83g5b86aveu0umu6j5pokpzy96tog5q', 'OTlkMWIyOTFmNDE1YWUwZThmZjBiOTYyMjYzNWVmN2M3OTQ1ZTA3NDp7Im1vdmllX3JhdGluZyI6IjQuMCIsInJlY29tbWVuZGF0aW9uc01vdmllczMiOjI3NSwicmVjb21tZW5kYXRpb25zTW92aWVzNiI6MTg5MywicmVjb21tZW5kYXRpb25zTW92aWVzMiI6MTQ2LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxIjoxNDMwLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM1Ijo1NTAzLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM5IjoxNTMsInJlY29tbWVuZGF0aW9uc01vdmllczgiOjUxMCwibW92aWVpZCI6IjI4MTMzOCIsImlkIjo4LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM0IjoyNjc1LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM3Ijo4MzU4LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxMCI6MjUwMX0=', '2018-01-04 07:30:55.341428'),
+('p83g5b86aveu0umu6j5pokpzy96tog5q', 'M2Q3YTliNTk1NTI4OWIwMWNkZmQ5YTMyOWYwZjI0OGRjYWIzZmRiZDp7InJlY29tbWVuZGF0aW9uc01vdmllczMiOjI3NSwicmVjb21tZW5kYXRpb25zTW92aWVzNyI6MTUzLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM0IjoyNjc1LCJpZCI6NywicmVjb21tZW5kYXRpb25zTW92aWVzMSI6MTQzMCwibW92aWVpZCI6IjM5NTgzNCIsInJlY29tbWVuZGF0aW9uc01vdmllczIiOjE0NiwicmVjb21tZW5kYXRpb25zTW92aWVzOSI6MTg5MywicmVjb21tZW5kYXRpb25zTW92aWVzOCI6NTEwLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM1Ijo1NTAzLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxMCI6NjY0LCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXM2Ijo4MzU4fQ==', '2018-01-15 18:20:13.035310'),
 ('vl39pblqcb97n4u3wo05fwkfnfcwwcjt', 'OGJkODg5MjhjMmYwMTYyMzhlYjIyMmJiYmYzODZiNTQ0NDA2YmQ4MTp7Im1vdmllaWQiOiI0ODIzMSJ9', '2017-11-29 15:03:43.676640');
 
 -- --------------------------------------------------------
@@ -9438,16 +9439,6 @@ CREATE TABLE `movies_ratings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `movies_ratings`
---
-
-INSERT INTO `movies_ratings` (`id`, `user_id`, `movie_id`, `ratings`) VALUES
-(27, 7, 281338, '3.0'),
-(30, 7, 13, '5.0'),
-(31, 7, 281957, '4.0'),
-(32, 8, 281338, '4.0');
-
---
 -- Indexes for dumped tables
 --
 
@@ -9608,7 +9599,7 @@ ALTER TABLE `movies_links`
 -- AUTO_INCREMENT for table `movies_ratings`
 --
 ALTER TABLE `movies_ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
