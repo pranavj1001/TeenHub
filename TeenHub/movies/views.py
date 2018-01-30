@@ -37,11 +37,11 @@ def show_movies(request):
 
         if(len(currentUserRatings) > 0):
             for i in range(0, len(currentUserRatings)):
-                dataset_ratings = dataset_ratings.append({'userId' : 672, 'movieId' : currentUserRatings[i].movie_id, 'rating' : int(currentUserRatings[i].ratings)}, ignore_index=True)
+                dataset_ratings = dataset_ratings.append({'userId': 672, 'movieId': currentUserRatings[i].movie_id, 'rating': int(currentUserRatings[i].ratings)}, ignore_index=True)
             # print(dataset_ratings)
 
             userRatings = dataset_ratings.pivot_table(index=['userId'], columns=['movieId'], values='rating')
-            corrMatrix = userRatings.corr(method='pearson', min_periods=20)
+            corrMatrix = userRatings.corr(method='pearson', min_periods=3)
 
             # if 'movieRecommender' not in request.session:
             #     print("computing")
@@ -51,8 +51,7 @@ def show_movies(request):
             #     print("not computing")
             #     corrMatrix = request.session["movieRecommender"]
 
-            getRatings = userRatings.loc[0].dropna()
-            print(getRatings)
+            getRatings = userRatings.loc[672].dropna()
 
             similarCandidates = pd.Series()
             for i in range(0, len(getRatings)):
@@ -106,7 +105,6 @@ def show_movie_info(request, movieid):
     request.session["movieid"] = movieid
     if 'movie_rating' in request.session:
         del request.session['movie_rating']
-    print("here")
     if 'id' in request.session:
         if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
             ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
