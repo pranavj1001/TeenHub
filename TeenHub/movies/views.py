@@ -119,16 +119,17 @@ def save_movie_rating(request, movie_rating):
     if 'noRatings' in request.session:
         del request.session["noRatings"]
     if 'id' in request.session:
-        if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating).exists():
+        link = Links.objects.get(tmdb_id=request.session["movieid"])
+        if Ratings.objects.filter(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating).exists():
           print('rating already exists')
           return render(request, 'movies/viewInfoMovies.html', {})
-        elif Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
+        elif Ratings.objects.filter(user_id=request.session["id"], movie_id=link.movie_id).exists():
             print('user wants to enter a new rating for a movie which he/she already rated')
-            oldRating = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
+            oldRating = Ratings.objects.get(user_id=request.session["id"], movie_id=link.movie_id)
             oldRating.ratings = movie_rating
             oldRating.save()
         else:
-            newRating = Ratings(user_id=request.session["id"], movie_id=request.session["movieid"], ratings=movie_rating)
+            newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating)
             newRating.save()
         show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})
