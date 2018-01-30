@@ -106,9 +106,11 @@ def show_movie_info(request, movieid):
     if 'movie_rating' in request.session:
         del request.session['movie_rating']
     if 'id' in request.session:
-        if Ratings.objects.filter(user_id=request.session["id"], movie_id=request.session["movieid"]).exists():
-            ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=request.session["movieid"])
+        link = Links.objects.get(tmdb_id=request.session["movieid"])
+        if Ratings.objects.filter(user_id=request.session["id"], movie_id=link.movie_id).exists():
+            ratingRow = Ratings.objects.get(user_id=request.session["id"], movie_id=link.movie_id)
             request.session["movie_rating"] = json.dumps(ratingRow.ratings)
+            print(request.session["movie_rating"])
         if Links.objects.filter(tmdb_id=movieid).exists():
             request.session["show_rating_stars"] = True
         elif 'show_rating_stars' in request.session:
