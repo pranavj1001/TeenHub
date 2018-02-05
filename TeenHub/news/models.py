@@ -14,6 +14,7 @@ class News(models.Model):
     ars_technica = models.IntegerField(blank=False, default=1)
     crypto_coins_news = models.IntegerField(blank=False, default=1)
     engadget = models.IntegerField(blank=False, default=1)
+    gruenderszene = models.IntegerField(blank=False, default=1)
     hacker_news = models.IntegerField(blank=False, default=1)
     recode = models.IntegerField(blank=False, default=1)
     t3n = models.IntegerField(blank=False, default=1)
@@ -21,4 +22,4 @@ class News(models.Model):
     techradar = models.IntegerField(blank=False, default=1)
     the_next_web = models.IntegerField(blank=False, default=1)
     the_verge = models.IntegerField(blank=False, default=1)
-    wired = models.IntegerField(blank=False, default=1) 
+    wired = models.IntegerField(blank=False, default=1)

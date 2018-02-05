@@ -41,7 +41,8 @@ def signup_user(request):
             hashedPasssword = make_password(password)
             newUser.password = hashedPasssword
             newUser.save()
-            newsRow = News(user_id=userDetails.user_number)
+            # create new row in news table
+            newsRow = News(user_id=request.session["id"])
             newsRow.save()
             print("created news row")
             return redirect('/movies')

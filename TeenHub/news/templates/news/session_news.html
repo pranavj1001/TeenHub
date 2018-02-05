@@ -123,129 +123,133 @@
                     }
                 });
                 articleList += `    <div id="sourceNews">
-                                      <h3>Entertainment</h3>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="buzzfeed" checked>
-                                        <label class="form-check-label" for="buzzfeed">
-                                          Buzzfeed
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="daily-mail" checked>
-                                        <label class="form-check-label" for="daily-mail">
-                                          Daily Mail
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="entertainment-weekly" checked>
-                                        <label class="form-check-label" for="entertainment-weekly">
-                                          Entertainment-Weekly
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="ign" checked>
-                                        <label class="form-check-label" for="ign">
-                                          IGN
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="mashable" checked>
-                                        <label class="form-check-label" for="mashable">
-                                          Mashable
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="mtv-news" checked>
-                                        <label class="form-check-label" for="mtv-news">
-                                          MTV News
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="polygon" checked>
-                                        <label class="form-check-label" for="polygon">
-                                          Polygon
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="the-lad-bible" checked>
-                                        <label class="form-check-label" for="the-lad-bible">
-                                          The Lad Bible
-                                        </label>
-                                      </div>
-
+                                      <h3>Entertainment &</h3>
                                       <h3>Technology</h3>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="ars-technica" checked>
-                                        <label class="form-check-label" for="ars-technica">
-                                          Ars Technica
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="crypto-coins-news" checked>
-                                        <label class="form-check-label" for="crypto-coins-news">
-                                          Crypto Coins News
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="engadget" checked>
-                                        <label class="form-check-label" for="engadget">
-                                          Engadget
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="gruenderszene" checked>
-                                        <label class="form-check-label" for="gruenderszene">
-                                          Gruenderszene
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="hacker-news" checked>
-                                        <label class="form-check-label" for="hacker-news">
-                                          Hacker News
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="recode" checked>
-                                        <label class="form-check-label" for="recode">
-                                          Recode
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="t3n" checked>
-                                        <label class="form-check-label" for="t3n">
-                                          T3n
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="techcrunch" checked>
-                                        <label class="form-check-label" for="techcrunch">
-                                          TechCrunch
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="techradar"  checked>
-                                        <label class="form-check-label" for="techradar">
-                                          TechRadar
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="the-next-web"  checked>
-                                        <label class="form-check-label" for="the-next-web">
-                                          The Next Web
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="the-verge"  checked>
-                                        <label class="form-check-label" for="the-verge">
-                                          The Verge
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="wired" checked>
-                                        <label class="form-check-label" for="wired">
-                                          Wired
-                                        </label>
-                                      </div>
+                                      <form action="{% url 'save_all_news_list' %}" method="post" Content-Type="application/json">
+                                        {% csrf_token %}
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed" checked>
+                                          <label class="form-check-label" for="buzzfeed">
+                                            Buzzfeed
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail" checked>
+                                          <label class="form-check-label" for="daily-mail">
+                                            Daily Mail
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly" checked>
+                                          <label class="form-check-label" for="entertainment-weekly">
+                                            Entertainment-Weekly
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign" checked>
+                                          <label class="form-check-label" for="ign">
+                                            IGN
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable" checked>
+                                          <label class="form-check-label" for="mashable">
+                                            Mashable
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news" checked>
+                                          <label class="form-check-label" for="mtv-news">
+                                            MTV News
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon" checked>
+                                          <label class="form-check-label" for="polygon">
+                                            Polygon
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible" checked>
+                                          <label class="form-check-label" for="the-lad-bible">
+                                            The Lad Bible
+                                          </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica" checked>
+                                          <label class="form-check-label" for="ars-technica">
+                                            Ars Technica
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news" checked>
+                                          <label class="form-check-label" for="crypto-coins-news">
+                                            Crypto Coins News
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget" checked>
+                                          <label class="form-check-label" for="engadget">
+                                            Engadget
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene" checked>
+                                          <label class="form-check-label" for="gruenderszene">
+                                            Gruenderszene
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news" checked>
+                                          <label class="form-check-label" for="hacker-news">
+                                            Hacker News
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode" checked>
+                                          <label class="form-check-label" for="recode">
+                                            Recode
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n" checked>
+                                          <label class="form-check-label" for="t3n">
+                                            T3n
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch" checked>
+                                          <label class="form-check-label" for="techcrunch">
+                                            TechCrunch
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"  checked>
+                                          <label class="form-check-label" for="techradar">
+                                            TechRadar
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"  checked>
+                                          <label class="form-check-label" for="the-next-web">
+                                            The Next Web
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"  checked>
+                                          <label class="form-check-label" for="the-verge">
+                                            The Verge
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired" checked>
+                                          <label class="form-check-label" for="wired">
+                                            Wired
+                                          </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </form
                                     </div>`;
                 $("#searchNews").html(articleList);
             }
@@ -290,54 +294,58 @@
                 });
                 articleList += `    <div id="sourceNews">
                                       <h3>Entertainment</h3>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="buzzfeed" checked>
-                                        <label class="form-check-label" for="buzzfeed">
-                                          Buzzfeed
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="daily-mail" checked>
-                                        <label class="form-check-label" for="daily-mail">
-                                          Daily Mail
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="entertainment-weekly" checked>
-                                        <label class="form-check-label" for="entertainment-weekly">
-                                          Entertainment-Weekly
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="ign" checked>
-                                        <label class="form-check-label" for="ign">
-                                          IGN
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="mashable" checked>
-                                        <label class="form-check-label" for="mashable">
-                                          Mashable
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="mtv-news" checked>
-                                        <label class="form-check-label" for="mtv-news">
-                                          MTV News
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="polygon" checked>
-                                        <label class="form-check-label" for="polygon">
-                                          Polygon
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="the-lad-bible" checked>
-                                        <label class="form-check-label" for="the-lad-bible">
-                                          The Lad Bible
-                                        </label>
-                                      </div>
+                                      <form action="{% url 'save_entertain_news_list' %}" method="post" Content-Type="application/json">
+                                        {% csrf_token %}
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="buzzfeed" checked>
+                                          <label class="form-check-label" for="buzzfeed">
+                                            Buzzfeed
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="daily-mail" checked>
+                                          <label class="form-check-label" for="daily-mail">
+                                            Daily Mail
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="entertainment-weekly" checked>
+                                          <label class="form-check-label" for="entertainment-weekly">
+                                            Entertainment-Weekly
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="ign" checked>
+                                          <label class="form-check-label" for="ign">
+                                            IGN
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="mashable" checked>
+                                          <label class="form-check-label" for="mashable">
+                                            Mashable
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="mtv-news" checked>
+                                          <label class="form-check-label" for="mtv-news">
+                                            MTV News
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="polygon" checked>
+                                          <label class="form-check-label" for="polygon">
+                                            Polygon
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="the-lad-bible" checked>
+                                          <label class="form-check-label" for="the-lad-bible">
+                                            The Lad Bible
+                                          </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </form>
 
 
                                     </div>`;
@@ -382,80 +390,84 @@
                     }
                 });
                 articleList += `    <div id="sourceNews">
-                                  
+
                                       <h3>Technology</h3>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="ars-technica" checked>
-                                        <label class="form-check-label" for="ars-technica">
-                                          Ars Technica
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="crypto-coins-news" checked>
-                                        <label class="form-check-label" for="crypto-coins-news">
-                                          Crypto Coins News
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="engadget" checked>
-                                        <label class="form-check-label" for="engadget">
-                                          Engadget
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="gruenderszene" checked>
-                                        <label class="form-check-label" for="gruenderszene">
-                                          Gruenderszene
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="hacker-news" checked>
-                                        <label class="form-check-label" for="hacker-news">
-                                          Hacker News
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="recode" checked>
-                                        <label class="form-check-label" for="recode">
-                                          Recode
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="t3n" checked>
-                                        <label class="form-check-label" for="t3n">
-                                          T3n
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="techcrunch" checked>
-                                        <label class="form-check-label" for="techcrunch">
-                                          TechCrunch
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="techradar"  checked>
-                                        <label class="form-check-label" for="techradar">
-                                          TechRadar
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="the-next-web"  checked>
-                                        <label class="form-check-label" for="the-next-web">
-                                          The Next Web
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="the-verge"  checked>
-                                        <label class="form-check-label" for="the-verge">
-                                          The Verge
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="wired" checked>
-                                        <label class="form-check-label" for="wired">
-                                          Wired
-                                        </label>
-                                      </div>
+                                      <form action="{% url 'save_tech_news_list' %}" method="post" Content-Type="application/json">
+                                        {% csrf_token %}
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="ars-technica" checked>
+                                          <label class="form-check-label" for="ars-technica">
+                                            Ars Technica
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="crypto-coins-news" checked>
+                                          <label class="form-check-label" for="crypto-coins-news">
+                                            Crypto Coins News
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="engadget" checked>
+                                          <label class="form-check-label" for="engadget">
+                                            Engadget
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="gruenderszene" checked>
+                                          <label class="form-check-label" for="gruenderszene">
+                                            Gruenderszene
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="hacker-news" checked>
+                                          <label class="form-check-label" for="hacker-news">
+                                            Hacker News
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="recode" checked>
+                                          <label class="form-check-label" for="recode">
+                                            Recode
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="t3n" checked>
+                                          <label class="form-check-label" for="t3n">
+                                            T3n
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="techcrunch" checked>
+                                          <label class="form-check-label" for="techcrunch">
+                                            TechCrunch
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="techradar"  checked>
+                                          <label class="form-check-label" for="techradar">
+                                            TechRadar
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="the-next-web"  checked>
+                                          <label class="form-check-label" for="the-next-web">
+                                            The Next Web
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="the-verge"  checked>
+                                          <label class="form-check-label" for="the-verge">
+                                            The Verge
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="wired" checked>
+                                          <label class="form-check-label" for="wired">
+                                            Wired
+                                          </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </form>
                                     </div>`;
                 $("#searchNews").html(articleList);
             }
