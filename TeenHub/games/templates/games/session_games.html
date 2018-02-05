@@ -93,7 +93,7 @@
 
 {% block moviesNews %}
 
-    <h2 class="sectionHeading veryLightGrayText">Todays Top News</h2>
+    <h2 class="sectionHeading veryLightGrayText">Todays Gaming News</h2>
 
     <section class="moviesNews">
         <div id="mNews" class="sectionAlignment veryLightGrayText">
@@ -305,7 +305,7 @@
 
     $.ajax({
         type: "GET",
-        url: "https://newsapi.org/v1/articles?source=mashable&sortBy=top&apiKey=bdbcae478d174e04ba1504b2914cc143",
+        url: "https://newsapi.org/v1/articles?source=polygon&sortBy=top&apiKey=bdbcae478d174e04ba1504b2914cc143",
         dataType: "json",
         success: function(result){
             var newsData = result.articles;
