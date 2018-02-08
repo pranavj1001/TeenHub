@@ -3,7 +3,8 @@ from news.models import News
 
 # Create your views here.
 def show_news(request):
-	return render(request, 'news/session_news.html', {})
+	news = News.objects.get(user_id=request.session['id'])
+	return render(request, 'news/session_news.html', {'news' : news})
 
 def save_all_news_list(request):
 	if request.POST:

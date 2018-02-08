@@ -18,6 +18,7 @@
     </div>
 {% endblock %}
 
+
 {% block ajaxBlock %}
 
     <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
@@ -129,122 +130,182 @@
                                         <form action="{% url 'save_all_news_list' %}" method="post" Content-Type="application/json">
                                           {% csrf_token %}
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed"
+                                            {% if news.buzzfeed == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="buzzfeed">
                                               Buzzfeed
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail"
+                                            {% if news.daily_mail == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="daily-mail">
                                               Daily Mail
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly"
+                                            {% if news.entertainment_weekly == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="entertainment-weekly">
                                               Entertainment-Weekly
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign"
+                                            {% if news.ign == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="ign">
                                               IGN
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable"
+                                            {% if news.mashable == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="mashable">
                                               Mashable
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news"
+                                            {% if news.mtv_news == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="mtv-news">
                                               MTV News
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon"
+                                            {% if news.polygon == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="polygon">
                                               Polygon
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible"
+                                            {% if news.the_lad_bible == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="the-lad-bible">
                                               The Lad Bible
                                             </label>
                                           </div>
 
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica"
+                                            {% if news.ars_technica == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="ars-technica">
                                               Ars Technica
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news"
+                                            {% if news.crypto_coins_news == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="crypto-coins-news">
                                               Crypto Coins News
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget"
+                                            {% if news.engadget == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="engadget">
                                               Engadget
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene"
+                                            {% if news.gruenderszene == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="gruenderszene">
                                               Gruenderszene
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news"
+                                            {% if news.hacker_news == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="hacker-news">
                                               Hacker News
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode"
+                                            {% if news.recode == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="recode">
                                               Recode
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n"
+                                            {% if news.t3n == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="t3n">
                                               T3n
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch"
+                                            {% if news.techcrunch == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="techcrunch">
                                               TechCrunch
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"  checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"
+                                            {% if news.techradar == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="techradar">
                                               TechRadar
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"  checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"
+                                            {% if news.the_next_web == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="the-next-web">
                                               The Next Web
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"  checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"
+                                            {% if news.the_verge == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="the-verge">
                                               The Verge
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired"
+                                            {% if news.wired == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="wired">
                                               Wired
                                             </label>
@@ -300,49 +361,73 @@
                                         <form action="{% url 'save_entertain_news_list' %}" method="post" Content-Type="application/json">
                                           {% csrf_token %}
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed"
+                                            {% if news.buzzfeed == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="buzzfeed">
                                               Buzzfeed
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail"
+                                            {% if news.daily_mail == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="daily-mail">
                                               Daily Mail
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly"
+                                            {% if news.entertainment_weekly == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="entertainment-weekly">
                                               Entertainment-Weekly
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign"
+                                            {% if news.ign == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="ign">
                                               IGN
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable"
+                                            {% if news.mashable == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="mashable">
                                               Mashable
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news"
+                                            {% if news.mtv_news == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="mtv-news">
                                               MTV News
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon"
+                                            {% if news.polygon == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="polygon">
                                               Polygon
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible"
+                                            {% if news.the_lad_bible == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="the-lad-bible">
                                               The Lad Bible
                                             </label>
@@ -400,73 +485,109 @@
                                         <form action="{% url 'save_tech_news_list' %}" method="post" Content-Type="application/json">
                                           {% csrf_token %}
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica"
+                                            {% if news.ars_technica == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="ars-technica">
                                               Ars Technica
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news"
+                                            {% if news.crypto_coins_news == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="crypto-coins-news">
                                               Crypto Coins News
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget"
+                                            {% if news.engadget == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="engadget">
                                               Engadget
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene"
+                                            {% if news.gruenderszene == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="gruenderszene">
                                               Gruenderszene
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news"
+                                            {% if news.hacker_news == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="hacker-news">
                                               Hacker News
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode"
+                                            {% if news.recode == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="recode">
                                               Recode
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n"
+                                            {% if news.t3n == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="t3n">
                                               T3n
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch"
+                                            {% if news.techcrunch == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="techcrunch">
                                               TechCrunch
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"  checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"
+                                            {% if news.techradar == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="techradar">
                                               TechRadar
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"  checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"
+                                            {% if news.the_next_web == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="the-next-web">
                                               The Next Web
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"  checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"
+                                            {% if news.the_verge == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="the-verge">
                                               The Verge
                                             </label>
                                           </div>
                                           <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired" checked>
+                                            <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired"
+                                            {% if news.wired == 1 %}
+                                              checked
+                                            {% endif %}>
                                             <label class="form-check-label" for="wired">
                                               Wired
                                             </label>
@@ -479,6 +600,7 @@
             }
         });
     }
+
 
 
 
