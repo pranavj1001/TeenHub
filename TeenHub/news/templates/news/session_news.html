@@ -799,7 +799,7 @@
              //console.log(inputText);
              $.ajax({
                  method:"GET",
-                 url:"https://newsapi.org/v2/everything?q="+inputText+"/sources=bbc-news&apiKey=c97376d8658b4d3ebd52b87297491737",
+                 url:"https://newsapi.org/v2/everything?q="+inputText+"&apiKey=c97376d8658b4d3ebd52b87297491737",
                  dataType: "json",
                  success: function(result){
                      console.log(result.articles);
