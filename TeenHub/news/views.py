@@ -92,43 +92,43 @@ def save_all_news_list(request):
 		if 'recode' not in request.POST:
 			allNewsList.recode=0
 		else:
-			allNewsList.engadget=request.POST['recode']
+			allNewsList.recode=request.POST['recode']
 			print('recode')
 
 		if 't3n' not in request.POST:
 			allNewsList.t3n=0
 		else:
-			allNewsList.engadget=request.POST['t3n']
+			allNewsList.t3n=request.POST['t3n']
 			print('t3n')
 
 		if 'techcrunch' not in request.POST:
 			allNewsList.techcrunch=0
 		else:
-			allNewsList.engadget=request.POST['techcrunch']
+			allNewsList.techcrunch=request.POST['techcrunch']
 			print('techcrunch')
 
 		if 'techradar' not in request.POST:
 			allNewsList.techradar=0
 		else:
-			allNewsList.engadget=request.POST['techradar']
+			allNewsList.techradar=request.POST['techradar']
 			print('techradar')
 
 		if 'the_next_web' not in request.POST:
 			allNewsList.the_next_web=0
 		else:
-			allNewsList.engadget=request.POST['the_next_web']
+			allNewsList.the_next_web=request.POST['the_next_web']
 			print('the_next_web')
 
 		if 'the_verge' not in request.POST:
 			allNewsList.the_verge=0
 		else:
-			allNewsList.engadget=request.POST['the_verge']
+			allNewsList.the_verge=request.POST['the_verge']
 			print('the_verge')
 
 		if 'wired' not in request.POST:
 			allNewsList.wired=0
 		else:
-			allNewsList.engadget=request.POST['wired']
+			allNewsList.wired=request.POST['wired']
 			print('wired')
 
 
@@ -233,43 +233,43 @@ def save_tech_news_list(request):
 		if 'recode' not in request.POST:
 			allNewsList.recode=0
 		else:
-			allNewsList.engadget=request.POST['recode']
+			allNewsList.recode=request.POST['recode']
 			print('recode')
 
 		if 't3n' not in request.POST:
 			allNewsList.t3n=0
 		else:
-			allNewsList.engadget=request.POST['t3n']
+			allNewsList.t3n=request.POST['t3n']
 			print('t3n')
 
 		if 'techcrunch' not in request.POST:
 			allNewsList.techcrunch=0
 		else:
-			allNewsList.engadget=request.POST['techcrunch']
+			allNewsList.techcrunch=request.POST['techcrunch']
 			print('techcrunch')
 
 		if 'techradar' not in request.POST:
 			allNewsList.techradar=0
 		else:
-			allNewsList.engadget=request.POST['techradar']
+			allNewsList.techradar=request.POST['techradar']
 			print('techradar')
 
 		if 'the_next_web' not in request.POST:
 			allNewsList.the_next_web=0
 		else:
-			allNewsList.engadget=request.POST['the_next_web']
+			allNewsList.the_next_web=request.POST['the_next_web']
 			print('the_next_web')
 
 		if 'the_verge' not in request.POST:
 			allNewsList.the_verge=0
 		else:
-			allNewsList.engadget=request.POST['the_verge']
+			allNewsList.the_verge=request.POST['the_verge']
 			print('the_verge')
 
 		if 'wired' not in request.POST:
 			allNewsList.wired=0
 		else:
-			allNewsList.engadget=request.POST['wired']
+			allNewsList.wired=request.POST['wired']
 			print('wired')
 
 

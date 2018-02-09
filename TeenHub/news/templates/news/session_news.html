@@ -89,9 +89,101 @@
     }
 
     function displayAll(){
+      var news_list=`
+      {% if news.buzzfeed == 1 %}
+        buzzfeed,
+      {% endif %}
+
+      {% if news.daily_mail == 1 %}
+        daily-mail,
+      {% endif %}
+
+      {% if news.entertainment_weekly == 1 %}
+        entertainment-weekly,
+      {% endif %}
+
+      {% if news.ign == 1 %}
+        ign,
+      {% endif %}
+
+      {% if news.mashable == 1 %}
+        mashable,
+      {% endif %}
+
+      {% if news.mtv_news == 1 %}
+        mtv-news,
+      {% endif %}
+
+      {% if news.polygon == 1 %}
+        polygon,
+      {% endif %}
+
+      {% if news.the_lad_bible == 1 %}
+        the-lad-bible,
+      {% endif %}
+
+
+
+      {% if news.ars_technica == 1 %}
+        ars-technica,
+      {% endif %}
+
+      {% if news.crypto_coins_news == 1 %}
+        crypto-coins-news,
+      {% endif %}
+
+      {% if news.engadget == 1 %}
+        engadget,
+      {% endif %}
+
+      {% if news.gruenderszene == 1 %}
+        gruenderszene,
+      {% endif %}
+
+      {% if news.hacker_news == 1 %}
+        hacker-news,
+      {% endif %}
+
+      {% if news.recode == 1 %}
+        recode,
+      {% endif %}
+
+      {% if news.t3n == 1 %}
+        t3n,
+      {% endif %}
+
+      {% if news.techcrunch == 1 %}
+        techcrunch,
+      {% endif %}
+
+      {% if news.techradar == 1 %}
+        techradar,
+      {% endif %}
+
+      {% if news.the_next_web == 1 %}
+        the-next-web,
+      {% endif %}
+
+      {% if news.the_verge == 1 %}
+        the-verge,
+      {% endif %}
+
+      {% if news.wired == 1 %}
+        wired,
+      {% endif %}`;
+
+      //console.log(news_list);
+      news_list = news_list.replace(/ /g,'');
+      //console.log(news_list+ "removing whitespaces");
+      news_list = news_list.replace(/(\r\n|\n|\r)/gm,"")
+      //console.log(news_list+ "removing newline");
+
+      news_list = news_list.substring(0,news_list.length-1);
+      //console.log(news_list);
+
         $.ajax({
             method:"GET",
-            url:"https://newsapi.org/v2/top-headlines?sources=buzzfeed,entertainment-weekly,mashable,mtv-news,the-lad-bible,polygon,ign,daily-mail,ars-technica,engadget,hacker-news,recode,gruenderszene,t3n,techcrunch,techradar,the-verge,the-next-web,wired,wired-de,crypto-coins-news&apiKey=c97376d8658b4d3ebd52b87297491737",
+            url:"https://newsapi.org/v2/top-headlines?sources="+news_list+"&apiKey=c97376d8658b4d3ebd52b87297491737",
             dataType: "json",
             success: function(result){
                 //console.log(result.articles);
@@ -321,292 +413,384 @@
 
 
         function displayEntertainment(){
-        $.ajax({
-            method:"GET",
-            url:"https://newsapi.org/v2/top-headlines?sources=buzzfeed,mashable,mtv-news,the-lad-bible,polygon,ign,daily-mail&apiKey=c97376d8658b4d3ebd52b87297491737",
-            dataType: "json",
-            success: function(result){
-                //console.log(result.articles);
-                var articles = result.articles;
-                var articleList="";
-                $.each(articles,(index,article)=>{
-                        // console.log(article.author);
-                        // console.log(article.title);
-                        // console.log(article.description);
-                        // console.log(article.source.name);
-                        // console.log(article.urlToImage);
-                        // console.log(article.url);
-                        // console.log("-------------");
-                    if(article.urlToImage != "null"){
-                        articleList += `
-                            <div class="news-item"><a target="_blank" href="${article.url}">
-                                <div class="news-item-image">
-                                    <img class="news-image" src="${article.urlToImage}">
-                                </div></a>
-                                <div class="news-item-info">
-                                    <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                    <div class="description"><p>${article.description}</p></div>
-                                    <div class="other-detail" >
-                                            <div class="source-name">${article.source.name}</div>
-                                            <div class="published"">${article.publishedAt}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
-                    }
-                });
-                {% if request.session.id %}
-                  articleList += `    <div id="sourceNews">
-                                        <h3>Entertainment</h3>
-                                        <form action="{% url 'save_entertain_news_list' %}" method="post" Content-Type="application/json">
-                                          {% csrf_token %}
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed"
-                                            {% if news.buzzfeed == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="buzzfeed">
-                                              Buzzfeed
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail"
-                                            {% if news.daily_mail == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="daily-mail">
-                                              Daily Mail
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly"
-                                            {% if news.entertainment_weekly == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="entertainment-weekly">
-                                              Entertainment-Weekly
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign"
-                                            {% if news.ign == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="ign">
-                                              IGN
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable"
-                                            {% if news.mashable == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="mashable">
-                                              Mashable
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news"
-                                            {% if news.mtv_news == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="mtv-news">
-                                              MTV News
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon"
-                                            {% if news.polygon == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="polygon">
-                                              Polygon
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible"
-                                            {% if news.the_lad_bible == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="the-lad-bible">
-                                              The Lad Bible
-                                            </label>
-                                          </div>
-                                          <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
+          var news_list=`
+          {% if news.buzzfeed == 1 %}
+            buzzfeed,
+          {% endif %}
+
+          {% if news.daily_mail == 1 %}
+            daily-mail,
+          {% endif %}
+
+          {% if news.entertainment_weekly == 1 %}
+            entertainment-weekly,
+          {% endif %}
+
+          {% if news.ign == 1 %}
+            ign,
+          {% endif %}
+
+          {% if news.mashable == 1 %}
+            mashable,
+          {% endif %}
+
+          {% if news.mtv_news == 1 %}
+            mtv-news,
+          {% endif %}
+
+          {% if news.polygon == 1 %}
+            polygon,
+          {% endif %}
+
+          {% if news.the_lad_bible == 1 %}
+            the-lad-bible,
+          {% endif %}`;
+
+          //console.log(news_list);
+          news_list = news_list.replace(/ /g,'');
+          //console.log(news_list+ "removing whitespaces");
+          news_list = news_list.replace(/(\r\n|\n|\r)/gm,"")
+          //console.log(news_list+ "removing newline");
+
+          news_list = news_list.substring(0,news_list.length-1);
+          //console.log(news_list);
+          $.ajax({
+              method:"GET",
+              url:"https://newsapi.org/v2/top-headlines?sources="+news_list+"&apiKey=c97376d8658b4d3ebd52b87297491737",
+              dataType: "json",
+              success: function(result){
+                  //console.log(result.articles);
+                  var articles = result.articles;
+                  var articleList="";
+                  $.each(articles,(index,article)=>{
+                          // console.log(article.author);
+                          // console.log(article.title);
+                          // console.log(article.description);
+                          // console.log(article.source.name);
+                          // console.log(article.urlToImage);
+                          // console.log(article.url);
+                          // console.log("-------------");
+                      if(article.urlToImage != "null"){
+                          articleList += `
+                              <div class="news-item"><a target="_blank" href="${article.url}">
+                                  <div class="news-item-image">
+                                      <img class="news-image" src="${article.urlToImage}">
+                                  </div></a>
+                                  <div class="news-item-info">
+                                      <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                                      <div class="description"><p>${article.description}</p></div>
+                                      <div class="other-detail" >
+                                              <div class="source-name">${article.source.name}</div>
+                                              <div class="published"">${article.publishedAt}</div>
+                                      </div>
+                                  </div>
+                              </div>
+                              `;
+                      }
+                  });
+                  {% if request.session.id %}
+                    articleList += `    <div id="sourceNews">
+                                          <h3>Entertainment</h3>
+                                          <form action="{% url 'save_entertain_news_list' %}" method="post" Content-Type="application/json">
+                                            {% csrf_token %}
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="buzzfeed" name="buzzfeed"
+                                              {% if news.buzzfeed == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="buzzfeed">
+                                                Buzzfeed
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="daily-mail" name="daily_mail"
+                                              {% if news.daily_mail == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="daily-mail">
+                                                Daily Mail
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="entertainment-weekly" name="entertainment_weekly"
+                                              {% if news.entertainment_weekly == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="entertainment-weekly">
+                                                Entertainment-Weekly
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="ign" name="ign"
+                                              {% if news.ign == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="ign">
+                                                IGN
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="mashable" name="mashable"
+                                              {% if news.mashable == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="mashable">
+                                                Mashable
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="mtv-news" name="mtv_news"
+                                              {% if news.mtv_news == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="mtv-news">
+                                                MTV News
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="polygon" name="polygon"
+                                              {% if news.polygon == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="polygon">
+                                                Polygon
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="the-lad-bible" name="the_lad_bible"
+                                              {% if news.the_lad_bible == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="the-lad-bible">
+                                                The Lad Bible
+                                              </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                          </form>
 
 
-                                      </div>`;
-                {% endif %}
-                $("#searchNews").html(articleList);
-            }
-        });
+                                        </div>`;
+                  {% endif %}
+                  $("#searchNews").html(articleList);
+              }
+          });
     }
 
         function displayTechnology(){
-        $.ajax({
-            method:"GET",
-            url:"https://newsapi.org/v2/top-headlines?sources=ars-technica,engadget,hacker-news,recode,gruenderszene,t3n,techcrunch-cn,techradar,the-verge,the-next-web,wired,wired-de,crypto-coins-news&apiKey=c97376d8658b4d3ebd52b87297491737",
-            dataType: "json",
-            success: function(result){
-                //console.log(result.articles);
-                var articles = result.articles;
-                var articleList="";
-                $.each(articles,(index,article)=>{
-                        // console.log(article.author);
-                        // console.log(article.title);
-                        // console.log(article.description);
-                        // console.log(article.source.name);
-                        // console.log(article.urlToImage);
-                        // console.log(article.url);
-                        // console.log("-------------");
-                    if(article.urlToImage != "null"){
-                        articleList += `
-                            <div class="news-item"><a target="_blank" href="${article.url}">
-                                <div class="news-item-image">
-                                    <img class="news-image" src="${article.urlToImage}">
-                                </div></a>
-                                <div class="news-item-info">
-                                    <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                    <div class="description"><p>${article.description}</p></div>
-                                    <div class="other-detail" >
-                                            <div class="source-name">${article.source.name}</div>
-                                            <div class="published"">${article.publishedAt}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
-                    }
-                });
-                {% if request.session.id %}
-                  articleList += `    <div id="sourceNews">
+          var news_list=`
+          {% if news.ars_technica == 1 %}
+            ars-technica,
+          {% endif %}
 
-                                        <h3>Technology</h3>
-                                        <form action="{% url 'save_tech_news_list' %}" method="post" Content-Type="application/json">
-                                          {% csrf_token %}
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica"
-                                            {% if news.ars_technica == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="ars-technica">
-                                              Ars Technica
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news"
-                                            {% if news.crypto_coins_news == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="crypto-coins-news">
-                                              Crypto Coins News
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget"
-                                            {% if news.engadget == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="engadget">
-                                              Engadget
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene"
-                                            {% if news.gruenderszene == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="gruenderszene">
-                                              Gruenderszene
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news"
-                                            {% if news.hacker_news == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="hacker-news">
-                                              Hacker News
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode"
-                                            {% if news.recode == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="recode">
-                                              Recode
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n"
-                                            {% if news.t3n == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="t3n">
-                                              T3n
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch"
-                                            {% if news.techcrunch == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="techcrunch">
-                                              TechCrunch
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"
-                                            {% if news.techradar == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="techradar">
-                                              TechRadar
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"
-                                            {% if news.the_next_web == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="the-next-web">
-                                              The Next Web
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"
-                                            {% if news.the_verge == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="the-verge">
-                                              The Verge
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired"
-                                            {% if news.wired == 1 %}
-                                              checked
-                                            {% endif %}>
-                                            <label class="form-check-label" for="wired">
-                                              Wired
-                                            </label>
-                                          </div>
-                                          <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-                                      </div>`;
-                {% endif %}
-                $("#searchNews").html(articleList);
-            }
-        });
+          {% if news.crypto_coins_news == 1 %}
+            crypto-coins-news,
+          {% endif %}
+
+          {% if news.engadget == 1 %}
+            engadget,
+          {% endif %}
+
+          {% if news.gruenderszene == 1 %}
+            gruenderszene,
+          {% endif %}
+
+          {% if news.hacker_news == 1 %}
+            hacker-news,
+          {% endif %}
+
+          {% if news.recode == 1 %}
+            recode,
+          {% endif %}
+
+          {% if news.t3n == 1 %}
+            t3n,
+          {% endif %}
+
+          {% if news.techcrunch == 1 %}
+            techcrunch,
+          {% endif %}
+
+          {% if news.techradar == 1 %}
+            techradar,
+          {% endif %}
+
+          {% if news.the_next_web == 1 %}
+            the-next-web,
+          {% endif %}
+
+          {% if news.the_verge == 1 %}
+            the-verge,
+          {% endif %}
+
+          {% if news.wired == 1 %}
+            wired,
+          {% endif %}`;
+
+          //console.log(news_list);
+          news_list = news_list.replace(/ /g,'');
+          //console.log(news_list+ "removing whitespaces");
+          news_list = news_list.replace(/(\r\n|\n|\r)/gm,"")
+          //console.log(news_list+ "removing newline");
+
+          news_list = news_list.substring(0,news_list.length-1);
+          //console.log(news_list);
+          $.ajax({
+              method:"GET",
+              url:"https://newsapi.org/v2/top-headlines?sources="+news_list+"&apiKey=c97376d8658b4d3ebd52b87297491737",
+              dataType: "json",
+              success: function(result){
+                  //console.log(result.articles);
+                  var articles = result.articles;
+                  var articleList="";
+                  $.each(articles,(index,article)=>{
+                          // console.log(article.author);
+                          // console.log(article.title);
+                          // console.log(article.description);
+                          // console.log(article.source.name);
+                          // console.log(article.urlToImage);
+                          // console.log(article.url);
+                          // console.log("-------------");
+                      if(article.urlToImage != "null"){
+                          articleList += `
+                              <div class="news-item"><a target="_blank" href="${article.url}">
+                                  <div class="news-item-image">
+                                      <img class="news-image" src="${article.urlToImage}">
+                                  </div></a>
+                                  <div class="news-item-info">
+                                      <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                                      <div class="description"><p>${article.description}</p></div>
+                                      <div class="other-detail" >
+                                              <div class="source-name">${article.source.name}</div>
+                                              <div class="published"">${article.publishedAt}</div>
+                                      </div>
+                                  </div>
+                              </div>
+                              `;
+                      }
+                  });
+                  {% if request.session.id %}
+                    articleList += `    <div id="sourceNews">
+
+                                          <h3>Technology</h3>
+                                          <form action="{% url 'save_tech_news_list' %}" method="post" Content-Type="application/json">
+                                            {% csrf_token %}
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="ars-technica" name="ars_technica"
+                                              {% if news.ars_technica == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="ars-technica">
+                                                Ars Technica
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="crypto-coins-news" name="crypto_coins_news"
+                                              {% if news.crypto_coins_news == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="crypto-coins-news">
+                                                Crypto Coins News
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="engadget" name="engadget"
+                                              {% if news.engadget == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="engadget">
+                                                Engadget
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="gruenderszene" name="gruenderszene"
+                                              {% if news.gruenderszene == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="gruenderszene">
+                                                Gruenderszene
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="hacker-news" name="hacker_news"
+                                              {% if news.hacker_news == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="hacker-news">
+                                                Hacker News
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="recode" name="recode"
+                                              {% if news.recode == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="recode">
+                                                Recode
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="t3n" name="t3n"
+                                              {% if news.t3n == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="t3n">
+                                                T3n
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="techcrunch" name="techcrunch"
+                                              {% if news.techcrunch == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="techcrunch">
+                                                TechCrunch
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="techradar" name="techradar"
+                                              {% if news.techradar == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="techradar">
+                                                TechRadar
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="the-next-web" name="the_next_web"
+                                              {% if news.the_next_web == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="the-next-web">
+                                                The Next Web
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="the-verge" name="the_verge"
+                                              {% if news.the_verge == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="the-verge">
+                                                The Verge
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="1" id="wired" name="wired"
+                                              {% if news.wired == 1 %}
+                                                checked
+                                              {% endif %}>
+                                              <label class="form-check-label" for="wired">
+                                                Wired
+                                              </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                          </form>
+                                        </div>`;
+                  {% endif %}
+                  $("#searchNews").html(articleList);
+              }
+          });
     }
 
-
-
-
-
-
-    let APIKEY = "c97376d8658b4d3ebd52b87297491737";
 
      $("#inputBox").keypress(function(e) {
          var key = e.keyCode;
@@ -615,7 +799,7 @@
              //console.log(inputText);
              $.ajax({
                  method:"GET",
-                 url:"https://newsapi.org/v2/everything?q="+inputText+"&apiKey="+APIKEY,
+                 url:"https://newsapi.org/v2/everything?q="+inputText+"&apiKey="+c97376d8658b4d3ebd52b87297491737,
                  dataType: "json",
                  success: function(result){
                      console.log(result.articles);
