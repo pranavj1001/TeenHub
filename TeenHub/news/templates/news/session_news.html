@@ -635,7 +635,7 @@
 
          $.ajax({
              method:"GET",
-             url:"https://newsapi.org/v2/everything?sources="+all_news_sources+"&q="+all_news_sources+"&apiKey=c97376d8658b4d3ebd52b87297491737",
+             url:"https://newsapi.org/v2/everything?sources="+all_news_sources+"&q="+inputText+"&apiKey=c97376d8658b4d3ebd52b87297491737",
              dataType: "json",
              success: function(result){
                  //console.log(result.articles);
@@ -870,7 +870,7 @@
 
        $.ajax({
            method:"GET",
-           url:"https://newsapi.org/v2/everything?sources="+entertainment_news_sources+"&q="+entertainment_news_sources+"&apiKey=c97376d8658b4d3ebd52b87297491737",
+           url:"https://newsapi.org/v2/everything?sources="+entertainment_news_sources+"&q="+inputText+"&apiKey=c97376d8658b4d3ebd52b87297491737",
            dataType: "json",
            success: function(result){
                //console.log(result.articles);
