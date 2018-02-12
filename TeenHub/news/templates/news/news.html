@@ -85,6 +85,8 @@
     }
     #searchNews{
       position: relative;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
     #sourceNews{
       position: absolute;
@@ -145,7 +147,7 @@
     {% block searchBox %}
     {% endblock %}
 
-    <nav class="navbar navbar-inverse lightGrayBg noPadding">
+    <nav class="navbar navbar-inverse lightGrayBg noPadding" id="news_navbar">
       <div id="applications" class="row justify-content-center container-fluid">
           <div class="col-3 app  news-link current-app">
             <a class="displayBlock" id="link1" href="#">All</a>

@@ -24,6 +24,21 @@
     <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
     <script type="text/javascript">
 
+
+    $(document).ready(function() {
+        $(document).scroll(function () {
+            var scroll = $(this).scrollTop();
+    				//console.log(scroll);
+            var topDist = $("#news_navbar").position();
+    				//console.log(topDist);
+            if (scroll > topDist.top) {
+                $('#news_navbar').css({"position":"fixed","top":"0","right":"0","left":"0","z-index":"2"});
+            } else {
+                $('#news_navbar').css({"position":"static","top":"auto"});
+            }
+        });
+    });
+
     var slideIndex = 1;
     render_feed();
 
