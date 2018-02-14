@@ -33,8 +33,10 @@
     				//console.log(topDist);
             if (scroll > topDist.top) {
                 $('#news_navbar').css({"position":"fixed","top":"0","right":"0","left":"0","z-index":"2"});
+                $('#news_navbar').addClass("lightGrayBg");
             } else {
                 $('#news_navbar').css({"position":"static","top":"auto"});
+                $('#news_navbar').removeClass("lightGrayBg");
             }
         });
     });
@@ -80,11 +82,11 @@
         if (n<1) {
           slideIndex = navs.length;
         }
-        //console.log(navs);
+        console.log(navs);
         for (var i = 0; i < navs.length; i++) {
           navs[i].className=navs[i].className.replace(" current-app","");
         }
-        //console.log(navs);
+        console.log(navs);
         navs[slideIndex-1].className += " current-app";
 
         render_feed();
@@ -92,14 +94,33 @@
     }
 
     function render_feed(){
+      $("#link"+slideIndex).addClass('news-nav-color');
         if(slideIndex==1){
-            displayAll();
+          if ($("#link2").hasClass("news-nav-color")){
+             $("#link2").removeClass("news-nav-color");
+          }
+          if ($("#link3").hasClass("news-nav-color")){
+              $("#link3").removeClass("news-nav-color");
+          }
+          displayAll();
         }
         else if (slideIndex == 2) {
-            displayEntertainment();
+          if ($("#link1").hasClass("news-nav-color")){
+             $("#link1").removeClass("news-nav-color");
+          }
+          if ($("#link3").hasClass("news-nav-color")){
+             $("#link3").removeClass("news-nav-color");
+          }
+          displayEntertainment();
         }
         else if (slideIndex == 3) {
-            displayTechnology();
+          if ($("#link2").hasClass("news-nav-color")){
+             $("#link2").removeClass("news-nav-color");
+          }
+          if ($("#link1").hasClass("news-nav-color")){
+             $("#link1").removeClass("news-nav-color");
+          }
+          displayTechnology();
         }
     }
 
