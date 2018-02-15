@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <title>Search Engine</title>
+</head>
+<body>
+
+  <input id="text" onKeyPress="DoSomethingOnEnter(event, this)">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="movies_names.js"></script>
+  <script>
+
+    // $.getJSON("movies_names.json", function(json) {
+    //   console.log(json);
+    // });
+
+    function DoSomethingOnEnter(e, input){
+    var code = (e.keyCode ? e.keyCode : e.which);
+      if(code == 13) {
+       console.log(document.getElementById('text').value);
+      }
+    }
+
+    console.log(json);
+  </script>
+</body>
+</html>
