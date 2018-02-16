@@ -3,7 +3,12 @@ from news.models import News
 
 # Create your views here.
 def show_news(request):
-	news = News.objects.get(user_id=request.session['id'])
+	if 'id' in request.session:
+		news = News.objects.get(user_id=request.session['id'])
+		print(news)
+	else:
+		print("inside else part")
+		news = News(buzzfeed=1,daily_mail=1,entertainment_weekly=1,ign=1,mashable=1,mtv_news=1,polygon=1,the_lad_bible=1,ars_technica=1,crypto_coins_news=1,engadget=1,gruenderszene=1,hacker_news=1,recode=1,t3n=1,techcrunch=1,techradar=1,the_next_web=1,the_verge=1,wired=1)
 	return render(request, 'news/session_news.html', {'news' : news})
 
 def save_all_news_list(request):

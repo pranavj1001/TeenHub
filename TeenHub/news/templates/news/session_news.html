@@ -82,11 +82,11 @@
         if (n<1) {
           slideIndex = navs.length;
         }
-        console.log(navs);
+        //console.log(navs);
         for (var i = 0; i < navs.length; i++) {
           navs[i].className=navs[i].className.replace(" current-app","");
         }
-        console.log(navs);
+        //console.log(navs);
         navs[slideIndex-1].className += " current-app";
 
         render_feed();
