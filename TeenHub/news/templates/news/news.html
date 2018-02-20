@@ -24,6 +24,7 @@
       background-color:#555;
       width: 720px;
       margin: 5px 0;
+      position: relative;
     }
     .news-item-image{
       margin-right: 10px;
@@ -35,7 +36,11 @@
       width: inherit;
     }
     .news-item-info{
-      position: relative;
+      position: absolute;
+      right: 5px;
+      left: 220px;
+      bottom: 5px;
+      top: 5px;
     }
     .source-name{
       position: absolute;
@@ -98,6 +103,12 @@
     }
     .news-nav-color{
       color: #7b7b7b;
+    }
+    @media only screen and (max-width: 1000px) {
+        /* For mobile phones: */
+        #sourceNews{
+          display: none;
+        }
     }
     </style>
 
