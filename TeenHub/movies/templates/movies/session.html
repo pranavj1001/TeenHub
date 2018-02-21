@@ -136,10 +136,6 @@
 
     console.log({{request.session.noRatings}});
 
-    function showMovieInfo(element) {
-        console.log(element);
-    }
-
     function DoSomethingOnKeyUp(e, input) {
         var code = (e.keyCode ? e.keyCode : e.which);
         var searchText = document.getElementById('searchInput').value;
@@ -169,7 +165,8 @@
     function showSearchResults(results) {
         var searchResults = "";
         for(var i = 0; i < (results.length < 10 ? results.length : 10); i++) {
-            searchResults += '<p movieid="' + results[i].id + '" class="results-style--single lightGrayBg" onclick="showMovieInfo(this)">' + results[i].title + '</p>';
+            var url = 'infoMovies/' + results[i].id + '/';
+            searchResults += '<p link="' + url + '" class="results-style--single lightGrayBg" onclick="showLink(this)">' + results[i].title + '</p>';
         }
         $("#results").html(searchResults);
     }
