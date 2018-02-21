@@ -5,13 +5,8 @@
     <div id="searchContainer" class="container">
         <h3 id="searchHeading">Teen<strong>HUB</strong><span class="subHeading">Movies</span></h3>
         <div id="searchBox" class="inner-addon right-addon">
-            <input type="text" class="form-control lightGrayBg searchText" onkeyup="DoSomethingOnKeyUp(event, this)" placeholder="Search" />
-            <div id="results" class="results-style">
-                <p class="results-style--single" onclick="showMovieInfo(this)">Movie Name 1</p>
-                <p class="results-style--single" onclick="showMovieInfo(this)">Movie Name 2</p>
-                <p class="results-style--single" onclick="showMovieInfo(this)">Movie Name 3</p>
-                <p class="results-style--single" onclick="showMovieInfo(this)">Movie Name 4</p>
-            </div>
+            <input type="text" class="form-control lightGrayBg searchText" onkeyup="DoSomethingOnKeyUp(event, this)" id="searchInput" placeholder="Search" />
+            <div id="results" class="results-style"></div>
         </div>
     </div>
 
@@ -136,13 +131,47 @@
 {% block ajaxBlock %}
 
     <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../datasets/movies_names.js"></script>
+    <script type="text/javascript" src="../../static/js/movies_names.js"></script>
     <script type="text/javascript">
 
     console.log({{request.session.noRatings}});
 
     function showMovieInfo(element) {
         console.log(element);
+    }
+
+    function DoSomethingOnKeyUp(e, input) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        var searchText = document.getElementById('searchInput').value;
+        var results = [];
+
+        if (code === 8) {
+            clearSearchResults();
+        } else {
+            json.forEach(function (element) {
+                var movieTitle = element.title;
+                if (movieTitle !== null) {
+                    movieTitle = movieTitle.toString().substr(0, searchText.length).toLowerCase();
+                    if (searchText.toLowerCase() === movieTitle) {
+                        results.push(element);
+                    }
+                }
+            });
+            showSearchResults(results);
+        }
+        console.log(results);
+    }
+
+    function clearSearchResults() {
+        $("#results").html("");
+    }
+
+    function showSearchResults(results) {
+        var searchResults = "";
+        for(var i = 0; i < (results.length < 10 ? results.length : 10); i++) {
+            searchResults += '<p movieid="' + results[i].id + '" class="results-style--single lightGrayBg" onclick="showMovieInfo(this)">' + results[i].title + '</p>';
+        }
+        $("#results").html(searchResults);
     }
 
     $.ajax({
