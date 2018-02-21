@@ -794,6 +794,21 @@ a:after {
     color:#FFF;
 }
 
+.results-style {
+	position: absolute;
+	margin-top: 10px;
+	width: 100%;
+	z-index: 10;
+}
+
+.results-style--single {
+	margin-bottom: 0px;
+	background-color: #555;
+	color: #999;
+	padding-left: 2%;
+	cursor: pointer;
+}
+
 .footer {
     bottom: 0;
     width: 100%;
