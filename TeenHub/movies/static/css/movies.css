@@ -802,8 +802,7 @@ a:after {
 }
 
 .results-style--single {
-	margin-bottom: 0px;
-	background-color: #555;
+	margin-bottom: 0;
 	color: #999;
 	padding-left: 2%;
 	cursor: pointer;
