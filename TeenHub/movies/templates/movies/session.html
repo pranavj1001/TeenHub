@@ -171,6 +171,12 @@
         $("#results").html(searchResults);
     }
 
+    $(window).click(function() {
+        if(!($('#searchInput').is(':focus'))){
+            clearSearchResults();
+        }
+    });
+
     $.ajax({
         type: "GET",
         url: "https://api.themoviedb.org/3/movie/popular?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
