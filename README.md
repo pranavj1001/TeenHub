@@ -13,6 +13,13 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do Movie List
 
+- [X] Show movies in cards
+- [X] Show movies info in another tab
+- [X] Save user ratings
+- [X] Show movie recommendations
+- [ ] Show movies according to genres
+- [X] Set up Search Engine for movies
+
 ## To-Do News List
 
 ## To-Do Games List
