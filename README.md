@@ -28,4 +28,12 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do Dashboard List
 
+- [ ] Show statistics of movies, songs, games
+- [ ] Develop a page for showing changelog, future updates
+- [ ] Develop a page to ask for user's permissions to store ratings and more....
+- [ ] Develop a page to show info about each main section
+- [ ] Use interactive charts to show the data
+- [ ] Develop a page where user can change forgot
+- [ ] Develop a page where user can view his/her connected social media feed
+
 Will be updated soon.
