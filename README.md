@@ -34,6 +34,7 @@ List Updated on 24th Feb, 2018.
 - [ ] Show games info in another tab
 - [ ] Show games recommendations
 - [ ] Show games according to genres in new tab
+- [ ] Save user ratings
 
 ## To-Do Songs List
 
