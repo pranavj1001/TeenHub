@@ -24,6 +24,11 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do Games List
 
+- [ ] Show games in cards
+- [ ] Show games info in another tab
+- [ ] Show games recommendations
+- [ ] Show games according to genres in new tab
+
 ## To-Do Songs List
 
 ## To-Do Dashboard List
