@@ -71,6 +71,10 @@
         </div>
     </div>
 
+    <div class="container" data-aos="flip-left">
+        <div class="list-group custom-list" id="custom-list"></div>
+    </div>
+
 	<footer class="footer">
         <div class="container">
             <span class="text-muted">&copy; <a href="https://github.com/pranavj1001/TeenHub">TeenHUB team</a></span>
@@ -134,8 +138,28 @@
             dataType: "json",
             success: function(result){
                 console.log(result);
+                var url = [];
+                var date = [];
+                var title = [];
+                var description = [];
+                result.results.forEach(function (movie) {
+                   title.push(movie.title);
+                   date.push(movie.release_date);
+                   description.push(movie.overview);
+                   var link = "http://127.0.0.1:8000/movies/infoMovies/" + movie.id + "/";
+                   url.push(link);
+                });
+                showList(url, date, title, description);
             }
         });
+
+        function showList(url, date, title, description) {
+            var htmlText = "";
+            for(var i = 0; i < url.length; i++) {
+                htmlText += '<a target="_blank" href="' + url[i] + '" class="list-group-item list-group-item-action flex-column align-items-start whiteText list-bg-' + i%2 + '" id="listItem"> <div class="d-flex w-100 justify-content-between"> <h5 class="mb-1 whiteText">' + title[i].replace(/'/g, "") + '</h5> <small>' + date[i] + '</small> </div> <p class="mb-1">' + description[i].replace(/'/g, "") + '</p> <small class="text-muted">Click to view more info</small> </a>';
+            }
+            $('#custom-list').html(htmlText);
+        }
     </script>
 
 </body>
