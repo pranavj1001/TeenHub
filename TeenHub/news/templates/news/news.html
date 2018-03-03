@@ -104,14 +104,24 @@
     .news-nav-color{
       color: #7b7b7b;
     }
+    #source{
+      display: none;
+    }
     @media (max-width: 960px) {
-        /* For mobile phones: */
-        #sourceNews{
-          display: none;
-        }
+      #source{
+        display: block;
+        padding-left: 50px;
+      }
+      #sourceNews{
+        display: none;
+      }
     }
 
     @media (max-width:720px) {
+      #source{
+        display: block;
+        padding-left: 50px;
+      }
       #sourceNews{
         display: none;
       }
@@ -120,6 +130,10 @@
     @media (max-width:540px) {
       #sourceNews{
         display: none;
+      }
+      #source{
+        display: block;
+        padding-left: 50px;
       }
 
       .news-item{
@@ -226,6 +240,9 @@
           </div>
       </div>
     </nav>
+
+      <div class="container" id="source">
+      </div>
 
 
     <a class="carousel-control-prev" href="#" id="prev" role="button" data-slide="prev">
