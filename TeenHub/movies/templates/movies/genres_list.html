@@ -71,7 +71,8 @@
         </div>
     </div>
 
-    <div class="container" data-aos="flip-left">
+    <div class="container">
+        <h2 class="sectionHeading veryLightGrayText" id="genreHeading"></h2>
         <div class="list-group custom-list" id="custom-list"></div>
     </div>
 
@@ -129,6 +130,22 @@
         $(window).click(function() {
             if(!($('#searchInput').is(':focus'))){
                 clearSearchResults();
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/genre/movie/list?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
+            dataType: "json",
+            success: function(result){
+                var genreName = "";
+                for(var i = 0; i < result.genres.length; i++) {
+                   if (result.genres[i].id === {{ request.session.genre_id }}) {
+                       genreName = result.genres[i].name;
+                       break;
+                   }
+                }
+                $('#genreHeading').html(genreName + ' Movies');
             }
         });
 
