@@ -121,6 +121,10 @@ def show_movie_info(request, movieid):
 
     return render(request, 'movies/viewInfoMovies.html', {})
 
+def show_genre_list(request, genre_id):
+    print(genre_id)
+    return render(request)
+
 def save_movie_rating(request, movie_rating):
     if 'noRatings' in request.session:
         del request.session["noRatings"]
