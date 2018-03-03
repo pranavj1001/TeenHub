@@ -3,7 +3,7 @@ One Place for your Entertainment
 
 ## To-Do List
 
-- [ ] Complete Movies Section by 3rd March, 2018
+- [X] Complete Movies Section by 3rd March, 2018
 - [ ] Complete News Section by 3rd March, 2018
 - [ ] Complete Games Section by 7th March, 2018
 - [ ] Complete Songs Section by 11th March, 2018
@@ -17,7 +17,7 @@ List Updated on 24th Feb, 2018.
 - [X] Show movies info in another tab
 - [X] Save user ratings
 - [X] Show movie recommendations
-- [ ] Show movies according to genres
+- [X] Show movies according to genres
 - [X] Set up Search Engine for movies
 
 ## To-Do News List
