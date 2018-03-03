@@ -132,6 +132,7 @@
 
     <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
     <script type="text/javascript">
+    <!-- popularity -->
 
     $.ajax({
         type: "GET",
@@ -266,6 +267,7 @@
     prepareRecommendationsCard();
     {% endif %}
 
+    <!-- top rated -->
     $.ajax({
         type: "GET",
         url: "https://api.themoviedb.org/3/movie/top_rated?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
@@ -285,28 +287,35 @@
         }
     });
 
+    <!-- upcoming -->
+    var currentTime = new Date();
     $.ajax({
         type: "GET",
-        url: "https://api.themoviedb.org/3/movie/upcoming?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
+        url: "https://www.giantbomb.com/api/games/?api_key=cbe9663e0fca45d439adc20d145f26d9395fa02f&format=json&limit=10&field_list=id,guid,name,image,expected_release_year,expected_release_quarter,expected_release_month&filter=expected_release_year:"+currentTime.getFullYear()+",expected_release_quarter:"+(1+Math.floor((currentTime.getMonth() + 3) / 3))+"&sort=date_added:asc",
         dataType: "json",
         success: function(result){
-            var movieDetails = result.results;
+            var gameDetails = result.results;
             var posterURLs = [];
             var titles = [];
             var ids = [];
-            for(var i = 0; i < movieDetails.length; i++){
-                posterURLs[i] = "https://image.tmdb.org/t/p/w342" + movieDetails[i].poster_path;
-                titles[i] = movieDetails[i].original_title;
-                ids[i] = movieDetails[i].id;
+            for(var i = 0; i < gameDetails.length; i++){
+                posterURLs[i] = gameDetails[i].image.thumb_url;
+                titles[i] = gameDetails[i].name;
+                console.log('done');
+                ids[i] = gameDetails[i].id;
             }
             var carousel = 'um';
             getPoster(posterURLs, titles, ids, carousel);
+        },
+        error: function (request, status, error) {
+            console.log(status,error);
+            alert(error);
         }
     });
-
+    <!-- news -->
     $.ajax({
         type: "GET",
-        url: "https://newsapi.org/v1/articles?source=polygon,the-verge&sortBy=top&apiKey=bdbcae478d174e04ba1504b2914cc143",
+        url: "https://newsapi.org/v2/top-headlines?sources=polygon,&apiKey=c97376d8658b4d3ebd52b87297491737",
         dataType: "json",
         success: function(result){
             var newsData = result.articles;
