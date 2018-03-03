@@ -19,6 +19,8 @@ def logout(request):
         del request.session["show_rating_stars"]
     if 'noRatings' in request.session:
         del request.session["noRatings"]
+    if 'genre_id' in request.session:
+        del request.session['genre_id']
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
@@ -123,7 +125,8 @@ def show_movie_info(request, movieid):
 
 def show_genre_list(request, genre_id):
     print(genre_id)
-    return render(request)
+    request.session['genre_id'] = genre_id
+    return render(request, 'movies/genres_list.html', {})
 
 def save_movie_rating(request, movie_rating):
     if 'noRatings' in request.session:

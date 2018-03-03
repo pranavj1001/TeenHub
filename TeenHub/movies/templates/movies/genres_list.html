@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/movies.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/Chart.js' %}"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+
+	<!-- Menu -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="#">TeenHub</a></h1>
+			<i class="icon-remove menu-close"></i>
+			<a href="#home" class="smoothScroll">Top</a>
+            <a href="{% url 'show_home' %}">Search</a>
+			<a href="#applications" class="smoothScroll">Applications</a>
+			<a href="#about" class="smoothScroll">About US</a>
+			<a href="#contact" class="smoothScroll">Contact</a>
+            {% if request.session.id %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'show_login' %}">Login</a>
+                <a href="{% url 'show_signup' %}">Signup</a>
+            {% endif %}
+			<a href="#"><i class="icon-facebook"></i></a>
+			<a href="#"><i class="icon-twitter"></i></a>
+			<a href="#"><i class="icon-dribbble"></i></a>
+			<a href="#"><i class="icon-envelope"></i></a>
+		</div>
+
+		<!-- Menu button -->
+		<div id="menuToggle"><i class="icon-reorder"></i></div>
+	</nav>
+
+    <nav class="navbar navbar-inverse lightGrayBg noPadding">
+      <div id="applications" class="row container-fluid">
+          <div class="col-3 app current-app">
+            <a href="#">Movies</a>
+          </div>
+          <div class="col-3 app">
+            <a href="#">Songs</a>
+          </div>
+          <div class="col-3 app">
+            <a href="{% url 'show_games_page' %}">Games</a>
+          </div>
+          <div class="col-3 app">
+            <a href="{% url 'show_news_page' %}">News</a>
+          </div>
+      </div>
+    </nav>
+
+    <div id="searchContainer" class="container">
+        <h3 id="searchHeading">Teen<strong>HUB</strong><span class="subHeading">Movies</span></h3>
+        <div id="searchBox" class="inner-addon right-addon">
+            <input type="text" class="form-control lightGrayBg searchText" onkeyup="DoSomethingOnKeyUp(event, this)" id="searchInput" placeholder="Search" />
+            <div id="results" class="results-style"></div>
+        </div>
+    </div>
+
+	<footer class="footer">
+        <div class="container">
+            <span class="text-muted">&copy; <a href="https://github.com/pranavj1001/TeenHub">TeenHUB team</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="{% static 'js/smoothscroll.js' %}"></script>
+    <script src="{% static 'js/classie.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/movies_names.js' %}"></script>
+    <script type="text/javascript">
+        
+        function DoSomethingOnKeyUp(e, input) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            var searchText = document.getElementById('searchInput').value;
+            var results = [];
+
+            if (code === 8) {
+                clearSearchResults();
+            } else {
+                json.forEach(function (element) {
+                    var movieTitle = element.title;
+                    if (movieTitle !== null) {
+                        movieTitle = movieTitle.toString().substr(0, searchText.length).toLowerCase();
+                        if (searchText.toLowerCase() === movieTitle) {
+                            results.push(element);
+                        }
+                    }
+                });
+                showSearchResults(results);
+            }
+            console.log(results);
+        }
+
+        function clearSearchResults() {
+            $("#results").html("");
+        }
+
+        function showSearchResults(results) {
+            var searchResults = "";
+            for(var i = 0; i < (results.length < 10 ? results.length : 10); i++) {
+                var url = 'infoMovies/' + results[i].id + '/';
+                searchResults += '<p link="' + url + '" class="results-style--single lightGrayBg" onclick="showLink(this)">' + results[i].title + '</p>';
+            }
+            $("#results").html(searchResults);
+        }
+
+        $(window).click(function() {
+            if(!($('#searchInput').is(':focus'))){
+                clearSearchResults();
+            }
+        });
+    </script>
+
+</body>
+</html>
