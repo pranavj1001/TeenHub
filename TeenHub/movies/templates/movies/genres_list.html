@@ -111,7 +111,6 @@
                 });
                 showSearchResults(results);
             }
-            console.log(results);
         }
 
         function clearSearchResults() {
@@ -121,7 +120,7 @@
         function showSearchResults(results) {
             var searchResults = "";
             for(var i = 0; i < (results.length < 10 ? results.length : 10); i++) {
-                var url = 'infoMovies/' + results[i].id + '/';
+                var url = 'http://127.0.0.1:8000/movies/infoMovies/' + results[i].id + '/';
                 searchResults += '<p link="' + url + '" class="results-style--single lightGrayBg" onclick="showLink(this)">' + results[i].title + '</p>';
             }
             $("#results").html(searchResults);
@@ -176,6 +175,10 @@
                 htmlText += '<a target="_blank" href="' + url[i] + '" class="list-group-item list-group-item-action flex-column align-items-start whiteText list-bg-' + i%2 + '" id="listItem"> <div class="d-flex w-100 justify-content-between"> <h5 class="mb-1 whiteText">' + title[i].replace(/'/g, "") + '</h5> <small>' + date[i] + '</small> </div> <p class="mb-1">' + description[i].replace(/'/g, "") + '</p> <small class="text-muted">Click to view more info</small> </a>';
             }
             $('#custom-list').html(htmlText);
+        }
+
+        function showLink(element){
+            window.location.href = element.attributes.link.value;
         }
     </script>
 
