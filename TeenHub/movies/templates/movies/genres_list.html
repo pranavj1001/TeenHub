@@ -86,7 +86,7 @@
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/movies_names.js' %}"></script>
     <script type="text/javascript">
-        
+
         function DoSomethingOnKeyUp(e, input) {
             var code = (e.keyCode ? e.keyCode : e.which);
             var searchText = document.getElementById('searchInput').value;
@@ -125,6 +125,15 @@
         $(window).click(function() {
             if(!($('#searchInput').is(':focus'))){
                 clearSearchResults();
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.themoviedb.org/3/genre/" + {{ request.session.genre_id }} + "/movies?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&include_adult=true&sort_by=created_at.asc",
+            dataType: "json",
+            success: function(result){
+                console.log(result);
             }
         });
     </script>
