@@ -808,6 +808,24 @@ a:after {
 	cursor: pointer;
 }
 
+.custom-list {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.list-bg-0 {
+	background-color: #333;
+}
+
+.list-bg-1 {
+	background-color: #444;
+}
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+	color: #999;
+	background-color: #222;
+}
+
 .footer {
     bottom: 0;
     width: 100%;
