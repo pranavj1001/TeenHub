@@ -155,7 +155,7 @@
 
         $.ajax({
             type: "GET",
-            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/credits?api_key=867611d6b3f8882764c7aec28bc288ed",
+            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.gameid }}" + "/credits?api_key=867611d6b3f8882764c7aec28bc288ed",
             dataType: "json",
             success: function(result){
                 var cast = result.cast;
