@@ -167,22 +167,22 @@
                         // console.log(article.url);
                         // console.log("-------------");
 
-                    if(article.urlToImag != 'null' ){
-                        articleList += `
-                            <div class="news-item"><a target="_blank" href="${article.url}">
-                                <div class="news-item-image">
-                                    <img class="news-image" src="${article.urlToImage}">
-                                </div></a>
-                                <div class="news-item-info">
-                                    <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                    <div class="description"><p>${article.description}</p></div>
-                                    <div class="other-detail" >
-                                            <div class="source-name">${article.source.name}</div>
-                                            <div class="published"">${article.publishedAt}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
+                    if(article.urlToImage !== null ){
+                      articleList += `
+                          <div class="news-item"><a target="_blank" href="${article.url}">
+                              <div class="news-item-image">
+                                  <img class="news-image" src="${article.urlToImage}">
+                              </div></a>
+                              <div class="news-item-info">
+                                  <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                                  <div class="description"><p>${article.description}</p></div>
+                                  <div class="other-detail" >
+                                          <div class="source-name">${article.source.name}</div>
+                                          <div class="published"">${article.publishedAt}</div>
+                                  </div>
+                              </div>
+                          </div>
+                          `;
                     }
                 });
                 {% if request.session.id %}
@@ -544,7 +544,7 @@
                           // console.log(article.urlToImage);
                           // console.log(article.url);
                           // console.log("-------------");
-                      if(article.urlToImage != "null"){
+                      if(article.urlToImage !== null){
                           articleList += `
                               <div class="news-item"><a target="_blank" href="${article.url}">
                                   <div class="news-item-image">
@@ -756,7 +756,7 @@
                           // console.log(article.urlToImage);
                           // console.log(article.url);
                           // console.log("-------------");
-                      if(article.urlToImage != "null"){
+                      if(article.urlToImage !== null){
                           articleList += `
                               <div class="news-item"><a target="_blank" href="${article.url}">
                                   <div class="news-item-image">
@@ -1001,7 +1001,7 @@
                          // console.log(article.urlToImage);
                          // console.log(article.url);
                          // console.log("-------------");
-                     if(article.urlToImage != "null"){
+                     if(article.urlToImage !== null){
                          articleList += `
                              <div class="news-item"><a target="_blank" href="${article.url}">
                                  <div class="news-item-image">
@@ -1209,7 +1209,7 @@
                        // console.log(article.urlToImage);
                        // console.log(article.url);
                        // console.log("-------------");
-                   if(article.urlToImage != "null"){
+                   if(article.urlToImage !== null){
                        articleList += `
                            <div class="news-item"><a target="_blank" href="${article.url}">
                                <div class="news-item-image">
@@ -1336,7 +1336,7 @@
                        // console.log(article.urlToImage);
                        // console.log(article.url);
                        // console.log("-------------");
-                   if(article.urlToImage != "null"){
+                   if(article.urlToImage !== null){
                        articleList += `
                            <div class="news-item"><a target="_blank" href="${article.url}">
                                <div class="news-item-image">
