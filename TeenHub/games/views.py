@@ -6,4 +6,5 @@ def games_home (request):
 	return render(request,'games/session_games.html')
 
 def show_game_info(request, gameid):
+	request.session["gameid"] = gameid
 	return render(request, 'games/viewInfoGames.html', {})

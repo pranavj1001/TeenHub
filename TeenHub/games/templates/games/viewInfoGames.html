@@ -1,4 +1,4 @@
-{% extends 'movies/baseInfoMovies.html' %}
+{% extends 'games/baseInfoGames.html' %}
 
 {% block info %}
 
@@ -15,32 +15,23 @@
                 </div>
             </div>
             <div class="col-md-9 spaceOnDesktop">
-                <h1 id="movieName" class="whiteText titleSpace"></h1>
-                <p id="movieDescription" class="whiteText description"></p>
-                <p id="movieLanguage" class="whiteText description"></p>
-                <p id="movieReleaseDate" class="whiteText description"></p>
-                <p id="movieGenres" class="whiteText description"></p>
-                <p id="moviePopularity" class="whiteText description"></p>
-                <p id="movieAdultRated" class="whiteText description"></p>
-                <p id="movieStatus" class="whiteText description"></p>
-                <p id="movieBudget" class="whiteText description"></p>
-                <p id="movieCountry" class="whiteText description"></p>
-                <p class="whiteText description"><strong>Production Companies</strong></p>
-                <ul id="movieCompanies" class="whiteText description lessLeftPadding"></ul>
-                <p class="whiteText description"><strong>Cast:</strong></p>
-                <div id="cast"></div>
-{#                <p class="whiteText description"><strong>Crew:</strong></p>#}
-{#                <p class="whiteText description">Director:</p>#}
-{#                <div id="crew-director"></div>#}
-{#                <p class="whiteText description">Producers:</p>#}
-{#                <div id="crew-producer"></div>#}
+                <h1 id="gameName" class="whiteText titleSpace"></h1>
+                <p id="gameDescription" class="whiteText description"></p>
+                <p id="gameReleaseDate" class="whiteText description"></p>
+                <p id="gameGenres" class="whiteText description"></p>
+                <p id="gameThemes" class="whiteText description"></p>
+                <p id="gameStatus" class="whiteText description"></p>
+                <p class="whiteText description"><strong>Developers:</strong></p>
+                <ul id="gameDevelopers" class="whiteText description lessLeftPadding"></ul>
+                <p class="whiteText description"><strong>Publishers:</strong></p>
+                <ul id="gamePublishers" class="whiteText description lessLeftPadding"></ul>
             </div>
         </div>
     </section>
 
 {% endblock %}
 
-{% block similarMovies %}
+{% block similarGames %}
 
     <section class="mobile">
     </section>
@@ -49,7 +40,7 @@
     <section class="desktop">
     </section>
 
-    <h2 class="sectionHeading veryLightGrayText">Similar Movies</h2>
+    <h2 class="sectionHeading veryLightGrayText">Similar Games</h2>
 
     <section id="similarMovies">
     <div id="sm" class="carousel slide" data-ride="carousel">
@@ -72,68 +63,80 @@
 
 {% endblock %}
 
-{% block ajaxInfoMovieBlock %}
+{% block ajaxInfoGameBlock %}
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
+
+        <!--Game Details -->
         $.ajax({
             type: "GET",
-            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
-            dataType: "json",
+            url: "https://www.giantbomb.com/api/game/" + "{{ request.session.gameid }}" + "/?api_key=cbe9663e0fca45d439adc20d145f26d9395fa02f&format=jsonp",
+            dataType: 'jsonp',
+            crossDomain: true,
+            jsonp: 'json_callback',
             success: function(result){
-                var wallpaper = "https://image.tmdb.org/t/p/original" + result.backdrop_path;
-                var img = "https://image.tmdb.org/t/p/w342" + result.poster_path;
+                console.log(result.results.image.screen_url);
+                var totalGameInfo = result.results;
+                var wallpaper = totalGameInfo.images[2].super_url;
+                var img = totalGameInfo.image.small_url;
                 var genres = '<strong>Genres:</strong> ';
-                var popularity = '<strong>Popularity:</strong> ';
-                var adultRated = '<strong>Adult Rated:</strong> ';
-                var budget = '<strong>Budget:</strong> ';
-                var companies = '';
+                var themes = '<strong>Themes:</strong> ';
+                var developers = '';
+                var publishers = '';
                 $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + wallpaper + ') no-repeat center center fixed');
                 $('#infoMovie').css('background-size', 'cover');
                 $('#thumbnail').html('<img class="card-img-top movieThumbnail" src="' + img + '" alt="action">');
-                $('#movieName').html(result.original_title);
-                $('#movieDescription').html(result.overview);
-                $('#movieLanguage').html('<strong>Language:</strong> ' + result.original_language);
-                $('#movieReleaseDate').html('<strong>Release Date:</strong> ' + result.release_date);
-                for(var i = 0; i < result.genres.length; i++){
-                    if (i === result.genres.length - 1 ) {
-                        genres += result.genres[i].name + '.';
+                $('#gameName').html(totalGameInfo.name);
+                $('#gameDescription').html(totalGameInfo.deck);
+
+                var releaseDate
+                if (totalGameInfo.original_release_date==null){
+                    releaseDate = "Unreleased"
+                }else{
+                    releaseDate = totalGameInfo.original_release_date.substr(0,10);
+                }
+                $('#gameReleaseDate').html('<strong>Release Date:</strong> ' + releaseDate);
+
+                for(var i = 0; i < totalGameInfo.genres.length; i++){
+                    if (i === totalGameInfo.genres.length - 1 ) {
+                        genres += totalGameInfo.genres[i].name + '.';
                     }else{
-                        genres += result.genres[i].name + ', ';
+                        genres += totalGameInfo.genres[i].name + ', ';
                     }
                 }
-                $('#movieGenres').html(genres);
-                if(result.popularity >= 90){
-                    popularity += 'Very Popular';
-                }else if(result.popularity >= 80){
-                    popularity += 'Popular';
-                }else if(result.popularity >= 65){
-                    popularity += 'Mildly Popular';
-                }else if(result.popularity >= 50){
-                    popularity += 'Average';
-                }else if(result.popularity >= 40) {
-                    popularity += 'Below Average';
+                $('#gameGenres').html(genres);
+
+                for(var i = 0; i < totalGameInfo.themes.length; i++){
+                    if (i === totalGameInfo.themes.length - 1 ) {
+                        themes += totalGameInfo.themes[i].name + '.';
+                    }else{
+                        themes += totalGameInfo.themes[i].name + ', ';
+                    }
+                }
+                $('#gameThemes').html(themes);
+
+                var gameStatus
+                if (releaseDate == "Unreleased") {
+                    gameStatus = releaseDate
                 }else{
-                    popularity += 'Not well known';
+                  gameStatus = "Released"
                 }
-                $('#moviePopularity').html(popularity);
-                if(result.adult){
-                    adultRated += 'Yes';
-                }else{
-                    adultRated += 'No';
+                $('#gameStatus').html('<strong>Status:</strong> ' + gameStatus);
+
+                for(var i = 0; i < totalGameInfo.developers.length; i++){
+                    developers += '<li>' + totalGameInfo.developers[i].name + '</li>';
                 }
-                $('#movieAdultRated').html(adultRated);
-                $('#movieStatus').html('<strong>Status:</strong> ' + result.status);
-                budget += result.budget.toLocaleString();
-                $('#movieBudget').html(budget);
-                $('#movieCountry').html('<strong>Production Country:</strong> ' + result.production_countries[0].name);
-                for(var i = 0; i < result.production_companies.length; i++){
-                    companies += '<li>' + result.production_companies[i].name + '</li>';
+                $('#gameDevelopers').html(developers);
+
+                for(var i = 0; i < totalGameInfo.publishers.length; i++){
+                    publishers += '<li>' + totalGameInfo.publishers[i].name + '</li>';
                 }
-                $('#movieCompanies').html(companies);
+                $('#gamePublishers').html(publishers);
             }
         });
 
+        <!-- Similar Games -->
         $.ajax({
             type: "GET",
             url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/similar?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
@@ -153,61 +156,6 @@
             }
         });
 
-        $.ajax({
-            type: "GET",
-            url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.gameid }}" + "/credits?api_key=867611d6b3f8882764c7aec28bc288ed",
-            dataType: "json",
-            success: function(result){
-                var cast = result.cast;
-                var crew = result.crew;
-                console.log(crew);
-                var maxCards = 10;
-                var realNames = [];
-                var charNames = [];
-                var profileImages = [];
-                var directors = [];
-                var directorsImages = [];
-                var producers = [];
-                var producersImages = [];
-                for(var i = 0; i < cast.length; i++){
-                    realNames[i] = cast[i].name;
-                    charNames[i] = cast[i].character;
-                    profileImages[i] = "https://image.tmdb.org/t/p/w92" + cast[i].profile_path;
-                }
-{#                var j = 0, k = 0;#}
-{#                for(var i = 0; i < crew.length; i++){#}
-{#                    if(crew[i].job === 'Director'){#}
-{#                        directors[j] = crew[i].name;#}
-{#                        directorsImages[j] = "https://image.tmdb.org/t/p/w92" + crew[i].profile_path;#}
-{#                        j++;#}
-{#                    }#}
-{#                    if(crew[i].job === 'Producer'){#}
-{#                        producers[k] = crew[i].name;#}
-{#                        producersImages[k] = "https://image.tmdb.org/t/p/w92" + crew[i].profile_path;#}
-{#                        k++;#}
-{#                    }#}
-{#                }#}
-                makePeopleCards(realNames, charNames, profileImages, maxCards, directors, directorsImages, producers, producersImages);
-            }
-        });
-
-        function makePeopleCards(realNames, charNames, profileImages, maxCards, directors, directorsImages, producers, producersImages){
-            var cast = '';
-            var crewDirectors = '';
-            var crewProducers = '';
-            for(var i = 0; i < (realNames.length > maxCards ? maxCards : realNames.length); i++) {
-                cast += '<div class="card genre cast"><img class="card-img-top" src="' + profileImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + realNames[i] + '</h4></div></div>';
-            }
-{#            for(var i = 0; i < (directors.length > maxCards ? maxCards : directors.length); i++) {#}
-{#                crewDirectors += '<div class="card genre cast"><img class="card-img-top" src="' + directorsImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + directors[i] + '</h4></div></div>';#}
-{#            }#}
-{#            for(var i = 0; i < (producers.length > maxCards ? maxCards : producers.length); i++) {#}
-{#                crewProducers += '<div class="card genre cast"><img class="card-img-top" src="' + producersImages[i] + '" alt="action"><div class="card-block small-block"><h4 class="card-title small-title veryLightGrayText">' + producers[i] + '</h4></div></div>';#}
-{#            }#}
-            $('#cast').html(cast);
-{#            $('#crew-director').html(crewDirectors);#}
-{#            $('#crew-producer').html(crewProducers);#}
-        }
 
         function getPoster(posterURLs, titles, ids, carousel) {
             var device;
