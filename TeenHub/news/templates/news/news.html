@@ -206,7 +206,7 @@
       }
 
     }
-    
+
     .spacing{
       height: 20px;
       background-color: #111;
@@ -278,6 +278,7 @@
       <div class="spacing"></div>
     </nav>
 
+      {% if request.session.id %}
       <div>
         <div class="container">
           <div id="menuSourceToggle">
@@ -287,11 +288,9 @@
           </div>
         </div>
         <div class="container source-wrapper-hide" id="source">
-        </div>
-
-
-
+      </div>
     </div>
+    {% endif %}
 
 
     <a class="carousel-control-prev" href="#" id="prev" role="button" data-slide="prev">
