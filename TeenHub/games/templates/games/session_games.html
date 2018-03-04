@@ -291,10 +291,13 @@
     var currentTime = new Date();
     $.ajax({
         type: "GET",
-        url: "https://www.giantbomb.com/api/games/?api_key=cbe9663e0fca45d439adc20d145f26d9395fa02f&format=json&limit=10&field_list=id,guid,name,image,expected_release_year,expected_release_quarter,expected_release_month&filter=expected_release_year:"+currentTime.getFullYear()+",expected_release_quarter:"+(1+Math.floor((currentTime.getMonth() + 3) / 3))+"&sort=date_added:asc",
-        dataType: "json",
+        url: "https://www.giantbomb.com/api/games/?format=jsonp&api_key=cbe9663e0fca45d439adc20d145f26d9395fa02f&limit=10&field_list=id,guid,name,image,expected_release_year,expected_release_quarter,expected_release_month&filter=expected_release_year:"+currentTime.getFullYear()+",expected_release_quarter:"+(1+Math.floor((currentTime.getMonth() + 3) / 3))+"&sort=date_added:asc",
+        dataType: 'jsonp',
+        crossDomain: true,
+        jsonp: 'json_callback',
         success: function(result){
             var gameDetails = result.results;
+            console.log(gameDetails);
             var posterURLs = [];
             var titles = [];
             var ids = [];

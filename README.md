@@ -22,10 +22,10 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do News List
 
-- [ ] Show news in cards
-- [ ] Show news in Categoary
-- [ ] Save user preference of news source
-- [ ] Show news based on user preference
+- [X] Show news in cards
+- [X] Show news in Categoary
+- [X] Save user preference of news source
+- [X] Show news based on user preference
 - [ ] Make responsive
 
 ## To-Do Games List
