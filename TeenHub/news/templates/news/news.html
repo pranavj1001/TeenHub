@@ -62,11 +62,7 @@
       font-size: 20px;
       line-height: 20px;
     }
-    .description{
-      line-height: 17px;
-      margin: 8px 0 0 0;
-      font-size: 14px;
-    }
+
     .description p{
       line-height: 1.5em;
       height: 3em;
@@ -104,26 +100,66 @@
     .news-nav-color{
       color: #7b7b7b;
     }
-    #source{
+    .source-wrapper-hide{
       display: none;
     }
+    .source-wrapper-show{
+      display: block;
+      padding-left: 50px
+    }
+    #menuSourceToggle{
+      display: none;
+      z-index: 11;
+    	text-align: center;
+    	font-size: 14px;
+    	color: #ffffff;
+    	width: 40px;
+    	height: 40px;
+    	line-height: 40px;
+    	cursor: pointer;
+    	background: #555;
+    	-webkit-transition: all .1s ease-in-out;
+    	   -moz-transition: all .1s ease-in-out;
+    		-ms-transition: all .1s ease-in-out;
+    		 -o-transition: all .1s ease-in-out;
+    			transition: all .1s ease-in-out;
+    }
+
+    #sourceNewsList{
+      display: block;
+    }
     @media (max-width: 960px) {
-      #source{
+      #menuSourceToggle{
         display: block;
-        padding-left: 50px;
       }
       #sourceNews{
         display: none;
+      }
+      .news-item{
+        width: 100%;
+        margin: 5px 0;
+        position: relative;
       }
     }
 
     @media (max-width:720px) {
-      #source{
+      #menuSourceToggle{
         display: block;
-        padding-left: 50px;
       }
       #sourceNews{
         display: none;
+      }
+      .news-item{
+        width: 100%;
+        margin: 5px 0;
+        position: relative;
+      }
+      .title{
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .description{
+        font-size: 13px;
       }
     }
 
@@ -131,9 +167,8 @@
       #sourceNews{
         display: none;
       }
-      #source{
+      #menuSourceToggle{
         display: block;
-        padding-left: 50px;
       }
 
       .news-item{
@@ -241,8 +276,20 @@
       </div>
     </nav>
 
-      <div class="container" id="source">
-      </div>
+      <div>
+        <div class="container">
+          <div id="menuSourceToggle">
+            <i class="icon-align-left"></i>
+            <!-- <i class="icon-reorder"></i>
+            <i class="icon-angle-up"></i> -->
+          </div>
+        </div>
+        <div class="container source-wrapper-hide" id="source">
+        </div>
+
+
+
+    </div>
 
 
     <a class="carousel-control-prev" href="#" id="prev" role="button" data-slide="prev">

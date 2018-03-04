@@ -41,6 +41,11 @@
         });
     });
 
+    $("#menuSourceToggle").on('click',function(){
+      $("#source").toggleClass('source-wrapper-hide');
+      $("#source").toggleClass('source-wrapper-show');
+    })
+
 
     var slideIndex = 1;
     render_feed();
@@ -125,6 +130,21 @@
         }
     }
 
+    // function checkImageUrl(imageUrl){
+    //   console.log(imageUrl);
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.open('HEAD', imageUrl, false);
+    //   xhr.send();
+    //
+    //   if (xhr.status == "404") {
+    //       console.log("File doesn't exist");
+    //       return false;
+    //   } else {
+    //       console.log("File exists");
+    //       return true;
+    //   }
+    // }
+
     function displayAll(){
 
       var all_news_sources=get_all_news_source();
@@ -146,7 +166,8 @@
                         // console.log(article.urlToImage);
                         // console.log(article.url);
                         // console.log("-------------");
-                    if(article.urlToImage != "null"){
+
+                    if(article.urlToImag != 'null' ){
                         articleList += `
                             <div class="news-item"><a target="_blank" href="${article.url}">
                                 <div class="news-item-image">
