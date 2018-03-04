@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^movies/', include('movies.urls')),
     url(r'^news/', include('news.urls')),
     url(r'^games/', include('games.urls')),
+    url(r'^dashboard/', include('dashboard.urls')),
 ]
