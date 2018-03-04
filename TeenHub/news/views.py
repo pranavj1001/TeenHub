@@ -8,7 +8,7 @@ def show_news(request):
 		print(news)
 	else:
 		print("inside else part")
-		news = News(buzzfeed=1,daily_mail=1,entertainment_weekly=1,ign=1,mashable=1,mtv_news=1,polygon=1,the_lad_bible=1,ars_technica=1,crypto_coins_news=1,engadget=1,gruenderszene=1,hacker_news=1,recode=1,t3n=1,techcrunch=1,techradar=1,the_next_web=1,the_verge=1,wired=1)
+		news = News(buzzfeed=1,daily_mail=1,entertainment_weekly=1,ign=1,mashable=1,mtv_news=1,polygon=1,the_lad_bible=1,ars_technica=1,crypto_coins_news=1,hacker_news=1,recode=1,techcrunch=1,techradar=1,the_next_web=1,the_verge=1,wired=1)
 	return render(request, 'news/session_news.html', {'news' : news})
 
 def save_all_news_list(request):
@@ -76,18 +76,6 @@ def save_all_news_list(request):
 			allNewsList.crypto_coins_news=request.POST['crypto_coins_news']
 			print('crypto_coins_news')
 
-		if 'engadget' not in request.POST:
-			allNewsList.engadget=0
-		else:
-			allNewsList.engadget=request.POST['engadget']
-			print('engadget')
-
-		if 'gruenderszene' not in request.POST:
-			allNewsList.gruenderszene=0
-		else:
-			allNewsList.gruenderszene=request.POST['gruenderszene']
-			print('gruenderszene')
-
 		if 'hacker_news' not in request.POST:
 			allNewsList.hacker_news=0
 		else:
@@ -99,12 +87,6 @@ def save_all_news_list(request):
 		else:
 			allNewsList.recode=request.POST['recode']
 			print('recode')
-
-		if 't3n' not in request.POST:
-			allNewsList.t3n=0
-		else:
-			allNewsList.t3n=request.POST['t3n']
-			print('t3n')
 
 		if 'techcrunch' not in request.POST:
 			allNewsList.techcrunch=0
@@ -217,18 +199,6 @@ def save_tech_news_list(request):
 			allNewsList.crypto_coins_news=request.POST['crypto_coins_news']
 			print('crypto_coins_news')
 
-		if 'engadget' not in request.POST:
-			allNewsList.engadget=0
-		else:
-			allNewsList.engadget=request.POST['engadget']
-			print('engadget')
-
-		if 'gruenderszene' not in request.POST:
-			allNewsList.gruenderszene=0
-		else:
-			allNewsList.gruenderszene=request.POST['gruenderszene']
-			print('gruenderszene')
-
 		if 'hacker_news' not in request.POST:
 			allNewsList.hacker_news=0
 		else:
@@ -240,12 +210,6 @@ def save_tech_news_list(request):
 		else:
 			allNewsList.recode=request.POST['recode']
 			print('recode')
-
-		if 't3n' not in request.POST:
-			allNewsList.t3n=0
-		else:
-			allNewsList.t3n=request.POST['t3n']
-			print('t3n')
 
 		if 'techcrunch' not in request.POST:
 			allNewsList.techcrunch=0
