@@ -16,6 +16,6 @@ def show_dashboard(request):
             max = last_ten[i].visits
         value = date(2000, last_ten[i].month, 1).strftime('%b') + "'" + str(last_ten[i].year)[-2:]
         month_names.append(value)
-    max += 100
+    max = (int(max / 100)+2)*100
 
     return render(request, 'dashboard/dashboard_home.html', {"visits_month": visits_month, "month_names": month_names, "max": max})
