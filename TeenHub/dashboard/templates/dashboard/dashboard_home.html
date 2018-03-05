@@ -81,9 +81,9 @@
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+          <i class="fa fa-area-chart"></i>TeenHub Hits</div>
         <div class="card-body">
-          <canvas id="myAreaChart" width="100%" height="30"></canvas>
+          <canvas id="visits" width="100%" height="30"></canvas>
         </div>
         <div class="card-footer small text-muted">True as per our records</div>
       </div>
@@ -388,7 +388,7 @@
 
     <script type="text/javascript">
 
-        var ctx = document.getElementById("myAreaChart");
+        var ctx = document.getElementById("visits");
         var myLineChart = new Chart(ctx, {
           type: 'line',
           data: {
