@@ -183,6 +183,10 @@
     <!-- Custom scripts for this page-->
     <script src="{% static 'js/dashboard-datatables.js' %}"></script>
     <script src="{% static 'js/dashboard-charts.js' %}"></script>
+
+    {% block javascript %}
+    {% endblock %}
+
 </body>
 
 </html>
