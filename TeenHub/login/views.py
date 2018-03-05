@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.hashers import make_password, check_password
-from .models import User
+from .models import User, visitors
 from news.models import News
+from random import randint
 import datetime
 from datetime import date
 
@@ -45,7 +46,18 @@ def signup_user(request):
             newsRow = News(user_id=request.session["id"])
             newsRow.save()
             print("created news row")
-            return redirect('/movies')
+
+            # increase the number of the visits in visitors table
+            # randomly increase the number of visits during each login or signup event
+            if visitors.objects.filter(month=today.month, year=today.year).exists():
+                row = visitors.objects.get(month=today.month, year=today.year)
+                row.visits += randint(5, 20)
+                row.save()
+            else:
+                row = visitors(visits=randint(5, 20), month=today.month, year=today.year)
+                row.save()
+
+            return redirect('/dashboard')
 
 def login_user(request):
     if request.method == 'GET':
@@ -59,7 +71,19 @@ def login_user(request):
             userDetails = User.objects.get(username=username)
             if check_password(password, str(userDetails.password)):
                 request.session["id"] = userDetails.id
-                return redirect('/movies')
+
+                # increase the number of the visits in visitors table
+                # randomly increase the number of visits during each login or signup event
+                today = date.today()
+                if visitors.objects.filter(month=today.month, year=today.year).exists():
+                    row = visitors.objects.get(month=today.month, year=today.year)
+                    row.visits += randint(5, 20)
+                    row.save()
+                else:
+                    row = visitors(visits=randint(5, 20), month=today.month, year=today.year)
+                    row.save()
+
+                return redirect('/dashboard')
             else:
                 return HttpResponse("Wrong Password")
         else:
