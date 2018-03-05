@@ -135,10 +135,17 @@
             </div>
           </form>
         </li>
+        {% if request.session.id %}
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'show_login' %}">
+                <i class="fa fa-fw fa-sign-in"></i>Login</a>
+            </li>
+        {% endif %}
       </ul>
     </div>
   </nav>
@@ -535,7 +542,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a href="{% url 'logout' %}">Logout</a>
           </div>
         </div>
       </div>
