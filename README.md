@@ -26,7 +26,7 @@ List Updated on 24th Feb, 2018.
 - [X] Show news in Categoary
 - [X] Save user preference of news source
 - [X] Show news based on user preference
-- [ ] Make responsive
+- [X] Make responsive
 
 ## To-Do Games List
 
