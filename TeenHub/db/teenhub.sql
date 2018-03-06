@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2018 at 07:34 PM
+-- Generation Time: Mar 06, 2018 at 04:39 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -225,7 +225,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (18, 'news', '0001_initial', '2018-03-04 07:42:40.955545'),
 (19, 'news', '0002_news_gruenderszene', '2018-03-04 07:42:41.509833'),
 (20, 'news', '0003_auto_20180304_1629', '2018-03-05 17:17:44.372896'),
-(21, 'login', '0002_visitors', '2018-03-05 17:19:25.945094');
+(21, 'login', '0002_visitors', '2018-03-05 17:19:25.945094'),
+(22, 'login', '0003_visitors_signups', '2018-03-06 15:06:27.192006');
 
 -- --------------------------------------------------------
 
@@ -256,7 +257,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('uatlqavlo6k6jq2oeegf1drwz5pojvt9', 'OWU4ODE3MmVjNjczMDkwNDViMGM0NDA3YzYwOWQyN2VmZTRlNDFhZjp7fQ==', '2017-11-26 11:41:11.900037'),
 ('vl39pblqcb97n4u3wo05fwkfnfcwwcjt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2017-11-24 05:17:37.815374'),
 ('wgtnceejxca0vdlkg6vr6q208eag1z1q', 'NzA2MDY3MjdjYzM1YjUyZjUyZTBmOWZlN2ZiOTYzMzU3YzIwZjBkMTp7ImlkIjo3LCJub1JhdGluZ3MiOjF9', '2018-02-24 11:32:26.787317'),
-('y0wr4f3j0cdbj4dmontmmowwqjx7w2gt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2018-03-19 17:47:24.662736'),
+('y0wr4f3j0cdbj4dmontmmowwqjx7w2gt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2018-03-20 14:06:40.716563'),
 ('z56c6t78mi4c4pb830hjxe8hmprck2o3', 'N2FkNDFlZmIxZTg2ZmY4ZGU5YjhmZjZhZDgxNzNmZDMxNmY0OTZlZjp7Im1vdmllaWQiOiIyOTk2ODcifQ==', '2018-02-14 10:49:18.347708');
 
 -- --------------------------------------------------------
@@ -17877,27 +17878,28 @@ CREATE TABLE `login_visitors` (
   `id` int(11) NOT NULL,
   `visits` int(11) NOT NULL,
   `month` int(11) NOT NULL,
-  `year` int(11) NOT NULL
+  `year` int(11) NOT NULL,
+  `signups` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login_visitors`
 --
 
-INSERT INTO `login_visitors` (`id`, `visits`, `month`, `year`) VALUES
-(1, 150, 3, 2017),
-(2, 187, 4, 2017),
-(3, 219, 5, 2017),
-(4, 166, 6, 2017),
-(5, 197, 7, 2017),
-(6, 235, 8, 2017),
-(7, 252, 9, 2017),
-(8, 278, 10, 2017),
-(9, 248, 11, 2017),
-(10, 306, 12, 2017),
-(11, 320, 1, 2018),
-(12, 338, 2, 2018),
-(13, 32, 3, 2018);
+INSERT INTO `login_visitors` (`id`, `visits`, `month`, `year`, `signups`) VALUES
+(1, 150, 3, 2017, 50),
+(2, 187, 4, 2017, 71),
+(3, 219, 5, 2017, 87),
+(4, 166, 6, 2017, 61),
+(5, 197, 7, 2017, 94),
+(6, 235, 8, 2017, 104),
+(7, 252, 9, 2017, 106),
+(8, 278, 10, 2017, 120),
+(9, 248, 11, 2017, 111),
+(10, 306, 12, 2017, 128),
+(11, 320, 1, 2018, 145),
+(12, 338, 2, 2018, 159),
+(13, 50, 3, 2018, 171);
 
 -- --------------------------------------------------------
 
@@ -27258,7 +27260,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `games_rating`
 --
