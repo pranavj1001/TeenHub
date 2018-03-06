@@ -38,6 +38,12 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do Songs List
 
+- [ ] Show songs in cards
+- [ ] Show news in Categoary
+- [ ] Save user preference of news source
+- [ ] Show news based on user preference
+- [ ] Make responsive
+
 ## To-Do Dashboard List
 
 - [ ] Show statistics of movies, songs, games
