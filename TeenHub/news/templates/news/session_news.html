@@ -144,6 +144,59 @@
     //       return true;
     //   }
     // }
+    function differnceOfDate(date){
+      var date1 = new Date();
+      var date2 = new Date(date);
+      var difference = Math.abs(date1-date2);
+      console.log("date1 "+date1);
+      console.log("date2 "+date2);
+      console.log("msec " +difference);
+      var sec =Math.floor(difference/1000);
+      if(sec<60){
+        //console.log(sec+" second ago");
+        return sec+" seconds ago";
+      }
+      else{
+        var minutes = Math.floor(sec/60);
+        if(minutes<60){
+          //console.log(minutes+" minutes ago");
+          return minutes+" minutes ago";
+        }
+        else{
+          var hour = Math.floor(minutes/60);
+          if(hour<24){
+            //console.log(hour+" hour ago");
+            return hour+" hours ago";
+          }
+          else{
+            var days = Math.floor(hour/24);
+            if (days<7) {
+              //console.log(days+" days ago");
+              return days+" days ago";
+            }
+            else{
+              var weeks = Math.floor(days/30);
+              if (weeks<4) {
+                //console.log(weeks+" weeks ago");
+                return weeks+" weeks ago";
+              }
+              else{
+                var months = Math.floor(weeks/4);
+                if(months<12){
+                  //console.log(months+" months ago");
+                  return months+" months ago";
+                }
+                else {
+                  var years =Math.floor(months/12);
+                  //console.log(year+" years ago");
+                  return year+" years ago";
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
     function displayAll(){
 
@@ -166,6 +219,8 @@
                         // console.log(article.urlToImage);
                         // console.log(article.url);
                         // console.log("-------------");
+                        //console.log(article.publishedAt);
+                        var ago = differnceOfDate(article.publishedAt);
 
                     if(article.urlToImage !== null ){
                       articleList += `
@@ -178,7 +233,7 @@
                                   <div class="description"><p>${article.description}</p></div>
                                   <div class="other-detail" >
                                           <div class="source-name">${article.source.name}</div>
-                                          <div class="published"">${article.publishedAt}</div>
+                                          <div class="published">`+ago+`</div>
                                   </div>
                               </div>
                           </div>
@@ -544,6 +599,9 @@
                           // console.log(article.urlToImage);
                           // console.log(article.url);
                           // console.log("-------------");
+                          var ago = differnceOfDate(article.publishedAt);
+
+
                       if(article.urlToImage !== null){
                           articleList += `
                               <div class="news-item"><a target="_blank" href="${article.url}">
@@ -555,7 +613,7 @@
                                       <div class="description"><p>${article.description}</p></div>
                                       <div class="other-detail" >
                                               <div class="source-name">${article.source.name}</div>
-                                              <div class="published"">${article.publishedAt}</div>
+                                              <div class="published">`+ago+`</div>
                                       </div>
                                   </div>
                               </div>
@@ -756,6 +814,9 @@
                           // console.log(article.urlToImage);
                           // console.log(article.url);
                           // console.log("-------------");
+                          var ago = differnceOfDate(article.publishedAt);
+
+
                       if(article.urlToImage !== null){
                           articleList += `
                               <div class="news-item"><a target="_blank" href="${article.url}">
@@ -767,7 +828,7 @@
                                       <div class="description"><p>${article.description}</p></div>
                                       <div class="other-detail" >
                                               <div class="source-name">${article.source.name}</div>
-                                              <div class="published"">${article.publishedAt}</div>
+                                              <div class="published">`+ago+`</div>
                                       </div>
                                   </div>
                               </div>
@@ -1001,6 +1062,8 @@
                          // console.log(article.urlToImage);
                          // console.log(article.url);
                          // console.log("-------------");
+                         var ago = differnceOfDate(article.publishedAt);
+
                      if(article.urlToImage !== null){
                          articleList += `
                              <div class="news-item"><a target="_blank" href="${article.url}">
@@ -1012,7 +1075,7 @@
                                      <div class="description"><p>${article.description}</p></div>
                                      <div class="other-detail" >
                                              <div class="source-name">${article.source.name}</div>
-                                             <div class="published"">${article.publishedAt}</div>
+                                             <div class="published">`+ago+`</div>
                                      </div>
                                  </div>
                              </div>
@@ -1209,6 +1272,8 @@
                        // console.log(article.urlToImage);
                        // console.log(article.url);
                        // console.log("-------------");
+                       var ago = differnceOfDate(article.publishedAt);
+
                    if(article.urlToImage !== null){
                        articleList += `
                            <div class="news-item"><a target="_blank" href="${article.url}">
@@ -1220,7 +1285,7 @@
                                    <div class="description"><p>${article.description}</p></div>
                                    <div class="other-detail" >
                                            <div class="source-name">${article.source.name}</div>
-                                           <div class="published"">${article.publishedAt}</div>
+                                           <div class="published">`+ago+`</div>
                                    </div>
                                </div>
                            </div>
@@ -1336,6 +1401,8 @@
                        // console.log(article.urlToImage);
                        // console.log(article.url);
                        // console.log("-------------");
+                       var ago = differnceOfDate(article.publishedAt);
+
                    if(article.urlToImage !== null){
                        articleList += `
                            <div class="news-item"><a target="_blank" href="${article.url}">
@@ -1347,7 +1414,7 @@
                                    <div class="description"><p>${article.description}</p></div>
                                    <div class="other-detail" >
                                            <div class="source-name">${article.source.name}</div>
-                                           <div class="published"">${article.publishedAt}</div>
+                                           <div class="published">`+ago+`</div>
                                    </div>
                                </div>
                            </div>
