@@ -8,14 +8,22 @@ def show_dashboard(request):
     last_ten = visitors.objects.all().order_by('-id')[:10][::-1]
     visits_month = []
     month_names = []
-    max = 0
+    signups_month = []
+    max_lineGraph = 0
+    max_barGraph = 0
     for i in range(0, len(last_ten)):
         # print(last_ten[i].visits, last_ten[i].year, last_ten[i].month)
         visits_month.append(last_ten[i].visits)
-        if max < last_ten[i].visits:
-            max = last_ten[i].visits
+        signups_month.append(last_ten[i].signups)
+        if max_lineGraph < last_ten[i].visits:
+            max_lineGraph = last_ten[i].visits
+        if max_barGraph < last_ten[i].signups:
+            max_barGraph = last_ten[i].signups
         value = date(2000, last_ten[i].month, 1).strftime('%b') + "'" + str(last_ten[i].year)[-2:]
         month_names.append(value)
-    max = (int(max / 100)+2)*100
+    max_lineGraph = (int(max_lineGraph / 100)+2)*100
+    max_barGraph = (int(max_barGraph / 100)+2)*100
 
-    return render(request, 'dashboard/dashboard_home.html', {"visits_month": visits_month, "month_names": month_names, "max": max})
+    print(signups_month[-6:], month_names[-6:], max_lineGraph, max_barGraph)
+
+    return render(request, 'dashboard/dashboard_home.html', {"visits_month": visits_month, "signups_month": signups_month[-6:], "signup_month_names": month_names[-6:], "month_names": month_names, "max_lineGraph": max_lineGraph, "max_barGraph": max_barGraph})
