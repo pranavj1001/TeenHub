@@ -13,5 +13,6 @@ class User(models.Model):
 
 class visitors(models.Model):
     visits = models.IntegerField(blank=False)
+    signups = models.IntegerField(blank=False, default=100)
     month = models.IntegerField(blank=False)
     year = models.IntegerField(blank=False)
