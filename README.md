@@ -4,7 +4,7 @@ One Place for your Entertainment
 ## To-Do List
 
 - [X] Complete Movies Section by 3rd March, 2018
-- [ ] Complete News Section by 3rd March, 2018
+- [X] Complete News Section by 3rd March, 2018
 - [ ] Complete Games Section by 7th March, 2018
 - [ ] Complete Songs Section by 11th March, 2018
 - [ ] Complete Dashboard by 15th March, 2018
