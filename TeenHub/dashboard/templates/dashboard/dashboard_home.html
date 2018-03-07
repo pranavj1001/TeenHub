@@ -492,6 +492,13 @@
           }
         });
 
+        var feed_content = {{ feed_content | safe }};
+        var feed_createdBy = {{ feed_createdBy | safe }};
+        var feed_time = {{ feed_time | safe }};
+        var feed_comments = {{ feed_comments | safe }};
+
+        console.log(feed_comments, feed_content, feed_createdBy, feed_time);
+
     </script>
 
 {% endblock %}

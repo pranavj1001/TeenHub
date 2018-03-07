@@ -37,7 +37,7 @@ def show_dashboard(request):
     feed_createdBy = []
     feed_time = []
     feed_comments = []
-    last_four_feed = feed.objects.all().order_by('-id')[:4][::-1]
+    last_four_feed = feed.objects.all().order_by('-id')[:4]
 
     for i in range(0, len(last_four_feed)):
         if User.objects.filter(id=last_four_feed[i].createdBy).exists():
@@ -49,16 +49,18 @@ def show_dashboard(request):
         feed_time.append(last_four_feed[i].createdAt)
         feed_content.append(last_four_feed[i].message)
 
-    print(feed_content, feed_time, feed_comments, feed_createdBy)
-
     return render(request, 'dashboard/dashboard_home.html',
                   {
-                      "visits_month": visits_month,
-                       "signups_month": signups_month[-6:],
-                       "signup_month_names": month_names[-6:],
-                       "month_names": month_names,
-                       "max_lineGraph": max_lineGraph,
-                       "max_barGraph": max_barGraph,
-                       "total_visits": total_visits,
-                       "total_users": total_users
-                   })
+                    "visits_month": visits_month,
+                    "signups_month": signups_month[-6:],
+                    "signup_month_names": month_names[-6:],
+                    "month_names": month_names,
+                    "max_lineGraph": max_lineGraph,
+                    "max_barGraph": max_barGraph,
+                    "total_visits": total_visits,
+                    "total_users": total_users,
+                    "feed_content": feed_content,
+                    "feed_createdBy": feed_createdBy,
+                    "feed_time": feed_time,
+                    "feed_comments": feed_comments
+                  })
