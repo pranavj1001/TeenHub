@@ -476,3 +476,7 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+.bottom_margin {
+  margin-bottom: 30px !important;
+}
