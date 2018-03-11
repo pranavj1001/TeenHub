@@ -2,6 +2,32 @@
 
 {% block container %}
 
-    
+    <div class="content-wrapper">
+      <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'show_dashboard' %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Movies</li>
+      </ol>
+      </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Created by TeenHub Team</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    </div>
 
+{% endblock %}
+
+{% block javascript %}
 {% endblock %}
