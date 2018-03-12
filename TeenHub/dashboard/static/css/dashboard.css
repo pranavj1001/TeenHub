@@ -3,8 +3,43 @@ html {
   min-height: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway";
+    font-weight: 300;
+    color: #333;
+}
+
+a {
+    color: #f85c37;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
 body {
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
 }
 
 body.sticky-footer {
@@ -479,4 +514,41 @@ footer.sticky-footer {
 
 .bottom_margin {
   margin-bottom: 30px !important;
+}
+
+.GrayText {
+  color: #555;
+}
+
+.rightLeftMargin {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.centerIfTabletAndBelow {
+  text-align: center;
+}
+
+.hr-width-adjusted {
+  width: 96%;
+}
+
+.grayBg {
+  background-color: #eee;
+}
+
+.hrMarginTopNone {
+  margin-top: 0;
+}
+
+@media (max-width: 576px) {
+  .mobileTextHeading {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .centerIfTabletAndBelow {
+    text-align: left;
+  }
 }

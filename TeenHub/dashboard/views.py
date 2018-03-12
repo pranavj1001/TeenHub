@@ -75,3 +75,6 @@ def show_dashboard(request):
 def show_dashboard_with_full_news(request):
     dictionary = return_news_details(1)
     return render(request, 'dashboard/dashboard_home.html', dictionary)
+
+def show_dashboard_movies(request):
+    return render(request, 'dashboard/dashboard_activities_movies.html', {})
