@@ -12,6 +12,18 @@
         <li class="breadcrumb-item active">Movies</li>
       </ol>
       </div>
+
+        {% if request.session.id %}
+            <div class="stats-movies">
+                <div class="stats-movies--heading">
+                    <h1 class="rightLeftMargin mobileTextHeading GrayText">Statistics</h1>
+                    <hr class="rightLeftMargin hrMarginTopNone grayBg">
+                </div>
+            </div>
+        {% else %}
+            <h1 class="rightLeftMargin centerIfTabletAndBelow mobileTextHeading GrayText">You're not logged in</h1>
+        {% endif %}
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
