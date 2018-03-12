@@ -1,0 +1,13 @@
+{% extends 'Songs/Songs.html' %}
+
+{% block searchBox %}
+
+    <div id="searchContainer" class="container">
+        <h3 id="searchHeading">Teen<strong>HUB</strong><span class="subHeading">Movies</span></h3>
+        <div id="searchBox" class="inner-addon right-addon">
+            <input type="text" class="form-control lightGrayBg searchText" onkeyup="DoSomethingOnKeyUp(event, this)" id="searchInput" placeholder="Search" />
+            <div id="results" class="results-style"></div>
+        </div>
+    </div>
+
+{% endblock %}
