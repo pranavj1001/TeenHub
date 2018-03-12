@@ -1,1 +1,366 @@
-<h1>songs</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Songs</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/movies.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/Chart.js' %}"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+
+	<!-- Menu -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="#">TeenHub</a></h1>
+			<i class="icon-remove menu-close"></i>
+			<a href="#home" class="smoothScroll">Top</a>
+            <a href="{% url 'show_home' %}">Search</a>
+			<a href="#applications" class="smoothScroll">Applications</a>
+			<a href="#about" class="smoothScroll">About US</a>
+			<a href="#contact" class="smoothScroll">Contact</a>
+            {% if request.session.id %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'show_login' %}">Login</a>
+                <a href="{% url 'show_signup' %}">Signup</a>
+            {% endif %}
+			<a href="#"><i class="icon-facebook"></i></a>
+			<a href="#"><i class="icon-twitter"></i></a>
+			<a href="#"><i class="icon-dribbble"></i></a>
+			<a href="#"><i class="icon-envelope"></i></a>
+		</div>
+
+		<!-- Menu button -->
+		<div id="menuToggle"><i class="icon-reorder"></i></div>
+	</nav>
+
+    <nav class="navbar navbar-inverse lightGrayBg noPadding">
+      <div id="applications" class="row container-fluid">
+          <div class="col-3 app">
+            <a href="{% url 'show_movies_page' %}">Movies</a>
+          </div>
+          <div class="col-3 app  current-app">
+            <a href="#">Songs</a>
+          </div>
+          <div class="col-3 app">
+            <a href="{% url 'show_games_page' %}">Games</a>
+          </div>
+          <div class="col-3 app">
+            <a href="{% url 'show_news_page' %}">News</a>
+          </div>
+      </div>
+    </nav>
+
+    {% block searchBox %}
+    {% endblock %}
+
+    <h2 class="sectionHeading veryLightGrayText">Top Genres</h2>
+
+    <section class="mobile">
+    <div id="mobileGenres" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#mobileGenres" data-slide-to="0" class="active"></li>
+        <li data-target="#mobileGenres" data-slide-to="1"></li>
+        <li data-target="#mobileGenres" data-slide-to="2"></li>
+        <li data-target="#mobileGenres" data-slide-to="3"></li>
+        <li data-target="#mobileGenres" data-slide-to="4"></li>
+        <li data-target="#mobileGenres" data-slide-to="5"></li>
+        <li data-target="#mobileGenres" data-slide-to="6"></li>
+        <li data-target="#mobileGenres" data-slide-to="7"></li>
+        <li data-target="#mobileGenres" data-slide-to="8"></li>
+      </ol>
+      <div class="carousel-inner heightAuto">
+        <div class="carousel-item active">
+          <div class="card genre" style="width: 100%" link="genres/28/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/action_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Action</h4>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/27/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/horror_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Horror</h4>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/878/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/scifi_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Sci-Fi</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/10752/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/war_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">War</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/53/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/thriller_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Thriller</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/12/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/adventure_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Adventure</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/35/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/comedy_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Comedy</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/16/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/animation_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Animation</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+          <div class="card genre" style="width: 100%" link="genres/14/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/fantasy_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Fantasy</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#mobileGenres" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#mobileGenres" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+    <section class="tablet">
+    <div id="tabletGenres" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#tabletGenres" data-slide-to="0" class="active"></li>
+        <li data-target="#tabletGenres" data-slide-to="1"></li>
+        <li data-target="#tabletGenres" data-slide-to="2"></li>
+        <li data-target="#tabletGenres" data-slide-to="3"></li>
+      </ol>
+      <div class="carousel-inner heightAuto">
+        <div class="carousel-item active">
+          <div class="card genre" style="width: 50%" link="genres/28/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/action_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Action</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 50%" link="genres/27/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/horror_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Horror</h4>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+           <div class="card genre" style="width: 50%" link="genres/878/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/scifi_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Sci-Fi</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 50%" link="genres/10752/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/war_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">War</h4>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+           <div class="card genre" style="width: 50%" link="genres/53/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/thriller_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Thriller</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 50%" link="genres/12/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/adventure_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Adventure</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+           <div class="card genre" style="width: 50%" link="genres/35/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/comedy_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Comedy</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 50%" link="genres/16/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/animation_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Animation</h4>
+            </div>
+          </div>
+        </div>
+          <div class="carousel-item">
+           <div class="card genre" style="width: 50%" link="genres/14/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/fantasy_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Fantasy</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#tabletGenres" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#tabletGenres" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+    <section class="desktop">
+    <div id="genres" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#genres" data-slide-to="0" class="active"></li>
+        <li data-target="#genres" data-slide-to="1"></li>
+        <li data-target="#genres" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner heightAuto">
+        <div class="carousel-item active">
+          <div id="genrePage" class="card genre" style="width: 33.3%" link="genres/28/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/action_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Action</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 33.3%" link="genres/27/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/horror_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Horror</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 33.3%" link="genres/878/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/scifi_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Sci - Fi</h4>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card genre" style="width: 33.3%" link="genres/10752/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/war_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">War</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 33.3%" link="genres/53/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/thriller_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Thriller</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 33.3%" link="genres/12/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/adventure_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Adventure</h4>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card genre" style="width: 33.3%" link="genres/35/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/comedy_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Comedy</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 33.3%" link="genres/16/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/animation_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Animation</h4>
+            </div>
+          </div>
+          <div class="card genre" style="width: 33.3%" link="genres/14/" onclick="showLink(this)">
+            <img class="card-img-top genreImg" src="../../static/img/fantasy_genre.jpg" alt="action">
+            <div class="card-block">
+                <h4 class="card-title veryLightGrayText">Fantasy</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#genres" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#genres" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+    {% block popularMovies %}
+    {% endblock %}
+
+    {% block recommendations %}
+    {% endblock %}
+
+    {% block ourTopPicks %}
+    {% endblock %}
+
+    {% block upcomingMovies %}
+    {% endblock %}
+
+    {% block moviesNews %}
+    {% endblock %}
+
+	<footer class="footer">
+        <div class="container">
+            <span class="text-muted">&copy; <a href="https://github.com/pranavj1001/TeenHub">TeenHUB team</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="{% static 'js/smoothscroll.js' %}"></script>
+    <script src="{% static 'js/classie.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block ajaxBlock %}
+    {% endblock %}
+
+</body>
+</html>
