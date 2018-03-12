@@ -3,6 +3,7 @@ import pandas as pd
 from .models import Links, Ratings
 import simplejson as json
 from TeenHub.settings import PROJECT_ROOT
+from datetime import date
 
 # Create your views here.
 def logout(request):
@@ -129,6 +130,7 @@ def show_genre_list(request, genre_id):
     return render(request, 'movies/genres_list.html', {})
 
 def save_movie_rating(request, movie_rating):
+    today = date.today()
     if 'noRatings' in request.session:
         del request.session["noRatings"]
     if 'id' in request.session:
@@ -140,9 +142,12 @@ def save_movie_rating(request, movie_rating):
             print('user wants to enter a new rating for a movie which he/she already rated')
             oldRating = Ratings.objects.get(user_id=request.session["id"], movie_id=link.movie_id)
             oldRating.ratings = movie_rating
+            oldRating.day = today.day
+            oldRating.month = today.month
+            oldRating.year = today.year
             oldRating.save()
         else:
-            newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating)
+            newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating, day=today.day, month=today.month, year=today.year)
             newRating.save()
         show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from login.models import visitors, User
+from movies.models import Ratings
 from datetime import date
 from .models import feed
 
@@ -77,4 +78,30 @@ def show_dashboard_with_full_news(request):
     return render(request, 'dashboard/dashboard_home.html', dictionary)
 
 def show_dashboard_movies(request):
-    return render(request, 'dashboard/dashboard_activities_movies.html', {})
+    ratings_per_month = []
+    today = date.today()
+    # if user is logged in
+    if 'id' in request.session:
+        # if there are ratings of user present in the dataset
+        if Ratings.objects.filter(user_id=request.session['id']).exists():
+            print('there are ratings')
+
+            # if there are ratings of user from the current year
+            if Ratings.objects.filter(year=today.year).exists():
+                print('user has rated movies in this year')
+
+            # if there are ratings of user from the current year
+            else:
+                print('user has not rating any movies in current year')
+
+        # if there are no ratings of user present in the dataset
+        else:
+            print('there are no ratings')
+
+        return render(request, 'dashboard/dashboard_activities_movies.html',
+                      {
+                          "ratings_per_month": ratings_per_month,
+                      })
+    # if user is not logged in
+    else:
+        return render(request, 'dashboard/dashboard_activities_movies.html', {})
