@@ -541,9 +541,29 @@ footer.sticky-footer {
   margin-top: 0;
 }
 
+.verticalLine {
+  border-left: 2px solid #ddd;
+  height: 100px;
+  border-radius: 4px;
+}
+
 @media (max-width: 576px) {
-  .mobileTextHeading {
+  .mobileTextHeadingH1 {
     font-size: 2rem;
+  }
+
+  .mobileTextHeadingH4 {
+    font-size: 1rem;
+  }
+
+  .notVisibleForMobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobileTextHeadingH4 {
+    font-size: 1.2rem;
   }
 }
 
