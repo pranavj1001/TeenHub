@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^news/', include('news.urls')),
     url(r'^games/', include('games.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^songs/', include('songs.urls')),
 ]
