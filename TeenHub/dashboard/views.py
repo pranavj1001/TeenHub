@@ -6,6 +6,18 @@ from .models import feed
 
 # Create your views here.
 
+def fill_ratings_per_month(year):
+    ratings_per_month = []
+
+    if Ratings.objects.filter(year=year).exists():
+        for i in range(1, 13):
+            if Ratings.objects.filter(year=year, month=i).exists():
+                ratings_per_month.append(Ratings.objects.filter(year=year, month=i).count())
+            else:
+                ratings_per_month.append(0)
+
+    return ratings_per_month
+
 def return_news_details(choice):
     # Graph Logic
     last_ten_graph = visitors.objects.all().order_by('-id')[:10][::-1]
@@ -89,7 +101,7 @@ def show_dashboard_movies(request):
             # if there are ratings of user from the current year
             if Ratings.objects.filter(year=today.year).exists():
                 print('user has rated movies in this year')
-
+                ratings_per_month = fill_ratings_per_month(today.year)
             # if there are ratings of user from the current year
             else:
                 print('user has not rating any movies in current year')
