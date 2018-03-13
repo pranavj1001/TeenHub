@@ -78,7 +78,7 @@
             success: function(result){
                 console.log(result.results.image.screen_url);
                 var totalGameInfo = result.results;
-                var wallpaper = totalGameInfo.images[2].super_url;
+                var wallpaper = totalGameInfo.images[1].super_url;
                 var img = totalGameInfo.image.small_url;
                 var genres = '<strong>Genres:</strong> ';
                 var themes = '<strong>Themes:</strong> ';
@@ -133,11 +133,26 @@
                     publishers += '<li>' + totalGameInfo.publishers[i].name + '</li>';
                 }
                 $('#gamePublishers').html(publishers);
+
+                <!--similar games-->
+                titles=[];
+                ids=[];
+                posterURLs=[];
+                for(var i = 0; i < totalGameInfo.similar_games.length; i++){
+
+                    titles[i] = totalGameInfo.similar_games[i].name;
+                    ids[i] = totalGameInfo.similar_games[i].id;
+                }
+                var carousel = 'sm';
+                getPoster(posterURLs, titles, ids, carousel);
             }
         });
 
         <!-- Similar Games -->
-        $.ajax({
+
+
+
+        /*$.ajax({
             type: "GET",
             url: "https://api.themoviedb.org/3/movie/" + "{{ request.session.movieid }}" + "/similar?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
             dataType: "json",
@@ -146,15 +161,9 @@
                 var posterURLs = [];
                 var titles = [];
                 var ids = [];
-                for(var i = 0; i < movieDetails.length; i++){
-                    posterURLs[i] = "https://image.tmdb.org/t/p/w342" + movieDetails[i].poster_path;
-                    titles[i] = movieDetails[i].original_title;
-                    ids[i] = movieDetails[i].id;
-                }
-                var carousel = 'sm';
-                getPoster(posterURLs, titles, ids, carousel);
+
             }
-        });
+        });*/
 
 
         function getPoster(posterURLs, titles, ids, carousel) {
@@ -199,7 +208,7 @@
                 indicatorsID = '#smIndicators';
             }
             for(var i = 0; i < ids.length; i++){
-                urls[i] = 'infoMovies/' + ids[i] + '/';
+                urls[i] = 'infoGames/' + ids[i] + '/';
             }
             carousel = '#' + carousel;
             $(sectionID).addClass(device);
@@ -212,15 +221,17 @@
                 counter++;
             }
             var final = start + string + '</div>';
-            for(var i = 1; i < carouselItems; i++){
+            cardsRemaining=ids.length;
+            for(var i = 1; i < Math.floor(ids.length/carouselItems); i++){
                     var start1 = '<div class="carousel-item">';
                     var string1 = '';
                     list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
-                    for (var j = 0; j < numberOfCards; j++) {
-                        if(counter === 20)
+                    for (var j = 0; j < cardsRemaining; j++) {
+                        if(counter === ids.length)
                             break;
                         string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                         counter++;
+                        cardsRemaining=cardsRemaining-numberOfCards
                     }
                     final += start1 + string1 + '</div>';
             }
@@ -229,7 +240,7 @@
         }
 
         function showLink(element){
-            window.location.href = 'http://127.0.0.1:8000/movies/' + element.attributes.link.value;
+            window.location.href = 'http://127.0.0.1:8000/games/' + element.attributes.link.value;
         }
 
         $(document).ready(function(){
