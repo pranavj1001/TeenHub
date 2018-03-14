@@ -18,7 +18,7 @@ def fill_ratings_per_month(request, year, ratings_values):
                 if max < temp:
                     max = temp
                 if temp == 1:
-                    rating = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
+                    rating = Ratings.objects.get(year=year, month=i, user_id=request.session['id'])
                     ratings_values[int(rating.ratings)-1] += 1
                 else:
                     ratings = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
