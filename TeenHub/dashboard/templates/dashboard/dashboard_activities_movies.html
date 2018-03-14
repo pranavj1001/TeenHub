@@ -78,9 +78,9 @@
 
             <div class="rightLeftMargin card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-table"></i> Your ratings in Tabular Format <span class="darkTableToggler"><input checked onclick="toggleTableMode(this)" type="checkbox"> Dark Table</span></div>
+                        <i class="fa fa-table"></i> Your ratings in Tabular Format <span id="darkTableToggler"><input onclick="toggleTableMode(this)" type="checkbox"> Dark Table</span></div>
                     <div class="card-body">
-                        <table id="ratings_movies_table" class="table table-hover table-dark">
+                        <table id="ratings_movies_table" class="table table-hover">
                           <thead>
                             <tr>
                               <th scope="col">#</th>
@@ -90,7 +90,7 @@
                             </tr>
                           </thead>
                           <tbody id="table_data">
-                            
+
                           </tbody>
                         </table>
                     </div>
@@ -189,7 +189,8 @@
         } else {
             var str = '<h1>' + message + '</h1>';
             $('#ratings_bar_graph').html(str);
-            $('#table_data').html(str);
+            $('#ratings_movies_table').html(str);
+            $('#darkTableToggler').css('display', 'none');
         }
 
     </script>
