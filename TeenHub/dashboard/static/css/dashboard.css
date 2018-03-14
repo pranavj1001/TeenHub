@@ -547,6 +547,10 @@ footer.sticky-footer {
   border-radius: 4px;
 }
 
+#year {
+  float: right;
+}
+
 @media (max-width: 576px) {
   .mobileTextHeadingH1 {
     font-size: 2rem;

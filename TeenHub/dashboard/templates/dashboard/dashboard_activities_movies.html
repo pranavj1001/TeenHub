@@ -48,7 +48,7 @@
 
                 <div class="rightLeftMargin card mb-3">
                     <div class="card-header">
-                      <i class="fa fa-bar-chart"></i> Your ratings in the Year: {{ year }}</div>
+                        <i class="fa fa-bar-chart"></i> Your ratings in the Year: {{ year }} <select id="year"></select></div>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-sm-9 my-auto" id="ratings_bar_graph">
@@ -99,6 +99,18 @@
 {% block javascript %}
 
     <script type="text/javascript">
+
+        var start = new Date().getFullYear();
+        var end = 1900;
+        var options = "";
+        for(var year = start ; year >= end; year--) {
+          options += "<option onclick='changeYear(this)'>"+ year +"</option>";
+        }
+        document.getElementById("year").innerHTML = options;
+
+        function changeYear(element) {
+            window.location.href = "http://127.0.0.1:8000/dashboard/movies/" + element.text + "/";
+        }
 
         var message = String('{{ message | safe }}');
 

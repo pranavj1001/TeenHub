@@ -22,17 +22,16 @@ def fill_ratings_per_month(request, year, ratings_values):
                     ratings_values[int(rating.ratings)-1] += 1
                 else:
                     ratings = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
-                    print(ratings)
                     for j in range(0, len(ratings)):
                         ratings_values[int(ratings[j].ratings) - 1] += 1
             else:
                 ratings_per_month.append(0)
 
     return {
-        "ratings_per_month": ratings_per_month,
-        "max": max,
-        "ratings_values": ratings_values
-    }
+                "ratings_per_month": ratings_per_month,
+                "max": max,
+                "ratings_values": ratings_values
+           }
 
 def return_news_details(choice):
     # Graph Logic
@@ -83,33 +82,25 @@ def return_news_details(choice):
         feed_content.append(last_four_feed[i].message)
 
     return {
-            "visits_month": visits_month,
-            "signups_month": signups_month[-6:],
-            "signup_month_names": month_names[-6:],
-            "month_names": month_names,
-            "max_lineGraph": max_lineGraph,
-            "max_barGraph": max_barGraph,
-            "total_visits": total_visits,
-            "total_users": total_users,
-            "feed_content": feed_content,
-            "feed_createdBy": feed_createdBy,
-            "feed_time": feed_time,
-            "feed_comments": feed_comments
+                "visits_month": visits_month,
+                "signups_month": signups_month[-6:],
+                "signup_month_names": month_names[-6:],
+                "month_names": month_names,
+                "max_lineGraph": max_lineGraph,
+                "max_barGraph": max_barGraph,
+                "total_visits": total_visits,
+                "total_users": total_users,
+                "feed_content": feed_content,
+                "feed_createdBy": feed_createdBy,
+                "feed_time": feed_time,
+                "feed_comments": feed_comments
            }
 
-def show_dashboard(request):
-    dictionary = return_news_details(0)
-    return render(request, 'dashboard/dashboard_home.html', dictionary)
-
-def show_dashboard_with_full_news(request):
-    dictionary = return_news_details(1)
-    return render(request, 'dashboard/dashboard_home.html', dictionary)
-
-def show_dashboard_movies(request):
+# common code
+def return_movies_activities_details(request, year):
     ratings_per_month = []
     max = 0
     message = ''
-    today = date.today()
     ratings_values = [0, 0, 0, 0, 0]
     total_ratings = 0
 
@@ -122,16 +113,16 @@ def show_dashboard_movies(request):
             total_ratings = Ratings.objects.filter(user_id=request.session['id']).count()
 
             # if there are ratings of user from the current year
-            if Ratings.objects.filter(year=today.year, user_id=request.session['id']).exists():
+            if Ratings.objects.filter(year=year, user_id=request.session['id']).exists():
                 print('user has rated movies in this year')
-                temp = fill_ratings_per_month(request, today.year, ratings_values)
+                temp = fill_ratings_per_month(request, year, ratings_values)
                 ratings_per_month = temp["ratings_per_month"]
                 max = temp["max"]
                 ratings_values = temp["ratings_values"]
             # if there are ratings of user from the current year
             else:
                 print('user has not rating any movies in current year')
-                message = 'You have not rated any movies in the year' + str(today.year)
+                message = 'You have not rated any movies in the year ' + str(year)
 
         # if there are no ratings of user present in the dataset
         else:
@@ -140,15 +131,31 @@ def show_dashboard_movies(request):
 
         max += (10 - (max % 10))
 
-        return render(request, 'dashboard/dashboard_activities_movies.html',
-                      {
-                          "ratings_per_month": ratings_per_month,
-                          "year": today.year,
-                          "max": max,
-                          "message": message,
-                          "ratings_values": ratings_values,
-                          "total_ratings": total_ratings
-                      })
+        return {
+                  "ratings_per_month": ratings_per_month,
+                  "year": year,
+                  "max": max,
+                  "message": message,
+                  "ratings_values": ratings_values,
+                  "total_ratings": total_ratings
+              }
     # if user is not logged in
     else:
-        return render(request, 'dashboard/dashboard_activities_movies.html', {})
+        return {}
+
+def show_dashboard(request):
+    dictionary = return_news_details(0)
+    return render(request, 'dashboard/dashboard_home.html', dictionary)
+
+def show_dashboard_with_full_news(request):
+    dictionary = return_news_details(1)
+    return render(request, 'dashboard/dashboard_home.html', dictionary)
+
+def show_dashboard_movies_custom_year(request, year):
+    dictionary = return_movies_activities_details(request, year)
+    return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
+
+def show_dashboard_movies(request):
+    today = date.today()
+    dictionary = return_movies_activities_details(request, today.year)
+    return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
