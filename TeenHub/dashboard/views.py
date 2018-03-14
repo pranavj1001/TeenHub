@@ -6,20 +6,33 @@ from .models import feed
 
 # Create your views here.
 
-def fill_ratings_per_month(request, year):
+def fill_ratings_per_month(request, year, ratings_values):
     ratings_per_month = []
     max = 0
 
     if Ratings.objects.filter(year=year).exists():
         for i in range(1, 13):
             if Ratings.objects.filter(year=year, month=i, user_id=request.session['id']).exists():
-                ratings_per_month.append(Ratings.objects.filter(year=year, month=i).count())
-                if max < Ratings.objects.filter(year=year, month=i).count():
-                    max = Ratings.objects.filter(year=year, month=i).count()
+                temp = Ratings.objects.filter(year=year, month=i, user_id=request.session['id']).count()
+                ratings_per_month.append(temp)
+                if max < temp:
+                    max = temp
+                if temp == 1:
+                    rating = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
+                    ratings_values[int(rating.ratings)-1] += 1
+                else:
+                    ratings = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
+                    print(ratings)
+                    for j in range(0, len(ratings)):
+                        ratings_values[int(ratings[j].ratings) - 1] += 1
             else:
                 ratings_per_month.append(0)
 
-    return {"ratings_per_month": ratings_per_month, "max": max}
+    return {
+        "ratings_per_month": ratings_per_month,
+        "max": max,
+        "ratings_values": ratings_values
+    }
 
 def return_news_details(choice):
     # Graph Logic
@@ -97,18 +110,24 @@ def show_dashboard_movies(request):
     max = 0
     message = ''
     today = date.today()
+    ratings_values = [0, 0, 0, 0, 0]
+    total_ratings = 0
+
     # if user is logged in
     if 'id' in request.session:
         # if there are ratings of user present in the dataset
         if Ratings.objects.filter(user_id=request.session['id']).exists():
             print('there are ratings from this user')
 
+            total_ratings = Ratings.objects.filter(user_id=request.session['id']).count()
+
             # if there are ratings of user from the current year
             if Ratings.objects.filter(year=today.year, user_id=request.session['id']).exists():
                 print('user has rated movies in this year')
-                temp = fill_ratings_per_month(request, today.year)
+                temp = fill_ratings_per_month(request, today.year, ratings_values)
                 ratings_per_month = temp["ratings_per_month"]
                 max = temp["max"]
+                ratings_values = temp["ratings_values"]
             # if there are ratings of user from the current year
             else:
                 print('user has not rating any movies in current year')
@@ -126,7 +145,9 @@ def show_dashboard_movies(request):
                           "ratings_per_month": ratings_per_month,
                           "year": today.year,
                           "max": max,
-                          "message": message
+                          "message": message,
+                          "ratings_values": ratings_values,
+                          "total_ratings": total_ratings
                       })
     # if user is not logged in
     else:
