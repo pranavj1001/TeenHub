@@ -1,6 +1,17 @@
 {% extends 'dashboard/dashboard.html' %}
 
-{% block container %}<div class="row">
+{% block container %}
+
+    <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'show_dashboard' %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Home</li>
+      </ol>
+      <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
@@ -67,17 +78,6 @@
         </div>
       </div>
 
-    <div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="{% url 'show_dashboard' %}">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Home</li>
-      </ol>
-      <!-- Icon Cards-->
-
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
@@ -87,6 +87,7 @@
         </div>
         <div class="card-footer small text-muted">True as per our records</div>
       </div>
+
       <div class="row">
         <div class="col-lg-8">
           <!-- Bar Chart Card-->

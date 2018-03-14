@@ -6,17 +6,20 @@ from .models import feed
 
 # Create your views here.
 
-def fill_ratings_per_month(year):
+def fill_ratings_per_month(request, year):
     ratings_per_month = []
+    max = 0
 
     if Ratings.objects.filter(year=year).exists():
         for i in range(1, 13):
-            if Ratings.objects.filter(year=year, month=i).exists():
+            if Ratings.objects.filter(year=year, month=i, user_id=request.session['id']).exists():
                 ratings_per_month.append(Ratings.objects.filter(year=year, month=i).count())
+                if max < Ratings.objects.filter(year=year, month=i).count():
+                    max = Ratings.objects.filter(year=year, month=i).count()
             else:
                 ratings_per_month.append(0)
 
-    return ratings_per_month
+    return {"ratings_per_month": ratings_per_month, "max": max}
 
 def return_news_details(choice):
     # Graph Logic
@@ -91,17 +94,20 @@ def show_dashboard_with_full_news(request):
 
 def show_dashboard_movies(request):
     ratings_per_month = []
+    max = 0
     today = date.today()
     # if user is logged in
     if 'id' in request.session:
         # if there are ratings of user present in the dataset
         if Ratings.objects.filter(user_id=request.session['id']).exists():
-            print('there are ratings')
+            print('there are ratings from this user')
 
             # if there are ratings of user from the current year
-            if Ratings.objects.filter(year=today.year).exists():
+            if Ratings.objects.filter(year=today.year, user_id=request.session['id']).exists():
                 print('user has rated movies in this year')
-                ratings_per_month = fill_ratings_per_month(today.year)
+                temp = fill_ratings_per_month(request, today.year)
+                ratings_per_month = temp["ratings_per_month"]
+                max = temp["max"]
             # if there are ratings of user from the current year
             else:
                 print('user has not rating any movies in current year')
@@ -110,9 +116,13 @@ def show_dashboard_movies(request):
         else:
             print('there are no ratings')
 
+        max += (10 - (max % 10))
+
         return render(request, 'dashboard/dashboard_activities_movies.html',
                       {
                           "ratings_per_month": ratings_per_month,
+                          "year": today.year,
+                          "max": max
                       })
     # if user is not logged in
     else:

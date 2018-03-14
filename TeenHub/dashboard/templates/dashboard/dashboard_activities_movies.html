@@ -20,6 +20,7 @@
                     <h1 class="rightLeftMargin mobileTextHeadingH1 GrayText">Statistics</h1>
                     <hr class="rightLeftMargin hrMarginTopNone grayBg">
                 </div>
+
                 <div class="row">
                     <div class="rightLeftMargin col-xl-3 col-sm-4 mb-3">
                       <div class="card text-white bg-danger o-hidden h-100">
@@ -37,15 +38,41 @@
                         </a>
                       </div>
                     </div>
-
                     <hr class="rightLeftMargin hrMarginTopNone verticalLine grayBg notVisibleForMobile">
-
                     <div class="rightLeftMargin col-xl-7 col-sm-6 mb-3">
                         <h4 class="mobileTextHeadingH4">Number of Movies: <strong>45684</strong> and counting</h4>
                         <h4 class="mobileTextHeadingH4">Total Ratings done by you : <strong>4</strong></h4>
                         <h4 class="mobileTextHeadingH4">Total Ratings : <strong>9125</strong></h4>
                     </div>
+                </div>
 
+                <div class="rightLeftMargin card mb-3">
+                    <div class="card-header">
+                      <i class="fa fa-bar-chart"></i> Your ratings in the Year: {{ year }}</div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-9 my-auto">
+                          <canvas id="ratings_movies" width="100" height="50"></canvas>
+                        </div>
+                        <div class="col-sm-3 text-center my-auto">
+                          <div class="h4 mb-0 text-success">12</div>
+                          <div class="small text-muted">Movies you rated <strong>Excellent</strong></div>
+                          <hr>
+                          <div class="h4 mb-0 text-success">15</div>
+                          <div class="small text-muted">Movies you rated <strong>Very Good</strong></div>
+                          <hr>
+                          <div class="h4 mb-0 text-warning">4</div>
+                          <div class="small text-muted">Movies you rated <strong>Good</strong></div>
+                          <hr>
+                          <div class="h4 mb-0 text-warning">7</div>
+                          <div class="small text-muted">Movies you rated <strong>Average</strong></div>
+                          <hr>
+                          <div class="h4 mb-0 text-danger">0</div>
+                          <div class="small text-muted">Movies you rated <strong>Not Watchable</strong></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer small text-muted">True as per our records</div>
                 </div>
             </div>
         {% else %}
@@ -73,7 +100,47 @@
 
     <script type="text/javascript">
 
-        console.log({{ ratings_per_month | safe }});
+        var ctx = document.getElementById("ratings_movies");
+        var myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+              label: "No of Ratings",
+              backgroundColor: "rgba(2,117,216,1)",
+              borderColor: "rgba(2,117,216,1)",
+              data: {{ ratings_per_month | safe }}
+            }]
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                time: {
+                  unit: 'month'
+                },
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  maxTicksLimit: 6
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: {{ max | safe }},
+                  maxTicksLimit: 5
+                },
+                gridLines: {
+                  display: true
+                }
+              }]
+            },
+            legend: {
+              display: false
+            }
+          }
+        });
 
     </script>
 
