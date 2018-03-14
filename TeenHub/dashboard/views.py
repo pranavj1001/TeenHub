@@ -95,6 +95,7 @@ def show_dashboard_with_full_news(request):
 def show_dashboard_movies(request):
     ratings_per_month = []
     max = 0
+    message = ''
     today = date.today()
     # if user is logged in
     if 'id' in request.session:
@@ -111,10 +112,12 @@ def show_dashboard_movies(request):
             # if there are ratings of user from the current year
             else:
                 print('user has not rating any movies in current year')
+                message = 'You have not rated any movies in the year' + str(today.year)
 
         # if there are no ratings of user present in the dataset
         else:
             print('there are no ratings')
+            message = 'You have not rated any movies'
 
         max += (10 - (max % 10))
 
@@ -122,7 +125,8 @@ def show_dashboard_movies(request):
                       {
                           "ratings_per_month": ratings_per_month,
                           "year": today.year,
-                          "max": max
+                          "max": max,
+                          "message": message
                       })
     # if user is not logged in
     else:
