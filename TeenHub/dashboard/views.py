@@ -17,13 +17,11 @@ def fill_ratings_per_month(request, year, ratings_values):
                 ratings_per_month.append(temp)
                 if max < temp:
                     max = temp
-                if temp == 1:
-                    rating = Ratings.objects.get(year=year, month=i, user_id=request.session['id'])
-                    ratings_values[int(rating.ratings)-1] += 1
-                else:
-                    ratings = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
-                    for j in range(0, len(ratings)):
-                        ratings_values[int(ratings[j].ratings) - 1] += 1
+                    
+                ratings = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
+                for j in range(0, len(ratings)):
+                    ratings_values[int(ratings[j].ratings) - 1] += 1
+
             else:
                 ratings_per_month.append(0)
 
