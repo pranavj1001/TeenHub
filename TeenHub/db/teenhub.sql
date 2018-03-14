@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2018 at 04:39 PM
+-- Generation Time: Mar 14, 2018 at 09:37 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -95,7 +95,10 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (36, 'Can delete news', 12, 'delete_news'),
 (37, 'Can add visitors', 13, 'add_visitors'),
 (38, 'Can change visitors', 13, 'change_visitors'),
-(39, 'Can delete visitors', 13, 'delete_visitors');
+(39, 'Can delete visitors', 13, 'delete_visitors'),
+(40, 'Can add feed', 14, 'add_feed'),
+(41, 'Can change feed', 14, 'change_feed'),
+(42, 'Can delete feed', 14, 'delete_feed');
 
 -- --------------------------------------------------------
 
@@ -144,6 +147,32 @@ CREATE TABLE `auth_user_user_permissions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dashboard_feed`
+--
+
+CREATE TABLE `dashboard_feed` (
+  `id` int(11) NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `message` varchar(200) NOT NULL,
+  `createdAt` int(11) NOT NULL,
+  `comments` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dashboard_feed`
+--
+
+INSERT INTO `dashboard_feed` (`id`, `createdBy`, `message`, `createdAt`, `comments`) VALUES
+(1, 1, 'Login System and aboutus page is now live! #v1.0', 1507593600, 0),
+(2, 1, 'Movies section now gives recommendation #v1.1 is now live!', 1510617600, 0),
+(3, 1, 'Custom Search Engine has now been added for Movies Section. #v1.1.1 is now live!', 1511740800, 0),
+(4, 1, 'News Section has been added to TeenHub. v1.2 is now live!', 1515542400, 0),
+(5, 1, 'Games section is now under development', 1517788800, 0),
+(6, 1, 'Get beta access to Games section. #v1.3.4 is now live!', 1518220800, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `django_admin_log`
 --
 
@@ -180,6 +209,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (4, 'auth', 'permission'),
 (2, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(14, 'dashboard', 'feed'),
 (7, 'login', 'user'),
 (13, 'login', 'visitors'),
 (9, 'movies', 'links'),
@@ -226,7 +256,15 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (19, 'news', '0002_news_gruenderszene', '2018-03-04 07:42:41.509833'),
 (20, 'news', '0003_auto_20180304_1629', '2018-03-05 17:17:44.372896'),
 (21, 'login', '0002_visitors', '2018-03-05 17:19:25.945094'),
-(22, 'login', '0003_visitors_signups', '2018-03-06 15:06:27.192006');
+(22, 'login', '0003_visitors_signups', '2018-03-06 15:06:27.192006'),
+(23, 'dashboard', '0001_initial', '2018-03-07 05:56:31.930593'),
+(24, 'dashboard', '0002_remove_feed_createdat', '2018-03-07 06:12:31.845382'),
+(25, 'dashboard', '0003_delete_feed', '2018-03-07 06:23:35.165411'),
+(26, 'dashboard', '0004_feed', '2018-03-07 06:23:58.082092'),
+(27, 'dashboard', '0005_delete_feed', '2018-03-07 07:04:35.910395'),
+(28, 'dashboard', '0006_feed', '2018-03-07 07:05:02.287720'),
+(29, 'movies', '0003_auto_20180312_2343', '2018-03-12 18:14:07.219618'),
+(30, 'movies', '0004_ratings_day', '2018-03-12 18:24:03.439874');
 
 -- --------------------------------------------------------
 
@@ -257,7 +295,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('uatlqavlo6k6jq2oeegf1drwz5pojvt9', 'OWU4ODE3MmVjNjczMDkwNDViMGM0NDA3YzYwOWQyN2VmZTRlNDFhZjp7fQ==', '2017-11-26 11:41:11.900037'),
 ('vl39pblqcb97n4u3wo05fwkfnfcwwcjt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2017-11-24 05:17:37.815374'),
 ('wgtnceejxca0vdlkg6vr6q208eag1z1q', 'NzA2MDY3MjdjYzM1YjUyZjUyZTBmOWZlN2ZiOTYzMzU3YzIwZjBkMTp7ImlkIjo3LCJub1JhdGluZ3MiOjF9', '2018-02-24 11:32:26.787317'),
-('y0wr4f3j0cdbj4dmontmmowwqjx7w2gt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2018-03-20 14:06:40.716563'),
+('y0wr4f3j0cdbj4dmontmmowwqjx7w2gt', 'NDcyMWI4MTYwYjg3NGJkZTgzNTAyYTVhMWNmZDkxZTFlMGU0OGVjZjp7InJlY29tbWVuZGF0aW9uc01vdmllczQiOjI1OTQxLCJpZCI6NywicmVjb21tZW5kYXRpb25zTW92aWVzNSI6MjY0NDEsIm1vdmllaWQiOiIxMDk0MTgiLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxIjoxMDczNCwicmVjb21tZW5kYXRpb25zTW92aWVzMiI6MTY2MDgsInJlY29tbWVuZGF0aW9uc01vdmllczkiOjIwMTMsIm1vdmllX3JhdGluZyI6IjIuMCIsInJlY29tbWVuZGF0aW9uc01vdmllczgiOjMzMzM3MSwic2hvd19yYXRpbmdfc3RhcnMiOnRydWUsInJlY29tbWVuZGF0aW9uc01vdmllczYiOjM4NzcyLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMxMCI6MTA0NzIsInJlY29tbWVuZGF0aW9uc01vdmllczciOjQwMDAxLCJyZWNvbW1lbmRhdGlvbnNNb3ZpZXMzIjoxNjM2M30=', '2018-03-28 08:13:36.348141'),
 ('z56c6t78mi4c4pb830hjxe8hmprck2o3', 'N2FkNDFlZmIxZTg2ZmY4ZGU5YjhmZjZhZDgxNzNmZDMxNmY0OTZlZjp7Im1vdmllaWQiOiIyOTk2ODcifQ==', '2018-02-14 10:49:18.347708');
 
 -- --------------------------------------------------------
@@ -17858,7 +17896,7 @@ CREATE TABLE `login_user` (
 --
 
 INSERT INTO `login_user` (`id`, `user_number`, `name`, `username`, `dob`, `age`, `email`, `password`) VALUES
-(1, 1, 'Pranav', 'user1', '1992-01-01', 25, 'user1@user1.com', 'user1'),
+(1, 1, 'TeenHub Admin', 'user1', '1992-01-01', 25, 'user1@user1.com', 'user1'),
 (2, 2, 'Dovah', 'user2', '1999-01-28', 18, 'user2@user2.com', 'user2'),
 (3, 3, 'User1', 'user3', '1990-01-17', 27, 'user3@user3.com', 'user3'),
 (4, 4, 'User4', 'user4', '1990-01-04', 27, 'user4@user4.com', 'user4'),
@@ -17866,7 +17904,8 @@ INSERT INTO `login_user` (`id`, `user_number`, `name`, `username`, `dob`, `age`,
 (6, 6, 'User6', 'user6', '1990-01-18', 27, 'user6@user6.com', 'pbkdf2_sha256$36000$'),
 (7, 7, 'User7', 'user7', '1990-01-31', 27, 'user7@user7.com', 'pbkdf2_sha256$36000$nmLOTX0BIUfG$cpZQv5AYCZtrFs67EAlsMxCUHsbEo1iJm79vjmrAMvc='),
 (8, 8, 'user9', 'kedar', '1997-01-01', 20, 'user9@user9.com', 'pbkdf2_sha256$30000$Gr28EgM05bg9$zX1zfq+cvmW5p9+b8cNYNVUJdayBXum7i103dew/ITY='),
-(10, 9, 'user10', 'user10', '1990-01-10', 28, 'user10@user10.com', 'pbkdf2_sha256$36000$9tjGlgFfpooe$hOHYNfb3iA/PfRd+cJUDebpeRtbLDYuKZMY+j1OSndg=');
+(10, 9, 'user10', 'user10', '1990-01-10', 28, 'user10@user10.com', 'pbkdf2_sha256$36000$9tjGlgFfpooe$hOHYNfb3iA/PfRd+cJUDebpeRtbLDYuKZMY+j1OSndg='),
+(11, 10, 'user8', 'user8', '1990-01-02', 28, 'user8@user8.com', 'pbkdf2_sha256$36000$NFgjffDLFeky$406HXc0pExo27UggSL/TNg4ULxksDoW20U2ZvUcSN/Q=');
 
 -- --------------------------------------------------------
 
@@ -17899,7 +17938,7 @@ INSERT INTO `login_visitors` (`id`, `visits`, `month`, `year`, `signups`) VALUES
 (10, 306, 12, 2017, 128),
 (11, 320, 1, 2018, 145),
 (12, 338, 2, 2018, 159),
-(13, 50, 3, 2018, 171);
+(13, 91, 3, 2018, 174);
 
 -- --------------------------------------------------------
 
@@ -27057,8 +27096,25 @@ CREATE TABLE `movies_ratings` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
-  `ratings` decimal(2,1) NOT NULL
+  `ratings` decimal(2,1) NOT NULL,
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `day` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `movies_ratings`
+--
+
+INSERT INTO `movies_ratings` (`id`, `user_id`, `movie_id`, `ratings`, `month`, `year`, `day`) VALUES
+(1, 7, 318, '5.0', 3, 2018, 13),
+(2, 7, 2959, '4.0', 3, 2018, 14),
+(3, 7, 2, '4.0', 3, 2018, 14),
+(4, 7, 135887, '4.0', 3, 2018, 14),
+(5, 7, 112552, '5.0', 3, 2018, 14),
+(6, 7, 106782, '3.0', 3, 2018, 14),
+(7, 7, 72998, '4.0', 3, 2018, 14),
+(8, 7, 104218, '2.0', 3, 2018, 14);
 
 -- --------------------------------------------------------
 
@@ -27093,7 +27149,8 @@ CREATE TABLE `news_news` (
 --
 
 INSERT INTO `news_news` (`id`, `user_id`, `buzzfeed`, `daily_mail`, `entertainment_weekly`, `ign`, `mashable`, `mtv_news`, `polygon`, `the_lad_bible`, `ars_technica`, `crypto_coins_news`, `hacker_news`, `recode`, `techcrunch`, `techradar`, `the_next_web`, `the_verge`, `wired`) VALUES
-(1, 10, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1);
+(1, 10, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1),
+(2, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -27143,6 +27200,12 @@ ALTER TABLE `auth_user_user_permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
   ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
+
+--
+-- Indexes for table `dashboard_feed`
+--
+ALTER TABLE `dashboard_feed`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `django_admin_log`
@@ -27230,7 +27293,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
@@ -27247,6 +27310,11 @@ ALTER TABLE `auth_user_groups`
 ALTER TABLE `auth_user_user_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `dashboard_feed`
+--
+ALTER TABLE `dashboard_feed`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
@@ -27255,12 +27323,12 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `games_rating`
 --
@@ -27270,7 +27338,7 @@ ALTER TABLE `games_rating`
 -- AUTO_INCREMENT for table `login_user`
 --
 ALTER TABLE `login_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `login_visitors`
 --
@@ -27285,12 +27353,12 @@ ALTER TABLE `movies_links`
 -- AUTO_INCREMENT for table `movies_ratings`
 --
 ALTER TABLE `movies_ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `news_news`
 --
 ALTER TABLE `news_news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
