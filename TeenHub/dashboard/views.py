@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from login.models import visitors, User
-from movies.models import Ratings
+from movies.models import Ratings, Links
 from datetime import date
 from .models import feed
 
@@ -17,7 +17,7 @@ def fill_ratings_per_month(request, year, ratings_values):
                 ratings_per_month.append(temp)
                 if max < temp:
                     max = temp
-                    
+
                 ratings = Ratings.objects.filter(year=year, month=i, user_id=request.session['id'])
                 for j in range(0, len(ratings)):
                     ratings_values[int(ratings[j].ratings) - 1] += 1
@@ -116,7 +116,8 @@ def return_movies_activities_details(request, year):
             for i in range(0, len(rating)):
                 newDate = date(rating[i].year, rating[i].month, rating[i].day).strftime("%d, %B %Y")
                 rating_date.append(newDate)
-                rating_movie_id.append(rating[i].movie_id)
+                link = Links.objects.get(movie_id=rating[i].movie_id)
+                rating_movie_id.append(link.tmdb_id)
                 rating_number.append(float(rating[i].ratings))
 
             # if there are ratings of user from the current year

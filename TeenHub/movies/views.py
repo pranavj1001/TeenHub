@@ -130,6 +130,7 @@ def show_genre_list(request, genre_id):
     return render(request, 'movies/genres_list.html', {})
 
 def save_movie_rating(request, movie_rating):
+    print(movie_rating)
     today = date.today()
     if 'noRatings' in request.session:
         del request.session["noRatings"]

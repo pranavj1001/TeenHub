@@ -78,7 +78,7 @@
 
             <div class="rightLeftMargin card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-table"></i> Your ratings in Tabular Format <span id="darkTableToggler"><input onclick="toggleTableMode(this)" type="checkbox"> Dark Table</span></div>
+                        <i class="fa fa-table"></i> Your ratings in Tabular Format <span id="darkTableToggler"><input onclick="toggleTableMode()" type="checkbox"> Dark Table</span></div>
                     <div class="card-body">
                         <table id="ratings_movies_table" class="table table-hover">
                           <thead>
@@ -123,8 +123,6 @@
 
     <script type="text/javascript">
 
-        console.log({{ rating_date | safe }}, {{ rating_movie_id | safe }}, {{ rating_number }});
-
         var start = new Date().getFullYear();
         var end = 1900;
         var options = "";
@@ -137,12 +135,14 @@
             window.location.href = "http://127.0.0.1:8000/dashboard/movies/" + element.text + "/";
         }
 
-        function toggleTableMode(element) {
+        function toggleTableMode() {
             var table = document.getElementById('ratings_movies_table');
             table.classList.toggle('table-dark');
         }
 
         var message = String('{{ message | safe }}');
+        var movieNames = [];
+        var i = 0;
 
         if(message === '') {
             var ctx = document.getElementById("ratings_movies");
@@ -186,11 +186,42 @@
                 }
               }
             });
+
+            var ratings = {{ rating_number | safe }};
+            var date = {{ rating_date | safe }};
+            var movieid = {{ rating_movie_id | safe }};
+
+            getMovieNames(movieid);
+
         } else {
             var str = '<h1>' + message + '</h1>';
             $('#ratings_bar_graph').html(str);
             $('#ratings_movies_table').html(str);
             $('#darkTableToggler').css('display', 'none');
+        }
+
+        function getMovieNames(movieids) {
+            $.ajax({
+                type: "GET",
+                url: "https://api.themoviedb.org/3/movie/" + movieids[i] + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
+                dataType: "json",
+                success: function(result){
+                    movieNames.push(result.original_title);
+                    i++;
+                    if(i === movieids.length) {
+                        drawTable();
+                    } else {
+                        getMovieNames(movieids);
+                    }
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        }
+
+        function drawTable(){
+            console.log(movieNames);
         }
 
     </script>
