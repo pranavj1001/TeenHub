@@ -75,6 +75,29 @@
                     <div class="card-footer small text-muted">True as per our records</div>
                 </div>
             </div>
+
+            <div class="rightLeftMargin card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Your ratings in Tabular Format <span class="darkTableToggler"><input checked onclick="toggleTableMode(this)" type="checkbox"> Dark Table</span></div>
+                    <div class="card-body">
+                        <table id="ratings_movies_table" class="table table-hover table-dark">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Movie Title</th>
+                              <th scope="col">Your Rating</th>
+                              <th scope="col">Date</th>
+                            </tr>
+                          </thead>
+                          <tbody id="table_data">
+                            
+                          </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer small text-muted">True as per our records</div>
+                </div>
+            </div>
+
         {% else %}
             <h1 class="rightLeftMargin centerIfTabletAndBelow mobileTextHeading GrayText">You're not logged in</h1>
         {% endif %}
@@ -100,6 +123,8 @@
 
     <script type="text/javascript">
 
+        console.log({{ rating_date | safe }}, {{ rating_movie_id | safe }}, {{ rating_number }});
+
         var start = new Date().getFullYear();
         var end = 1900;
         var options = "";
@@ -110,6 +135,11 @@
 
         function changeYear(element) {
             window.location.href = "http://127.0.0.1:8000/dashboard/movies/" + element.text + "/";
+        }
+
+        function toggleTableMode(element) {
+            var table = document.getElementById('ratings_movies_table');
+            table.classList.toggle('table-dark');
         }
 
         var message = String('{{ message | safe }}');
@@ -157,7 +187,9 @@
               }
             });
         } else {
-            $('#ratings_bar_graph').html('<h1>' + message + '</h1>');
+            var str = '<h1>' + message + '</h1>';
+            $('#ratings_bar_graph').html(str);
+            $('#table_data').html(str);
         }
 
     </script>

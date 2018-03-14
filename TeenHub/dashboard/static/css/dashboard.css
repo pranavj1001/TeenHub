@@ -547,7 +547,7 @@ footer.sticky-footer {
   border-radius: 4px;
 }
 
-#year {
+#year, .darkTableToggler {
   float: right;
 }
 

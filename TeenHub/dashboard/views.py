@@ -103,14 +103,23 @@ def return_movies_activities_details(request, year):
     message = ''
     ratings_values = [0, 0, 0, 0, 0]
     total_ratings = 0
+    rating_date = []
+    rating_movie_id = []
+    rating_number = []
 
     # if user is logged in
     if 'id' in request.session:
         # if there are ratings of user present in the dataset
         if Ratings.objects.filter(user_id=request.session['id']).exists():
             print('there are ratings from this user')
-
             total_ratings = Ratings.objects.filter(user_id=request.session['id']).count()
+
+            rating = Ratings.objects.filter(user_id=request.session['id'])
+            for i in range(0, len(rating)):
+                newDate = date(rating[i].year, rating[i].month, rating[i].day).strftime("%d, %B %Y")
+                rating_date.append(newDate)
+                rating_movie_id.append(rating[i].movie_id)
+                rating_number.append(float(rating[i].ratings))
 
             # if there are ratings of user from the current year
             if Ratings.objects.filter(year=year, user_id=request.session['id']).exists():
@@ -137,7 +146,10 @@ def return_movies_activities_details(request, year):
                   "max": max,
                   "message": message,
                   "ratings_values": ratings_values,
-                  "total_ratings": total_ratings
+                  "total_ratings": total_ratings,
+                  "rating_date": rating_date,
+                  "rating_movie_id": rating_movie_id,
+                  "rating_number": rating_number
               }
     # if user is not logged in
     else:
@@ -151,11 +163,11 @@ def show_dashboard_with_full_news(request):
     dictionary = return_news_details(1)
     return render(request, 'dashboard/dashboard_home.html', dictionary)
 
-def show_dashboard_movies_custom_year(request, year):
-    dictionary = return_movies_activities_details(request, year)
-    return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
-
 def show_dashboard_movies(request):
     today = date.today()
     dictionary = return_movies_activities_details(request, today.year)
+    return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
+
+def show_dashboard_movies_custom_year(request, year):
+    dictionary = return_movies_activities_details(request, year)
     return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
