@@ -78,7 +78,17 @@
             success: function(result){
                 console.log(result.results.image.screen_url);
                 var totalGameInfo = result.results;
-                var wallpaper = totalGameInfo.images[1].super_url;
+
+                if (totalGameInfo.images.length>=3){
+                    var wallpaper = totalGameInfo.images[2].super_url;
+                }else if (totalGameInfo.images.length>=2) {
+                    var wallpaper = totalGameInfo.images[1].super_url;
+                }else if (totalGameInfo.images.length>=1) {
+                    var wallpaper = totalGameInfo.images[0].super_url;
+                }else{
+                  var wallpaper = totalGameInfo.image.screen_large_url;
+                }
+
                 var img = totalGameInfo.image.small_url;
                 var genres = '<strong>Genres:</strong> ';
                 var themes = '<strong>Themes:</strong> ';
