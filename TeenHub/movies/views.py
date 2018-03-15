@@ -146,9 +146,10 @@ def save_movie_rating(request, movie_rating):
             oldRating.day = today.day
             oldRating.month = today.month
             oldRating.year = today.year
+            oldRating.edited = 1
             oldRating.save()
         else:
-            newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating, day=today.day, month=today.month, year=today.year)
+            newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating, day=today.day, month=today.month, year=today.year, edited=0)
             newRating.save()
         show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})
