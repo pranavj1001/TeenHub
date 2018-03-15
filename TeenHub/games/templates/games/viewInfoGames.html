@@ -178,16 +178,16 @@
             var urls = [];
             if($('.desktop').css('display') === 'block'){
                 device = "desktop";
-                carouselItems = 4;
                 numberOfCards = 6;
+                carouselItems = Math.ceil(ids.length/numberOfCards);
             }else if($('.tablet').css('display') === 'block') {
                 device = "tablet";
-                carouselItems = 7;
                 numberOfCards = 3;
+                carouselItems = Math.ceil(ids.length/numberOfCards);
             }else if($('.mobile').css('display') === 'block') {
                 device = "mobile";
-                carouselItems = 10;
                 numberOfCards = 2;
+                carouselItems = Math.ceil(ids.length/numberOfCards);
             }
             width = 100/ numberOfCards;
             if(carousel === 'pm'){
@@ -216,23 +216,23 @@
             var start = '<div class="carousel-item active">';
             var string = '';
             var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
-            for(var j = 0; j < numberOfCards; j++){
+            for(var j = 0; j < (ids.length>numberOfCards?numberOfCards:ids.length); j++){
                 string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                 counter++;
             }
             var final = start + string + '</div>';
-            cardsRemaining=ids.length;
-            for(var i = 1; i < Math.floor(ids.length/carouselItems); i++){
+            cardsRemaining=ids.length-counter;
+            for(var i = 1; i < carouselItems; i++){
                     var start1 = '<div class="carousel-item">';
                     var string1 = '';
                     list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
-                    for (var j = 0; j < cardsRemaining; j++) {
+                    for (var j = 0; j < (cardsRemaining>numberOfCards?numberOfCards:cardsRemaining); j++) {
                         if(counter === ids.length)
                             break;
                         string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                         counter++;
-                        cardsRemaining=cardsRemaining-numberOfCards
                     }
+                    cardsRemaining=cardsRemaining-numberOfCards;
                     final += start1 + string1 + '</div>';
             }
             $(indicatorsID).html(list);
