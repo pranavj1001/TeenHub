@@ -117,14 +117,16 @@
                 }
                 $('#gameGenres').html(genres);
 
-                for(var i = 0; i < totalGameInfo.themes.length; i++){
-                    if (i === totalGameInfo.themes.length - 1 ) {
-                        themes += totalGameInfo.themes[i].name + '.';
-                    }else{
-                        themes += totalGameInfo.themes[i].name + ', ';
-                    }
-                }
+                if (totalGameInfo.themes) {
+                  for(var i = 0; i < totalGameInfo.themes.length; i++){
+                      if (i === totalGameInfo.themes.length - 1 ) {
+                          themes += totalGameInfo.themes[i].name + '.';
+                      }else{
+                          themes += totalGameInfo.themes[i].name + ', ';
+                      }
+                  }
                 $('#gameThemes').html(themes);
+              }
 
                 var gameStatus
                 if (releaseDate == "Unreleased") {
@@ -145,22 +147,22 @@
                 $('#gamePublishers').html(publishers);
 
                 <!--similar games-->
-                titles=[];
-                ids=[];
-                posterURLs=[];
-                for(var i = 0; i < totalGameInfo.similar_games.length; i++){
+                if (totalGameInfo.similar_games) {
+                  titles=[];
+                  ids=[];
+                  posterURLs=[];
+                  for(var i = 0; i < totalGameInfo.similar_games.length; i++){
 
-                    titles[i] = totalGameInfo.similar_games[i].name;
-                    ids[i] = totalGameInfo.similar_games[i].id;
-                }
-                var carousel = 'sm';
-                getPoster(posterURLs, titles, ids, carousel);
+                      titles[i] = totalGameInfo.similar_games[i].name;
+                      ids[i] = totalGameInfo.similar_games[i].id;
+                  }
+                  var carousel = 'sm';
+                  getPoster(posterURLs, titles, ids, carousel);
+              }
             }
         });
 
         <!-- Similar Games -->
-
-
 
         /*$.ajax({
             type: "GET",
