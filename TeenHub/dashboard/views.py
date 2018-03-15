@@ -104,6 +104,7 @@ def return_movies_activities_details(request, year):
     rating_date = []
     rating_movie_id = []
     rating_number = []
+    rating_edited = []
 
     # if user is logged in
     if 'id' in request.session:
@@ -119,6 +120,7 @@ def return_movies_activities_details(request, year):
                 link = Links.objects.get(movie_id=rating[i].movie_id)
                 rating_movie_id.append(link.tmdb_id)
                 rating_number.append(float(rating[i].ratings))
+                rating_edited.append(rating[i].edited)
 
             # if there are ratings of user from the current year
             if Ratings.objects.filter(year=year, user_id=request.session['id']).exists():
@@ -148,7 +150,8 @@ def return_movies_activities_details(request, year):
                   "total_ratings": total_ratings,
                   "rating_date": rating_date,
                   "rating_movie_id": rating_movie_id,
-                  "rating_number": rating_number
+                  "rating_number": rating_number,
+                  "rating_edited": rating_edited
               }
     # if user is not logged in
     else:

@@ -189,9 +189,10 @@
 
             var ratings = {{ rating_number | safe }};
             var date = {{ rating_date | safe }};
-            var movieid = {{ rating_movie_id | safe }};
+            var movieids = {{ rating_movie_id | safe }};
+            var edited = {{ rating_edited | safe }};
 
-            getMovieNames(movieid);
+            getMovieNames(movieids, ratings, date, edited);
 
         } else {
             var str = '<h1>' + message + '</h1>';
@@ -200,7 +201,7 @@
             $('#darkTableToggler').css('display', 'none');
         }
 
-        function getMovieNames(movieids) {
+        function getMovieNames(movieids, ratings, date, edited) {
             $.ajax({
                 type: "GET",
                 url: "https://api.themoviedb.org/3/movie/" + movieids[i] + "?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US",
@@ -209,16 +210,21 @@
                     movieNames.push(result.original_title);
                     i++;
                     if(i === movieids.length) {
-                        drawTable();
+                        drawTable(movieids, ratings, date, edited);
                     } else {
-                        getMovieNames(movieids);
+                        getMovieNames(movieids, ratings, date, edited);
                     }
                 }
             });
         }
 
-        function drawTable(){
+        function drawTable(movieids, ratings, date, edited){
             console.log(movieNames);
+            var tableData = '';
+            for(var i = 0; i < movieids.length; i++) {
+                tableData += '<tr> <th scope="row">' + (i+1) + '</th> <td>' + movieNames[i] + '</td> <td>' + ratings[i] + '</td> <td>' + date[i] + '</td> </tr>';
+            }
+            $('#table_data').html(tableData);
         }
 
     </script>
