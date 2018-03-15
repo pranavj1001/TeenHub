@@ -546,6 +546,9 @@ footer.sticky-footer {
   height: 100px;
   border-radius: 4px;
 }
+sub {
+  color: #777;
+}
 
 #year, #darkTableToggler {
   float: right;

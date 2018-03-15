@@ -222,7 +222,7 @@
             console.log(movieNames);
             var tableData = '';
             for(var i = 0; i < movieids.length; i++) {
-                tableData += '<tr> <th scope="row">' + (i+1) + '</th> <td>' + movieNames[i] + '</td> <td>' + ratings[i] + '</td> <td>' + date[i] + '</td> </tr>';
+                tableData += '<tr> <th scope="row">' + (i+1) + '</th> <td>' + movieNames[i] + '</td> <td>' + ((edited[i] === 1) ? ratings[i]+' <sub>(edited)</sub>' : ratings[i])  + '</td> <td>' + date[i] + '</td> </tr>';
             }
             $('#table_data').html(tableData);
         }
