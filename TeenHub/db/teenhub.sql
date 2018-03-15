@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2018 at 08:05 PM
+-- Generation Time: Mar 15, 2018 at 07:22 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -264,7 +264,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (27, 'dashboard', '0005_delete_feed', '2018-03-07 07:04:35.910395'),
 (28, 'dashboard', '0006_feed', '2018-03-07 07:05:02.287720'),
 (29, 'movies', '0003_auto_20180312_2343', '2018-03-12 18:14:07.219618'),
-(30, 'movies', '0004_ratings_day', '2018-03-12 18:24:03.439874');
+(30, 'movies', '0004_ratings_day', '2018-03-12 18:24:03.439874'),
+(31, 'movies', '0005_ratings_edited', '2018-03-15 06:20:14.097214');
 
 -- --------------------------------------------------------
 
@@ -295,7 +296,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('uatlqavlo6k6jq2oeegf1drwz5pojvt9', 'OWU4ODE3MmVjNjczMDkwNDViMGM0NDA3YzYwOWQyN2VmZTRlNDFhZjp7fQ==', '2017-11-26 11:41:11.900037'),
 ('vl39pblqcb97n4u3wo05fwkfnfcwwcjt', 'N2I0YmY0MjU4OTBkNmI0MDFjYjg1MDE1NzFlMzk4OTEyZTk5MTdkNDp7ImlkIjo3fQ==', '2017-11-24 05:17:37.815374'),
 ('wgtnceejxca0vdlkg6vr6q208eag1z1q', 'NzA2MDY3MjdjYzM1YjUyZjUyZTBmOWZlN2ZiOTYzMzU3YzIwZjBkMTp7ImlkIjo3LCJub1JhdGluZ3MiOjF9', '2018-02-24 11:32:26.787317'),
-('y0wr4f3j0cdbj4dmontmmowwqjx7w2gt', 'MzliYjllZGRjMzU3M2U5NmYyNDM4NDI5MDE1NmYwZWU4M2FjMGFiMjp7ImlkIjo3LCJtb3ZpZWlkIjoiMTA5NDE4In0=', '2018-03-28 18:14:10.324423'),
+('y0wr4f3j0cdbj4dmontmmowwqjx7w2gt', 'NjcxODVmNTRmMmVlZWQ0MWUxYzgwMzMyMmU5NTcyNDEyMjkzMzNjNDp7Im1vdmllaWQiOiIxMDk0MTgiLCJpZCI6N30=', '2018-03-29 06:17:00.386570'),
 ('z56c6t78mi4c4pb830hjxe8hmprck2o3', 'N2FkNDFlZmIxZTg2ZmY4ZGU5YjhmZjZhZDgxNzNmZDMxNmY0OTZlZjp7Im1vdmllaWQiOiIyOTk2ODcifQ==', '2018-02-14 10:49:18.347708');
 
 -- --------------------------------------------------------
@@ -17938,7 +17939,7 @@ INSERT INTO `login_visitors` (`id`, `visits`, `month`, `year`, `signups`) VALUES
 (10, 306, 12, 2017, 128),
 (11, 320, 1, 2018, 145),
 (12, 338, 2, 2018, 159),
-(13, 126, 3, 2018, 176);
+(13, 144, 3, 2018, 177);
 
 -- --------------------------------------------------------
 
@@ -27099,22 +27100,23 @@ CREATE TABLE `movies_ratings` (
   `ratings` decimal(2,1) NOT NULL,
   `month` int(11) NOT NULL,
   `year` int(11) NOT NULL,
-  `day` int(11) NOT NULL
+  `day` int(11) NOT NULL,
+  `edited` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `movies_ratings`
 --
 
-INSERT INTO `movies_ratings` (`id`, `user_id`, `movie_id`, `ratings`, `month`, `year`, `day`) VALUES
-(1, 7, 318, '5.0', 3, 2018, 13),
-(2, 7, 2959, '4.0', 1, 2018, 10),
-(3, 7, 2, '4.0', 2, 2018, 21),
-(4, 7, 135887, '4.0', 3, 2018, 14),
-(5, 7, 112552, '5.0', 2, 2018, 7),
-(6, 7, 106782, '3.0', 3, 2018, 14),
-(7, 7, 72998, '4.0', 10, 2017, 8),
-(8, 7, 104218, '2.0', 12, 2017, 14);
+INSERT INTO `movies_ratings` (`id`, `user_id`, `movie_id`, `ratings`, `month`, `year`, `day`, `edited`) VALUES
+(1, 7, 318, '5.0', 10, 2017, 13, 0),
+(2, 7, 2959, '4.0', 12, 2017, 10, 0),
+(3, 7, 2, '4.0', 1, 2018, 21, 0),
+(4, 7, 135887, '4.0', 2, 2018, 14, 0),
+(5, 7, 112552, '5.0', 2, 2018, 7, 1),
+(6, 7, 106782, '3.0', 2, 2018, 14, 0),
+(7, 7, 72998, '4.0', 3, 2018, 8, 0),
+(8, 7, 104218, '2.0', 3, 2018, 14, 0);
 
 -- --------------------------------------------------------
 
@@ -27328,7 +27330,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `games_rating`
 --
