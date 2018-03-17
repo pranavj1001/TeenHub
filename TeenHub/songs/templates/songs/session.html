@@ -88,6 +88,19 @@
 
 {% endblock %}
 
+{% block songsNews %}
+
+    <h2 class="sectionHeading veryLightGrayText">Todays Top News</h2>
+
+    <section class="moviesNews">
+        <div id="mNews" class="sectionAlignment veryLightGrayText">
+            <!-- News go here -->
+        </div>
+    </section>
+
+{% endblock %}
+
+
 {% block ajaxBlock %}
 
 <script type="text/javascript" src="../../static/js/jquery.min.js"></script>
@@ -207,6 +220,28 @@ function createPoplularAlbumsByTag(tag){
 
 }
 
+$.ajax({
+    type: "GET",
+    url: "https://newsapi.org/v1/articles?source=mtv-news&sortBy=top&apiKey=bdbcae478d174e04ba1504b2914cc143",
+    dataType: "json",
+    success: function(result){
+        var newsData = result.articles;
+        var news = {
+            authors: [],
+            titles: [],
+            description: [],
+            urls: []
+        };
+        for(var i = 0; i < 4; i++){
+            news.titles[i] = newsData[i].title;
+            news.authors[i] = newsData[i].author;
+            news.description[i] = newsData[i].description;
+            news.urls[i] = newsData[i].url;
+        }
+        postNews(news);
+    }
+});
+
 function getPoster(posterURLs, titles, ids, carousel) {
     var device;
     var carouselItems;
@@ -289,6 +324,15 @@ function getPoster(posterURLs, titles, ids, carousel) {
     $(indicatorsID).html(list);
     $(cardID).html(final);
 }
+
+function postNews(news) {
+    var final = '';
+    for(var i = 0; i < 4; i++){
+        final += '<h4 class="veryLightGrayText">' + news.titles[i] + '</h4><p>' + news.authors[i] + '</p><p>' + news.description[i] + '</p><a target="_blank" href="' + news.urls[i] + '">More Info</a>';
+    }
+    $('#mNews').html(final);
+}
+
 
 function showLink(element){
     window.location.href = 'http://127.0.0.1:8000/movies/' + element.attributes.link.value;
