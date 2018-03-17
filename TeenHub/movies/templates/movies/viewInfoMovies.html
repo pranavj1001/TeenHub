@@ -8,6 +8,7 @@
                 <div class="card genre" id="thumbnail"></div>
                 {% if request.session.show_rating_stars %}
                 <div class="rating" id="ratings"></div>
+                <a class="back-button" href="{% url 'show_movies_page' %}"><i class="icon-home icon-2x"></i></a>
                 {% endif %}
             </div>
             <div class="col-md-9 spaceOnDesktop">
