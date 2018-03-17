@@ -28,7 +28,7 @@
 			<a href="#home" class="smoothScroll">Top</a>
             <a href="{% url 'show_home' %}">Search</a>
 			<a href="#applications" class="smoothScroll">Applications</a>
-			<a href="#about" class="smoothScroll">About US</a>
+			<a href="{% url 'show_aboutus' %}" class="smoothScroll">About US</a>
 			<a href="#contact" class="smoothScroll">Contact</a>
             {% if request.session.id %}
                 <a href="{% url 'logout' %}">Logout</a>
