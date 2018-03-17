@@ -3,11 +3,183 @@
 {% block searchBox %}
 
     <div id="searchContainer" class="container">
-        <h3 id="searchHeading">Teen<strong>HUB</strong><span class="subHeading">Movies</span></h3>
+        <h3 id="searchHeading">Teen<strong>HUB</strong><span class="subHeading">Songs</span></h3>
         <div id="searchBox" class="inner-addon right-addon">
             <input type="text" class="form-control lightGrayBg searchText" onkeyup="DoSomethingOnKeyUp(event, this)" id="searchInput" placeholder="Search" />
             <div id="results" class="results-style"></div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block popularMovies %}
+
+    <h2 class="sectionHeading veryLightGrayText">Popular Artist</h2>
+
+    <section id="popularMovies">
+    <div id="pm" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="pmIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="pmItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#pm" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next fivePercentWidthOnDesktop" href="#pm" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
+{% block ajaxBlock %}
+
+<script type="text/javascript" src="../../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../static/js/movies_names.js"></script>
+<script type="text/javascript">
+
+$.ajax({
+    type: "GET",
+    url: "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=20",
+    dataType: "json",
+    success: function(result){
+        console.log(result);
+        var artistDetails = result.artists.artist;
+        // console.log(artistDetails[0].image[0]);
+        // var str = JSON.stringify(artistDetails[0].image[0]);
+        // var n = str.indexOf("https");
+        // var m = str.indexOf(`","`);
+        // console.log(str.substring(n,m));
+        var posterURLs = [];
+        var titles = [];
+        var ids = [];
+        console.log(artistDetails.length);
+        for(var i = 0; i < artistDetails.length; i++){
+          if(artistDetails[i].name != null){
+            var str = JSON.stringify(artistDetails[i].image[4]);
+            var n = str.indexOf("https");
+            var m = str.indexOf(`","`);
+            //console.log(str.substring(n,m));
+            posterURLs[i] = str.substring(n,m);
+            titles[i] = artistDetails[i].name;
+            //ids[i] = movieDetails[i].id;
+          }
+        }
+        console.log(posterURLs);
+        console.log(titles);
+        var carousel = 'pm';
+        getPoster(posterURLs, titles, ids, carousel);
+    }
+});
+
+// $.ajax({
+//     type: "GET",
+//     url: "https://api.themoviedb.org/3/movie/popular?api_key=867611d6b3f8882764c7aec28bc288ed&language=en-US&page=1",
+//     dataType: "json",
+//     success: function(result){
+//         //console.log(result);
+//         var movieDetails = result.results;
+//         var posterURLs = [];
+//         var titles = [];
+//         var ids = [];
+//         for(var i = 0; i < movieDetails.length; i++){
+//             posterURLs[i] = "https://image.tmdb.org/t/p/w342" + movieDetails[i].poster_path;
+//             titles[i] = movieDetails[i].original_title;
+//             ids[i] = movieDetails[i].id;
+//         }
+//         var carousel = 'pm';
+//         getPoster(posterURLs, titles, ids, carousel);
+//     }
+// });
+
+function getPoster(posterURLs, titles, ids, carousel) {
+    var device;
+    var carouselItems;
+    var numberOfCards;
+    var counter = 0;
+    var width;
+    var sectionID = '';
+    var cardID = '';
+    var indicatorsID = '';
+    var urls = [];
+    if($('.desktop').css('display') === 'block'){
+        device = "desktop";
+        carouselItems = 4;
+        numberOfCards = 6;
+        if(carousel === 'rm'){
+            carouselItems = 2;
+        }
+    }else if($('.tablet').css('display') === 'block') {
+        device = "tablet";
+        carouselItems = 7;
+        numberOfCards = 3;
+        if(carousel === 'rm'){
+            carouselItems = 4;
+        }
+    }else if($('.mobile').css('display') === 'block') {
+        device = "mobile";
+        carouselItems = 10;
+        numberOfCards = 2;
+        if(carousel === 'rm'){
+            carouselItems = 5;
+        }
+    }
+    width = 100/ numberOfCards;
+    if(carousel === 'pm'){
+        sectionID = '#popularMovies';
+        cardID = '#pmItems';
+        indicatorsID = '#pmIndicators';
+    }else if(carousel === 'otp'){
+        sectionID = '#ourTopPicks';
+        cardID = '#otpItems';
+        indicatorsID = '#otpIndicators';
+    }else if(carousel === 'um'){
+        sectionID = '#upcomingMovies';
+        cardID = '#umItems';
+        indicatorsID = '#umIndicators';
+    }else if(carousel === 'rm'){
+        sectionID = '#recommendations';
+        cardID = '#rmItems';
+        indicatorsID = '#rmIndicators';
+        console.log("reached here");
+    }
+    for(var i = 0; i < ids.length; i++){
+        urls[i] = 'infoMovies/' + ids[i] + '/';
+    }
+    carousel = '#' + carousel;
+    $(sectionID).addClass(device);
+    // make carousel
+    var start = '<div class="carousel-item active">';
+    var string = '';
+    var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
+    for(var j = 0; j < numberOfCards; j++){
+        string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+        counter++;
+    }
+    var final = start + string + '</div>';
+    for(var i = 1; i < carouselItems; i++){
+            var start1 = '<div class="carousel-item">';
+            var string1 = '';
+            list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
+            for (var j = 0; j < numberOfCards; j++) {
+                if(carousel === '#rm' && counter === 10)
+                    break;
+                if(counter === 20)
+                    break;
+                string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                counter++;
+            }
+            final += start1 + string1 + '</div>';
+    }
+    $(indicatorsID).html(list);
+    $(cardID).html(final);
+}
+
+</script>
 
 {% endblock %}
