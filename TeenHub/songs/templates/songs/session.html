@@ -12,7 +12,7 @@
 
 {% endblock %}
 
-{% block popularMovies %}
+{% block popularArtist %}
 
     <h2 class="sectionHeading veryLightGrayText">Popular Artist</h2>
 
@@ -59,6 +59,32 @@
       </a>
     </div>
     </section>
+
+{% endblock %}
+
+{% block popularAlbum %}
+
+        <h2 class="sectionHeading veryLightGrayText">Popular Albums</h2>
+
+        <section id="popularAlbum">
+        <div id="rm" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators" id="paIndicators">
+            <!-- assign the indicators -->
+          </ol>
+          <div class="carousel-inner heightAuto" id="paItems">
+            <!-- assign items and cards -->
+          </div>
+          <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#rm" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next fivePercentWidthOnDesktop" href="#rm" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        </section>
+
 
 {% endblock %}
 
@@ -138,6 +164,49 @@ $.ajax({
 //     }
 // });
 
+var posterURLs = [];
+var titles = [];
+var ids = [];
+var c = 0;
+displayPopularAlbums();
+
+function displayPopularAlbums(){
+  createPoplularAlbumsByTag("disco");
+  createPoplularAlbumsByTag("rock");
+  createPoplularAlbumsByTag("pop");
+  createPoplularAlbumsByTag("jazz");
+  createPoplularAlbumsByTag("hip-hop");
+  var carousel = 'pa';
+  getPoster(posterURLs, titles, ids, carousel);
+
+}
+
+function createPoplularAlbumsByTag(tag){
+
+  $.ajax({
+      type: "GET",
+      url: "http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag="+tag+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=4",
+      dataType: "json",
+      async:false,
+      success: function(result){
+          var albumDetails = result.albums.album;
+          for(var i = 0; i < albumDetails.length; i++){
+            if(albumDetails[i].name != null){
+              var str = JSON.stringify(albumDetails[i].image[3]);
+              var n = str.indexOf("https");
+              var m = str.indexOf(`","`);
+              posterURLs[c] = str.substring(n,m);
+              titles[c] = albumDetails[i].name;
+
+              //ids[i] = movieDetails[i].id;
+              c++;
+            }
+          }
+      }
+  });
+
+}
+
 function getPoster(posterURLs, titles, ids, carousel) {
     var device;
     var carouselItems;
@@ -183,11 +252,11 @@ function getPoster(posterURLs, titles, ids, carousel) {
         sectionID = '#popularTracks';
         cardID = '#ptItems';
         indicatorsID = '#ptIndicators';
-    }else if(carousel === 'rm'){
-        sectionID = '#recommendations';
-        cardID = '#rmItems';
-        indicatorsID = '#rmIndicators';
-        console.log("reached here");
+    }else if(carousel === 'pa'){
+        sectionID = '#popularAlbum';
+        cardID = '#paItems';
+        indicatorsID = '#paIndicators';
+        //console.log("reached here");
     }
     for(var i = 0; i < ids.length; i++){
         urls[i] = 'infoMovies/' + ids[i] + '/';
