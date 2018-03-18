@@ -123,8 +123,7 @@ $.ajax({
             var m = str.indexOf(`","`);
             posterURLs[i] = str.substring(n,m);
             titles[i] = artistDetails[i].name;
-
-            //ids[i] = movieDetails[i].id;
+            ids[i] = artistDetails[i].name;
           }
         }
         var carousel = 'pm';
@@ -148,8 +147,7 @@ $.ajax({
             var m = str.indexOf(`","`);
             posterURLs[i] = str.substring(n,m);
             titles[i] = trackDetails[i].name;
-
-            //ids[i] = movieDetails[i].id;
+            ids[i] = trackDetails[i].name;
           }
         }
         var carousel = 'pt';
@@ -210,8 +208,7 @@ function createPoplularAlbumsByTag(tag){
               var m = str.indexOf(`","`);
               posterURLs[c] = str.substring(n,m);
               titles[c] = albumDetails[i].name;
-
-              //ids[i] = movieDetails[i].id;
+              ids[c] = albumDetails[i].name;
               c++;
             }
           }
@@ -294,7 +291,7 @@ function getPoster(posterURLs, titles, ids, carousel) {
         //console.log("reached here");
     }
     for(var i = 0; i < ids.length; i++){
-        urls[i] = 'infoMovies/' + ids[i] + '/';
+        urls[i] = 'infoSongs/' + ids[i] + '/';
     }
     carousel = '#' + carousel;
     $(sectionID).addClass(device);
@@ -335,7 +332,7 @@ function postNews(news) {
 
 
 function showLink(element){
-    window.location.href = 'http://127.0.0.1:8000/movies/' + element.attributes.link.value;
+    window.location.href = 'http://127.0.0.1:8000/songs/' + element.attributes.link.value;
 }
 
 </script>
