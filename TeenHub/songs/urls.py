@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.show_songs, name='show_songs_page'),
+    url(r'^infoSongs/(?P<songsinfo>.*)/$', views.show_song_info, name='show_song_info'),
 ]
