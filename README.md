@@ -6,7 +6,7 @@ One Place for your Entertainment
 - [X] Complete Movies Section by 3rd March, 2018
 - [X] Complete News Section by 3rd March, 2018
 - [ ] Complete Games Section by 7th March, 2018
-- [ ] Complete Songs Section by 11th March, 2018
+- [ ] Complete Songs Section by 20th March, 2018
 - [ ] Complete Dashboard by 15th March, 2018
 
 List Updated on 24th Feb, 2018.
@@ -38,10 +38,10 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do Songs List
 
-- [ ] Show songs in cards
-- [ ] Show news in Categoary
-- [ ] Save user preference of news source
-- [ ] Show news based on user preference
+- [X] Show songs in cards
+- [ ] Show songs info in another tab
+- [ ] Show songs similar to selected one
+- [ ] Show songs based on search
 - [ ] Make responsive
 
 ## To-Do Dashboard List
