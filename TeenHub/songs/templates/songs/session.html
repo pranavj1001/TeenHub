@@ -116,6 +116,7 @@ $.ajax({
         var posterURLs = [];
         var titles = [];
         var ids = [];
+        var type = 1;
         for(var i = 0; i < artistDetails.length; i++){
           if(artistDetails[i].name != null){
             var str = JSON.stringify(artistDetails[i].image[4]);
@@ -127,7 +128,7 @@ $.ajax({
           }
         }
         var carousel = 'pm';
-        getPoster(posterURLs, titles, ids, carousel);
+        getPoster(posterURLs, titles, ids, type, carousel);
     }
 });
 
@@ -140,6 +141,7 @@ $.ajax({
         var posterURLs = [];
         var titles = [];
         var ids = [];
+        var type = 2
         for(var i = 0; i < trackDetails.length; i++){
           if(trackDetails[i].name != null){
             var str = JSON.stringify(trackDetails[i].image[3]);
@@ -151,7 +153,7 @@ $.ajax({
           }
         }
         var carousel = 'pt';
-        getPoster(posterURLs, titles, ids, carousel);
+        getPoster(posterURLs, titles, ids, type, carousel);
     }
 });
 
@@ -179,6 +181,8 @@ var posterURLs = [];
 var titles = [];
 var ids = [];
 var c = 0;
+var type = 3;
+var tag = [];
 displayPopularAlbums();
 
 function displayPopularAlbums(){
@@ -187,8 +191,25 @@ function displayPopularAlbums(){
   createPoplularAlbumsByTag("pop");
   createPoplularAlbumsByTag("jazz");
   createPoplularAlbumsByTag("hip-hop");
+  for(var i=0;i<20;i++){
+    if(i <= 3){
+      tag[i] = "disco";
+    }
+    else if (i >= 4 && i <= 7) {
+      tag[i] = "rock";
+    }
+    else if (i >= 8 && i <= 11) {
+      tag[i] = "pop";
+    }
+    else if (i >= 12 && i <= 15) {
+      tag[i] = "jazz";
+    }
+    else if (i >= 16 && i <= 19) {
+      tag[i] = "hip-hop";
+    }
+  }
   var carousel = 'pa';
-  getPoster(posterURLs, titles, ids, carousel);
+  getPoster(posterURLs, titles, ids, type, carousel, tag);
 
 }
 
@@ -239,7 +260,7 @@ $.ajax({
     }
 });
 
-function getPoster(posterURLs, titles, ids, carousel) {
+function getPoster(posterURLs, titles, ids, type, carousel, tag = 0) {
     var device;
     var carouselItems;
     var numberOfCards;
@@ -291,7 +312,12 @@ function getPoster(posterURLs, titles, ids, carousel) {
         //console.log("reached here");
     }
     for(var i = 0; i < ids.length; i++){
-        urls[i] = 'infoSongs/' + ids[i] + '/';
+      if(type == 3){
+        urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/';
+      }
+      else{
+        urls[i] = 'infoSongs/' + ids[i] + '/' + type + '/';
+      }
     }
     carousel = '#' + carousel;
     $(sectionID).addClass(device);
