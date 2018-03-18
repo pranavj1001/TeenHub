@@ -173,3 +173,6 @@ def show_dashboard_movies(request):
 def show_dashboard_movies_custom_year(request, year):
     dictionary = return_movies_activities_details(request, year)
     return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
+
+def show_dashboard_change_password(request):
+    return render(request, 'dashboard/dashboard_change_password.html', {})
