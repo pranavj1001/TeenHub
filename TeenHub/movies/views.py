@@ -22,6 +22,9 @@ def logout(request):
         del request.session["noRatings"]
     if 'genre_id' in request.session:
         del request.session['genre_id']
+    if 'ratingsChanged' in request.session:
+        del request.session['ratingsChanged']
+
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
@@ -36,7 +39,11 @@ def show_movies(request):
 
     if 'id' in request.session:
         request.session["noRatings"] = 0
-        if not 'recommendationsMovies1' in request.session:
+        if not 'recommendationsMovies1' in request.session or 'ratingsChanged' in request.session:
+            print('ratingsChanged')
+
+            if 'ratingsChanged' in request.session:
+                del request.session['ratingsChanged']
 
             dataset_ratings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/movies_ratings_small.csv', usecols=range(3))
 
@@ -152,8 +159,10 @@ def save_movie_rating(request, movie_rating):
             oldRating.year = today.year
             oldRating.edited = 1
             oldRating.save()
+            request.session['ratingsChanged'] = 1
         else:
             newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating, day=today.day, month=today.month, year=today.year, edited=0)
             newRating.save()
+            request.session['ratingsChanged'] = 1
         show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})
