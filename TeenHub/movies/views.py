@@ -22,6 +22,9 @@ def logout(request):
         del request.session["noRatings"]
     if 'genre_id' in request.session:
         del request.session['genre_id']
+    if 'ratingsChanged' in request.session:
+        del request.session['ratingsChanged']
+
     return render(request, 'home/home.html', {})
 
 def show_movies(request):
@@ -32,75 +35,83 @@ def show_movies(request):
     if 'show_rating_stars' in request.session:
         del request.session["show_rating_stars"]
 
+    request.session["noRatings"] = 1
+
     if 'id' in request.session:
+        request.session["noRatings"] = 0
+        if not 'recommendationsMovies1' in request.session or 'ratingsChanged' in request.session:
+            print('ratingsChanged')
 
-        dataset_ratings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/movies_ratings_small.csv', usecols=range(3))
+            if 'ratingsChanged' in request.session:
+                del request.session['ratingsChanged']
 
-        currentUserRatings = Ratings.objects.filter(user_id=request.session['id'])
+            dataset_ratings = pd.read_csv(PROJECT_ROOT + '/movies/datasets/movies_ratings_small.csv', usecols=range(3))
 
-        if(len(currentUserRatings) > 0):
-            for i in range(0, len(currentUserRatings)):
-                dataset_ratings = dataset_ratings.append({'userId': 672, 'movieId': currentUserRatings[i].movie_id, 'rating': int(currentUserRatings[i].ratings)}, ignore_index=True)
-            # print(dataset_ratings)
+            currentUserRatings = Ratings.objects.filter(user_id=request.session['id'])
 
-            userRatings = dataset_ratings.pivot_table(index=['userId'], columns=['movieId'], values='rating')
-            corrMatrix = userRatings.corr(method='pearson', min_periods=3)
+            if(len(currentUserRatings) > 0):
+                for i in range(0, len(currentUserRatings)):
+                    dataset_ratings = dataset_ratings.append({'userId': 672, 'movieId': currentUserRatings[i].movie_id, 'rating': int(currentUserRatings[i].ratings)}, ignore_index=True)
+                # print(dataset_ratings)
 
-            # if 'movieRecommender' not in request.session:
-            #     print("computing")
-            #     corrMatrix = userRatings.corr(method='pearson', min_periods=20)
-            #     request.session["movieRecommender"] = json.dumps(corrMatrix)
-            # else:
-            #     print("not computing")
-            #     corrMatrix = request.session["movieRecommender"]
+                userRatings = dataset_ratings.pivot_table(index=['userId'], columns=['movieId'], values='rating')
+                corrMatrix = userRatings.corr(method='pearson', min_periods=3)
 
-            getRatings = userRatings.loc[672].dropna()
+                # if 'movieRecommender' not in request.session:
+                #     print("computing")
+                #     corrMatrix = userRatings.corr(method='pearson', min_periods=20)
+                #     request.session["movieRecommender"] = json.dumps(corrMatrix)
+                # else:
+                #     print("not computing")
+                #     corrMatrix = request.session["movieRecommender"]
 
-            similarCandidates = pd.Series()
-            for i in range(0, len(getRatings)):
-                recommendationList = corrMatrix[getRatings.index[i]].dropna()
-                if getRatings.index[i] > 4.0:
-                    recommendationList = recommendationList.map(lambda x: 2 * x * getRatings.index[i])
-                elif getRatings.index[i] <= 4.0 and getRatings.index[i] > 3.0:
-                    recommendationList = recommendationList.map(lambda x: x * getRatings.index[i])
-                elif getRatings.index[i] <= 3.0 and getRatings.index[i] > 2.5:
-                    recommendationList = recommendationList.map(lambda x: x + getRatings.index[i])
-                elif getRatings.index[i] <= 2.5:
-                    recommendationList = recommendationList.map(lambda x: (-1) * x - getRatings.index[i])
-                similarCandidates = similarCandidates.append(recommendationList)
+                getRatings = userRatings.loc[672].dropna()
 
-            similarCandidates.sort_values(inplace=True, ascending=False)  # sort the results
+                similarCandidates = pd.Series()
+                for i in range(0, len(getRatings)):
+                    recommendationList = corrMatrix[getRatings.index[i]].dropna()
+                    if getRatings.index[i] > 4.0:
+                        recommendationList = recommendationList.map(lambda x: 2 * x * getRatings.index[i])
+                    elif getRatings.index[i] <= 4.0 and getRatings.index[i] > 3.0:
+                        recommendationList = recommendationList.map(lambda x: x * getRatings.index[i])
+                    elif getRatings.index[i] <= 3.0 and getRatings.index[i] > 2.5:
+                        recommendationList = recommendationList.map(lambda x: x + getRatings.index[i])
+                    elif getRatings.index[i] <= 2.5:
+                        recommendationList = recommendationList.map(lambda x: (-1) * x - getRatings.index[i])
+                    similarCandidates = similarCandidates.append(recommendationList)
 
-            # use groupby() to add together the scores from movies that show up more than once
-            similarCandidates = similarCandidates.groupby(similarCandidates.index).sum()
+                similarCandidates.sort_values(inplace=True, ascending=False)  # sort the results
 
-            similarCandidates.sort_values(inplace=True, ascending=False)
+                # use groupby() to add together the scores from movies that show up more than once
+                similarCandidates = similarCandidates.groupby(similarCandidates.index).sum()
 
-            # filter out movies that the user already rated
-            filteredRecommendationList = similarCandidates.drop(getRatings.index)
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[0])
-            request.session["recommendationsMovies1"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[1])
-            request.session["recommendationsMovies2"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[2])
-            request.session["recommendationsMovies3"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[3])
-            request.session["recommendationsMovies4"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[4])
-            request.session["recommendationsMovies5"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[5])
-            request.session["recommendationsMovies6"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[6])
-            request.session["recommendationsMovies7"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[7])
-            request.session["recommendationsMovies8"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[8])
-            request.session["recommendationsMovies9"] = link.tmdb_id
-            link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[9])
-            request.session["recommendationsMovies10"] = link.tmdb_id
+                similarCandidates.sort_values(inplace=True, ascending=False)
 
-        else:
-            request.session["noRatings"] = 1
+                # filter out movies that the user already rated
+                filteredRecommendationList = similarCandidates.drop(getRatings.index)
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[0])
+                request.session["recommendationsMovies1"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[1])
+                request.session["recommendationsMovies2"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[2])
+                request.session["recommendationsMovies3"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[3])
+                request.session["recommendationsMovies4"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[4])
+                request.session["recommendationsMovies5"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[5])
+                request.session["recommendationsMovies6"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[6])
+                request.session["recommendationsMovies7"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[7])
+                request.session["recommendationsMovies8"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[8])
+                request.session["recommendationsMovies9"] = link.tmdb_id
+                link = Links.objects.get(movie_id=filteredRecommendationList.head(10).index[9])
+                request.session["recommendationsMovies10"] = link.tmdb_id
+
+            else:
+                request.session["noRatings"] = 1
 
     return render(request, 'movies/session.html', {})
 
@@ -148,8 +159,10 @@ def save_movie_rating(request, movie_rating):
             oldRating.year = today.year
             oldRating.edited = 1
             oldRating.save()
+            request.session['ratingsChanged'] = 1
         else:
             newRating = Ratings(user_id=request.session["id"], movie_id=link.movie_id, ratings=movie_rating, day=today.day, month=today.month, year=today.year, edited=0)
             newRating.save()
+            request.session['ratingsChanged'] = 1
         show_movie_info(request, request.session["movieid"])
     return render(request, 'movies/viewInfoMovies.html', {})
