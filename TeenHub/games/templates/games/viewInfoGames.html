@@ -232,7 +232,7 @@
             var string = '';
             var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
             for(var j = 0; j < (ids.length>numberOfCards?numberOfCards:ids.length); j++){
-                string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                 counter++;
             }
             var final = start + string + '</div>';
@@ -244,7 +244,7 @@
                     for (var j = 0; j < (cardsRemaining>numberOfCards?numberOfCards:cardsRemaining); j++) {
                         if(counter === ids.length)
                             break;
-                        string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                        string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                         counter++;
                     }
                     cardsRemaining=cardsRemaining-numberOfCards;
