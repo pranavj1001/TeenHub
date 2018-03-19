@@ -14,7 +14,7 @@
                     <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
                 </div>
             </div>
-            
+
             <div class="col-md-9 spaceOnDesktop">
                 <h1 id="gameName" class="whiteText titleSpace"></h1>
                 <p id="gameDescription" class="whiteText description"></p>
@@ -109,12 +109,14 @@
                 }
                 $('#gameReleaseDate').html('<strong>Release Date:</strong> ' + releaseDate);
 
-                for(var i = 0; i < totalGameInfo.genres.length; i++){
-                    if (i === totalGameInfo.genres.length - 1 ) {
-                        genres += totalGameInfo.genres[i].name + '.';
-                    }else{
-                        genres += totalGameInfo.genres[i].name + ', ';
-                    }
+                if (totalGameInfo.genres) {
+                  for(var i = 0; i < totalGameInfo.genres.length; i++){
+                      if (i === totalGameInfo.genres.length - 1 ) {
+                          genres += totalGameInfo.genres[i].name + '.';
+                      }else{
+                          genres += totalGameInfo.genres[i].name + ', ';
+                      }
+                   }
                 }
                 $('#gameGenres').html(genres);
 
