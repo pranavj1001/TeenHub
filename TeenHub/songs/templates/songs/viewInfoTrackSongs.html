@@ -1,0 +1,159 @@
+{% extends 'Songs/baseInfoSongs.html' %}
+
+{% block info %}
+{% endblock %}
+
+{% block similar %}
+
+
+    <section class="mobile">
+    </section>
+    <section class="tablet">
+    </section>
+    <section class="desktop">
+    </section>
+
+    <h2 class="sectionHeading veryLightGrayText" >Similar Tracks</h2>
+
+    <section id="similartracks">
+    <div id="st" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="stIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="stItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#st" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next fivePercentWidthOnDesktop" href="#st" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+
+{% endblock %}
+
+{% block ajaxInfoSongBlock %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+
+console.log("{{ songsinfo }}");
+console.log("{{ name }}");
+
+$.ajax({
+    type: "GET",
+    url: "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist="+"{{ name }}"+"&track="+"{{ songsinfo }}"+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=20",
+    dataType: "json",
+    success: function(result){
+      //console.log(result);
+
+        var trackDetails = result.similartracks.track;
+        var posterURLs = [];
+        var titles = [];
+        var ids = [];
+        var type = 2;
+        var tag = [];
+        for(var i = 0; i < trackDetails.length; i++){
+          if(trackDetails[i].name != null){
+            var str = JSON.stringify(trackDetails[i].image[3]);
+            var n = str.indexOf("https");
+            var m = str.indexOf(`","`);
+            posterURLs[i] = str.substring(n,m);
+            titles[i] = trackDetails[i].name;
+            ids[i] = trackDetails[i].name;
+            tag[i] = trackDetails[i].artist.name;
+          }
+        }
+        //console.log(trackDetails.length);
+        var carousel = 'st';
+        if(trackDetails.length != 0){
+          getPoster(posterURLs, titles, ids, type, carousel, tag);
+        }
+    }
+});
+
+function getPoster(posterURLs, titles, ids, type, carousel, tag = 0) {
+    var device;
+    var carouselItems;
+    var numberOfCards;
+    var counter = 0;
+    var width;
+    var sectionID = '';
+    var cardID = '';
+    var indicatorsID = '';
+    var urls = [];
+    if($('.desktop').css('display') === 'block'){
+        device = "desktop";
+        carouselItems = 4;
+        numberOfCards = 6;
+        if(carousel === 'rm'){
+            carouselItems = 2;
+        }
+    }else if($('.tablet').css('display') === 'block') {
+        device = "tablet";
+        carouselItems = 7;
+        numberOfCards = 3;
+        if(carousel === 'rm'){
+            carouselItems = 4;
+        }
+    }else if($('.mobile').css('display') === 'block') {
+        device = "mobile";
+        carouselItems = 10;
+        numberOfCards = 2;
+        if(carousel === 'rm'){
+            carouselItems = 5;
+        }
+    }
+    width = 100/ numberOfCards;
+    if(carousel === 'st'){
+        sectionID = '#similartracks';
+        cardID = '#stItems';
+        indicatorsID = '#stIndicators';
+    }
+    for(var i = 0; i < ids.length; i++){
+      if(type == 2){
+        urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/' + type + '/';
+      }
+    }
+    carousel = '#' + carousel;
+    $(sectionID).addClass(device);
+    // make carousel
+    var start = '<div class="carousel-item active">';
+    var string = '';
+    var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
+    for(var j = 0; j < numberOfCards; j++){
+        string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+        counter++;
+    }
+    var final = start + string + '</div>';
+    for(var i = 1; i < carouselItems; i++){
+            var start1 = '<div class="carousel-item">';
+            var string1 = '';
+            list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
+            for (var j = 0; j < numberOfCards; j++) {
+                if(carousel === '#rm' && counter === 10)
+                    break;
+                if(counter === 20)
+                    break;
+                string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                counter++;
+            }
+            final += start1 + string1 + '</div>';
+    }
+    $(indicatorsID).html(list);
+    $(cardID).html(final);
+}
+
+
+
+function showLink(element){
+    window.location.href = 'http://127.0.0.1:8000/songs/' + element.attributes.link.value;
+}
+
+</script>
+
+{% endblock %}
