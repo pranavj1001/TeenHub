@@ -67,10 +67,10 @@
     {% block searchBar %}
     {% endblock %}
 
-    <h2 class="sectionHeading veryLightGrayText">Top Genres</h2>
+    <!--<h2 class="sectionHeading veryLightGrayText">Top Genres</h2>-->
 
     <section class="mobile">
-    <div id="mobileGenres" class="carousel slide" data-ride="carousel">
+    <!--<div id="mobileGenres" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#mobileGenres" data-slide-to="0" class="active"></li>
         <li data-target="#mobileGenres" data-slide-to="1"></li>
@@ -164,11 +164,11 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
+    </div>-->
     </section>
 
     <section class="tablet">
-    <div id="tabletGenres" class="carousel slide" data-ride="carousel">
+    <!--<div id="tabletGenres" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#tabletGenres" data-slide-to="0" class="active"></li>
         <li data-target="#tabletGenres" data-slide-to="1"></li>
@@ -249,11 +249,11 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
+    </div>-->
     </section>
 
     <section class="desktop">
-    <div id="genres" class="carousel slide" data-ride="carousel">
+    <!--<div id="genres" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#genres" data-slide-to="0" class="active"></li>
         <li data-target="#genres" data-slide-to="1"></li>
@@ -329,22 +329,23 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
-    </section>
-
-    {% block popularMovies %}
-    {% endblock %}
+    </div>-->
+  </section>
 
     {% block recommendations %}
+    {% endblock %}
+
+    {% block upcomingGames %}
     {% endblock %}
 
     {% block ourTopPicks %}
     {% endblock %}
 
-    {% block upcomingMovies %}
+    {% block trendingGames %}
     {% endblock %}
 
-    {% block moviesNews %}
+
+    {% block gamesNews %}
     {% endblock %}
 
 	<footer class="footer">
