@@ -1,0 +1,330 @@
+{% extends 'Songs/baseInfoSongs.html' %}
+<h1>{{ songsinfo }}</h1>
+<p>{{ type }}</p>
+
+{% block info %}
+
+    <section id="infoMovie">
+        <div class="row container-fluid detailSpace">
+            <div class="col-sm-3 col-6">
+                <div class="card genre" id="thumbnail"></div>
+            </div>
+            <div class="col-md-9 spaceOnDesktop">
+                <h1 id="artistName" class="whiteText titleSpace"></h1>
+                <p id="songslisteners" class="whiteText description"></p>
+                <p id="songsplaycount" class="whiteText description"></p>
+                <p id="songsontour" class="whiteText description"></p>
+                <p id="songsSummary" class="whiteText description"></p>
+                <p id="songsContent" class="whiteText description"></p>
+{#                <p class="whiteText description"><strong>Crew:</strong></p>#}
+{#                <p class="whiteText description">Director:</p>#}
+{#                <div id="crew-director"></div>#}
+{#                <p class="whiteText description">Producers:</p>#}
+{#                <div id="crew-producer"></div>#}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block similar %}
+
+    <section class="mobile">
+    </section>
+    <section class="tablet">
+    </section>
+    <section class="desktop">
+    </section>
+
+    <h2 class="sectionHeading veryLightGrayText" >Similar Artist</h2>
+
+    <section id="similarArtist">
+    <div id="sa" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="saIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="saItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#sa" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next fivePercentWidthOnDesktop" href="#sa" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
+{% block topTracks %}
+
+    <section class="mobile">
+    </section>
+    <section class="tablet">
+    </section>
+    <section class="desktop">
+    </section>
+
+    <h2 class="sectionHeading veryLightGrayText" >Top Tracks of Artist</h2>
+
+    <section id="topTracks">
+    <div id="tta" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="ttaIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="ttaItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#tta" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next fivePercentWidthOnDesktop" href="#tta" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
+
+{% block topAlbums %}
+
+    <section class="mobile">
+    </section>
+    <section class="tablet">
+    </section>
+    <section class="desktop">
+    </section>
+
+    <h2 class="sectionHeading veryLightGrayText" >Top Albums of Artist</h2>
+
+    <section id="topAlbums">
+    <div id="ta" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="taIndicators">
+        <!-- assign the indicators -->
+      </ol>
+      <div class="carousel-inner heightAuto" id="taItems">
+        <!-- assign items and cards -->
+      </div>
+      <a class="carousel-control-prev fivePercentWidthOnDesktop" href="#ta" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next fivePercentWidthOnDesktop" href="#ta" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </section>
+
+{% endblock %}
+
+
+
+{% block ajaxInfoSongBlock %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+
+        $.ajax({
+            type: "GET",
+            url: "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+"{{ songsinfo }}"+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json",
+            dataType: "json",
+            success: function(result){
+              console.log(result);
+              var str = JSON.stringify(result.artist.image[5]);
+              var n = str.indexOf("https");
+              var m = str.indexOf(`","`);
+              var img = str.substring(n,m);
+              $('#thumbnail').html('<img class="card-img-top movieThumbnail" src="' + img + '" alt="action">');
+               $('#artistName').html(result.artist.name);
+               $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + img + ') no-repeat center center fixed');
+               $('#infoMovie').css('background-size', 'cover');
+               $('#songsSummary').html(result.artist.bio.summary);
+               $("#songslisteners").html("<strong>Listeners :</strong>"+result.artist.stats.listeners);
+               $("#songsplaycount").html("<strong>Playcount :</strong>"+result.artist.stats.playcount);
+               $("#songsontour").html("<strong>OnTour :</strong>"+result.artist.ontour);
+
+            }
+        });
+
+       var artist = "{{ songsinfo }}";
+       $.ajax({
+           type: "GET",
+           url: "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist="+artist+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=20",
+           dataType: "json",
+           success: function(result){
+               var artistDetails = result.similarartists.artist;
+               var posterURLs = [];
+               var titles = [];
+               var ids = [];
+               var type = 1;
+               for(var i = 0; i < artistDetails.length; i++){
+                 if(artistDetails[i].name != null){
+                   var str = JSON.stringify(artistDetails[i].image[4]);
+                   var n = str.indexOf("https");
+                   var m = str.indexOf(`","`);
+                   posterURLs[i] = str.substring(n,m);
+                   titles[i] = artistDetails[i].name;
+                   ids[i] = artistDetails[i].name;
+                 }
+               }
+               var carousel = 'sa';
+               console.log("reach heere");
+               getPoster(posterURLs, titles, ids, type, carousel);
+           }
+       });
+
+       $.ajax({
+           type: "GET",
+           url: "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="+ "{{ songsinfo }}"+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=20",
+           dataType: "json",
+           success: function(result){
+               var trackDetails = result.toptracks.track;
+               var posterURLs = [];
+               var titles = [];
+               var ids = [];
+               var type = 2
+               for(var i = 0; i < trackDetails.length; i++){
+                 if(trackDetails[i].name != null){
+                   var str = JSON.stringify(trackDetails[i].image[3]);
+                   var n = str.indexOf("https");
+                   var m = str.indexOf(`","`);
+                   posterURLs[i] = str.substring(n,m);
+                   titles[i] = trackDetails[i].name;
+                   ids[i] = trackDetails[i].name;
+                 }
+               }
+               var carousel = 'tta';
+               getPoster(posterURLs, titles, ids, type, carousel);
+           }
+       });
+
+       $.ajax({
+           type: "GET",
+           url: "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+"{{ songsinfo }}"+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=20",
+           dataType: "json",
+           success: function(result){
+             var albumDetails = result.topalbums.album;
+             var posterURLs = [];
+             var titles = [];
+             var ids = [];
+             var type = 0;
+             for(var i = 0; i < albumDetails.length; i++){
+               if(albumDetails[i].name != null){
+                 var str = JSON.stringify(albumDetails[i].image[3]);
+                 var n = str.indexOf("https");
+                 var m = str.indexOf(`","`);
+                 posterURLs[i] = str.substring(n,m);
+                 titles[i] = albumDetails[i].name;
+                 ids[i] = albumDetails[i].name;
+               }
+             }
+             var carousel = 'ta';
+             getPoster(posterURLs, titles, ids, type, carousel);
+           }
+       });
+
+
+
+
+
+    function getPoster(posterURLs, titles, ids, type, carousel, tag = 0) {
+        var device;
+        var carouselItems;
+        var numberOfCards;
+        var counter = 0;
+        var width;
+        var sectionID = '';
+        var cardID = '';
+        var indicatorsID = '';
+        var urls = [];
+        if($('.desktop').css('display') === 'block'){
+            device = "desktop";
+            carouselItems = 4;
+            numberOfCards = 6;
+            if(carousel === 'rm'){
+                carouselItems = 2;
+            }
+        }else if($('.tablet').css('display') === 'block') {
+            device = "tablet";
+            carouselItems = 7;
+            numberOfCards = 3;
+            if(carousel === 'rm'){
+                carouselItems = 4;
+            }
+        }else if($('.mobile').css('display') === 'block') {
+            device = "mobile";
+            carouselItems = 10;
+            numberOfCards = 2;
+            if(carousel === 'rm'){
+                carouselItems = 5;
+            }
+        }
+        width = 100/ numberOfCards;
+        if(carousel === 'sa'){
+            sectionID = '#similarArtist';
+            cardID = '#saItems';
+            indicatorsID = '#saIndicators';
+        }else if(carousel === 'tta'){
+            sectionID = '#topTracks';
+            cardID = '#ttaItems';
+            indicatorsID = '#ttaIndicators';
+        }else if(carousel === 'ta'){
+            sectionID = '#topAlbums';
+            cardID = '#taItems';
+            indicatorsID = '#taIndicators';
+        }else if(carousel === 'pa'){
+            sectionID = '#popularAlbum';
+            cardID = '#paItems';
+            indicatorsID = '#paIndicators';
+            //console.log("reached here");
+        }
+        for(var i = 0; i < ids.length; i++){
+          if(type == 3){
+            urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/';
+          }
+          else{
+            urls[i] = 'infoSongs/' + ids[i] + '/' + type + '/';
+          }
+        }
+        carousel = '#' + carousel;
+        $(sectionID).addClass(device);
+        // make carousel
+        var start = '<div class="carousel-item active">';
+        var string = '';
+        var list = '<li data-target="' + carousel + '" data-slide-to="0" class="active"></li>';
+        for(var j = 0; j < numberOfCards; j++){
+            string += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+            counter++;
+        }
+        var final = start + string + '</div>';
+        for(var i = 1; i < carouselItems; i++){
+                var start1 = '<div class="carousel-item">';
+                var string1 = '';
+                list += '<li data-target="' + carousel + '" data-slide-to="' + i + '"></li>';
+                for (var j = 0; j < numberOfCards; j++) {
+                    if(carousel === '#rm' && counter === 10)
+                        break;
+                    if(counter === 20)
+                        break;
+                    string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
+                    counter++;
+                }
+                final += start1 + string1 + '</div>';
+        }
+        $(indicatorsID).html(list);
+        $(cardID).html(final);
+    }
+
+
+
+    function showLink(element){
+        window.location.href = 'http://127.0.0.1:8000/songs/' + element.attributes.link.value;
+    }
+</script>
+{% endblock %}
