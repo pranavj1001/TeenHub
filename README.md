@@ -30,9 +30,9 @@ List Updated on 24th Feb, 2018.
 
 ## To-Do Games List
 
-- [ ] Show games in cards
+- [X] Show games in cards
 - [X] Show games info in another tab
-- [ ] Show games recommendations
+- [X] Show games recommendations
 - [ ] Show games according to genres in new tab
 - [ ] Save user ratings
 
