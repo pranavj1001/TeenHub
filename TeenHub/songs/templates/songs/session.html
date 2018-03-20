@@ -137,11 +137,13 @@ $.ajax({
     url: "http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=20",
     dataType: "json",
     success: function(result){
+      //console.log(result);
         var trackDetails = result.tracks.track;
         var posterURLs = [];
         var titles = [];
         var ids = [];
-        var type = 2
+        var type = 2;
+        var tag = [];
         for(var i = 0; i < trackDetails.length; i++){
           if(trackDetails[i].name != null){
             var str = JSON.stringify(trackDetails[i].image[3]);
@@ -150,10 +152,12 @@ $.ajax({
             posterURLs[i] = str.substring(n,m);
             titles[i] = trackDetails[i].name;
             ids[i] = trackDetails[i].name;
+            tag[i] = trackDetails[i].artist.name;
           }
         }
+        //console.log(tag);
         var carousel = 'pt';
-        getPoster(posterURLs, titles, ids, type, carousel);
+        getPoster(posterURLs, titles, ids, type, carousel,tag);
     }
 });
 
@@ -191,33 +195,35 @@ function displayPopularAlbums(){
   createPoplularAlbumsByTag("pop");
   createPoplularAlbumsByTag("jazz");
   createPoplularAlbumsByTag("hip-hop");
-  for(var i=0;i<20;i++){
-    if(i <= 3){
-      tag[i] = "disco";
-    }
-    else if (i >= 4 && i <= 7) {
-      tag[i] = "rock";
-    }
-    else if (i >= 8 && i <= 11) {
-      tag[i] = "pop";
-    }
-    else if (i >= 12 && i <= 15) {
-      tag[i] = "jazz";
-    }
-    else if (i >= 16 && i <= 19) {
-      tag[i] = "hip-hop";
-    }
-  }
+  // for(var i=0;i<20;i++){
+  //   if(i <= 3){
+  //     tag[i] = "disco";
+  //   }
+  //   else if (i >= 4 && i <= 7) {
+  //     tag[i] = "rock";
+  //   }
+  //   else if (i >= 8 && i <= 11) {
+  //     tag[i] = "pop";
+  //   }
+  //   else if (i >= 12 && i <= 15) {
+  //     tag[i] = "jazz";
+  //   }
+  //   else if (i >= 16 && i <= 19) {
+  //     tag[i] = "hip-hop";
+  //   }
+  // }
+  // console.log(tag);
+  // console.log(titles);
   var carousel = 'pa';
   getPoster(posterURLs, titles, ids, type, carousel, tag);
 
 }
 
-function createPoplularAlbumsByTag(tag){
+function createPoplularAlbumsByTag(tag1){
 
   $.ajax({
       type: "GET",
-      url: "http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag="+tag+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=4",
+      url: "http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag="+tag1+"&api_key=ef4e44a60f35e9dceea28279e13d4318&format=json&limit=4",
       dataType: "json",
       async:false,
       success: function(result){
@@ -230,6 +236,8 @@ function createPoplularAlbumsByTag(tag){
               posterURLs[c] = str.substring(n,m);
               titles[c] = albumDetails[i].name;
               ids[c] = albumDetails[i].name;
+              tag[c] = albumDetails[i].artist.name;
+              //console.log(albumDetails[i].artist.name);
               c++;
             }
           }
@@ -313,10 +321,13 @@ function getPoster(posterURLs, titles, ids, type, carousel, tag = 0) {
     }
     for(var i = 0; i < ids.length; i++){
       if(type == 3){
-        urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/';
+        urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/' + type + '/';
       }
-      else{
-        urls[i] = 'infoSongs/' + ids[i] + '/' + type + '/';
+      if(type == 2){
+        urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/' + type + '/';
+      }
+      if(type == 1){
+        urls[i] = 'infoSongs/' + ids[i] + '/' + tag + '/' + type + '/';
       }
     }
     carousel = '#' + carousel;
