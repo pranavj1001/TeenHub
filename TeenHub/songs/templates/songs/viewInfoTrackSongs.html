@@ -1,6 +1,27 @@
 {% extends 'Songs/baseInfoSongs.html' %}
 
 {% block info %}
+<section id="infoMovie">
+    <div class="row container-fluid detailSpace">
+        <div class="col-sm-3 col-6">
+            <div class="card genre" id="thumbnail"></div>
+        </div>
+        <div class="col-md-9 spaceOnDesktop">
+            <h1 id="trackName" class="whiteText titleSpace"></h1>
+            <p id="artistName" class="whiteText description"></p>
+            <p id="albumTitle" class="whiteText description"></p>
+            <p id="songslisteners" class="whiteText description"></p>
+            <p id="songsplaycount" class="whiteText description"></p>
+            <p id="songsDuration" class="whiteText description"></p>
+            <p id="songsSummary" class="whiteText description"></p>
+{#                <p class="whiteText description"><strong>Crew:</strong></p>#}
+{#                <p class="whiteText description">Director:</p>#}
+{#                <div id="crew-director"></div>#}
+{#                <p class="whiteText description">Producers:</p>#}
+{#                <div id="crew-producer"></div>#}
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 {% block similar %}
@@ -13,7 +34,7 @@
     <section class="desktop">
     </section>
 
-    <h2 class="sectionHeading veryLightGrayText" >Similar Tracks</h2>
+    <h2 class="sectionHeading veryLightGrayText" id="heading">Similar Tracks</h2>
 
     <section id="similartracks">
     <div id="st" class="carousel slide" data-ride="carousel">
@@ -41,8 +62,30 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
-console.log("{{ songsinfo }}");
-console.log("{{ name }}");
+$.ajax({
+    type: "GET",
+    url: "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=ef4e44a60f35e9dceea28279e13d4318&artist="+"{{ name }}"+"&track="+"{{ songsinfo }}"+"&format=json&limit=20",
+    dataType: "json",
+    success: function(result){
+      console.log(result);
+      var str = JSON.stringify(result.track.album.image[3]);
+      var n = str.indexOf("https");
+      var m = str.indexOf(`","`);
+      var img = str.substring(n,m);
+      $('#thumbnail').html('<img class="card-img-top movieThumbnail" src="' + img + '" alt="action">');
+      $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + img + ') no-repeat center center fixed');
+      $('#infoMovie').css('background-size', 'cover');
+      $('#trackName').html(result.track.name);
+      $("#artistName").html("<strong>Artist :</strong>"+result.track.artist.name);
+      $("#albumTitle").html("<strong>Album :</strong>"+result.track.album.title)
+      $("#songslisteners").html("<strong>Listeners :</strong>"+result.track.listeners);
+      $("#songsplaycount").html("<strong>Playcount :</strong>"+result.track.playcount);
+      $("#songsDuration").html("<strong>Duration :</strong>"+result.track.duration);
+      $("#songsSummary").html("<strong>Summary :</strong>"+result.track.wiki.summary);
+
+    }
+  });
+
 
 $.ajax({
     type: "GET",
@@ -71,8 +114,10 @@ $.ajax({
         //console.log(trackDetails.length);
         var carousel = 'st';
         if(trackDetails.length != 0){
+          //console.log("i am inside");
           getPoster(posterURLs, titles, ids, type, carousel, tag);
         }
+
     }
 });
 
@@ -153,6 +198,7 @@ function getPoster(posterURLs, titles, ids, type, carousel, tag = 0) {
 function showLink(element){
     window.location.href = 'http://127.0.0.1:8000/songs/' + element.attributes.link.value;
 }
+
 
 </script>
 
