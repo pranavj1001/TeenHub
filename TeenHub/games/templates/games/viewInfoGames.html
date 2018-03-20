@@ -22,6 +22,7 @@
                 <p id="gameGenres" class="whiteText description"></p>
                 <p id="gameThemes" class="whiteText description"></p>
                 <p id="gameStatus" class="whiteText description"></p>
+                <p id="gamePlatforms" class="whiteText description"></p>
                 <p class="whiteText description"><strong>Developers:</strong></p>
                 <ul id="gameDevelopers" class="whiteText description lessLeftPadding"></ul>
                 <p class="whiteText description"><strong>Publishers:</strong></p>
@@ -93,6 +94,7 @@
                 var img = totalGameInfo.image.small_url;
                 var genres = '<strong>Genres:</strong> ';
                 var themes = '<strong>Themes:</strong> ';
+                var platforms = '<strong>Platforms:</strong> ';
                 var developers = '';
                 var publishers = '';
                 $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + wallpaper + ') no-repeat center center fixed');
@@ -148,6 +150,17 @@
                     publishers += '<li>' + totalGameInfo.publishers[i].name + '</li>';
                 }
                 $('#gamePublishers').html(publishers);
+
+                if (totalGameInfo.platforms) {
+                  for(var i = 0; i < totalGameInfo.platforms.length; i++){
+                      if (i === totalGameInfo.platforms.length - 1 ) {
+                          platforms += totalGameInfo.platforms[i].name + '.';
+                      }else{
+                          platforms += totalGameInfo.platforms[i].name + ', ';
+                      }
+                  }
+                $('#gamePlatforms').html(platforms);
+              }
 
                 <!--similar games-->
                 if (totalGameInfo.similar_games) {
