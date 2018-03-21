@@ -1,6 +1,4 @@
 {% extends 'Songs/baseInfoSongs.html' %}
-<h1>{{ songsinfo }}</h1>
-<p>{{ type }}</p>
 
 {% block info %}
 
@@ -171,6 +169,7 @@
                    posterURLs[i] = str.substring(n,m);
                    titles[i] = artistDetails[i].name;
                    ids[i] = artistDetails[i].name;
+                   tag[i] = artistDetails[i].name;
                  }
                }
                var carousel = 'sa';
@@ -188,7 +187,8 @@
                var posterURLs = [];
                var titles = [];
                var ids = [];
-               var type = 2
+               var type = 2;
+               var tag = [];
                for(var i = 0; i < trackDetails.length; i++){
                  if(trackDetails[i].name != null){
                    var str = JSON.stringify(trackDetails[i].image[3]);
@@ -197,10 +197,11 @@
                    posterURLs[i] = str.substring(n,m);
                    titles[i] = trackDetails[i].name;
                    ids[i] = trackDetails[i].name;
+                   tag[i] = trackDetails[i].artist.name;
                  }
                }
                var carousel = 'tta';
-               getPoster(posterURLs, titles, ids, type, carousel);
+               getPoster(posterURLs, titles, ids, type, carousel,tag);
            }
        });
 
@@ -213,7 +214,8 @@
              var posterURLs = [];
              var titles = [];
              var ids = [];
-             var type = 0;
+             var type = 3;
+             var tag = [];
              for(var i = 0; i < albumDetails.length; i++){
                if(albumDetails[i].name != null){
                  var str = JSON.stringify(albumDetails[i].image[3]);
@@ -222,10 +224,11 @@
                  posterURLs[i] = str.substring(n,m);
                  titles[i] = albumDetails[i].name;
                  ids[i] = albumDetails[i].name;
+                 tag[i] - albumDetails[i].artist.name;
                }
              }
              var carousel = 'ta';
-             getPoster(posterURLs, titles, ids, type, carousel);
+             getPoster(posterURLs, titles, ids, type, carousel,tag);
            }
        });
 
@@ -286,10 +289,13 @@
         }
         for(var i = 0; i < ids.length; i++){
           if(type == 3){
-            urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/';
+            urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/' + type + '/';
           }
-          else{
-            urls[i] = 'infoSongs/' + ids[i] + '/' + type + '/';
+          if(type == 2){
+            urls[i] = 'infoSongs/' + ids[i] + '/' + tag[i] + '/' + type + '/';
+          }
+          if(type == 1){
+            urls[i] = 'infoSongs/' + ids[i] + '/' + tag + '/' + type + '/';
           }
         }
         carousel = '#' + carousel;
