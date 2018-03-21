@@ -39,8 +39,8 @@ List Updated on 24th Feb, 2018.
 ## To-Do Songs List
 
 - [X] Show songs in cards
-- [ ] Show songs info in another tab
-- [ ] Show songs similar to selected one
+- [X] Show songs info in another tab
+- [X] Show songs similar to selected one
 - [ ] Show songs based on search
 - [ ] Make responsive
 
