@@ -42,7 +42,7 @@ List Updated on 24th Feb, 2018.
 - [X] Show songs info in another tab
 - [X] Show songs similar to selected one
 - [ ] Show songs based on search
-- [ ] Make responsive
+- [X] Make responsive
 
 ## To-Do Dashboard List
 
