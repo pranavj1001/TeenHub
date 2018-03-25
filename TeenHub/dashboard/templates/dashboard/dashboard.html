@@ -116,12 +116,15 @@
 {#            </li>#}
 {#          </ul>#}
 {#        </li>#}
+          {% if request.session.id %}
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="{% url 'show_dashboard_change_password' %}">
             <i class="fa fa-fw fa-key"></i>
             <span class="nav-link-text">Change Password</span>
           </a>
-        </li>
+          </li>
+          {% endif %}
+
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">

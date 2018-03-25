@@ -554,6 +554,10 @@ sub {
   float: right;
 }
 
+.max-width-600px{
+  max-width: 600px;
+}
+
 @media (max-width: 576px) {
   .mobileTextHeadingH1 {
     font-size: 2rem;
