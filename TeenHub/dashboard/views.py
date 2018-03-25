@@ -177,7 +177,8 @@ def show_dashboard_movies_custom_year(request, year):
 
 def show_dashboard_change_password(request):
     message = "not in operation"
-    return render(request, 'dashboard/dashboard_change_password.html', {"message": message})
+    position = 0
+    return render(request, 'dashboard/dashboard_change_password.html', {"message": message, "position": position})
 
 def change_password(request):
     print(request.POST['currentPassword'])
@@ -185,24 +186,26 @@ def change_password(request):
     print(request.POST['newConfirmPassword'])
 
     message = ''
+    position = 0
     if 'id' in request.session:
         currentUser = User.objects.get(id=request.session['id'])
 
         if not check_password(request.POST['currentPassword'], str(currentUser.password)):
             message = 'Your current password did not match with the password stored at our database.'
-            print(message)
+            position = 1
         elif request.POST['newPassword'] != request.POST['newConfirmPassword']:
             message = 'Your new password did not match. Please Enter same password in last two fields.'
-            print(message)
+            position = 2
         elif len(request.POST['newPassword']) == 0:
             message = 'You cannot set an empty password'
+            position = 2
         elif len(request.POST['newPassword']) < 4:
             message = 'New Password\'s length should be greater than 4'
+            position = 2
         else:
             currentUser.password = make_password(request.POST['newPassword'])
             currentUser.save()
             message = 'Your password was successfully changed.'
-            print(message)
+            position = 5
 
-
-    return render(request, 'dashboard/dashboard_change_password.html', { "message": message })
+    return render(request, 'dashboard/dashboard_change_password.html', {"message": message, "position": position})

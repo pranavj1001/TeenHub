@@ -550,12 +550,20 @@ sub {
   color: #777;
 }
 
+.Display-None{
+  display: none;
+}
+
 #year, #darkTableToggler {
   float: right;
 }
 
-.max-width-600px{
-  max-width: 600px;
+.max-width-700px{
+  max-width: 700px;
+}
+
+.top-margin{
+  margin-top: 16px;
 }
 
 @media (max-width: 576px) {
