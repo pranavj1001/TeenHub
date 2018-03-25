@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.hashers import make_password, check_password
 from login.models import visitors, User
 from movies.models import Ratings, Links
 from datetime import date
@@ -175,4 +176,28 @@ def show_dashboard_movies_custom_year(request, year):
     return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
 
 def show_dashboard_change_password(request):
+    return render(request, 'dashboard/dashboard_change_password.html', {})
+
+def change_password(request):
+    print(request.POST['currentPassword'])
+    print(request.POST['newPassword'])
+    print(request.POST['newConfirmPassword'])
+
+    message = ''
+    if 'id' in request.session:
+        currentUser = User.objects.get(id=request.session['id'])
+
+        if not check_password(request.POST['currentPassword'], str(currentUser.password)):
+            message = 'Your current password did not match with the password stored at our database.'
+            print(message)
+        elif request.POST['newPassword'] != request.POST['newConfirmPassword']:
+            message = 'Your new password did not match. Please Enter same password in last two fields.'
+            print(message)
+        else:
+            currentUser.password = make_password(request.POST['newPassword'])
+            currentUser.save()
+            message = 'Your password was successfully changed.'
+            print(message)
+
+
     return render(request, 'dashboard/dashboard_change_password.html', {})
