@@ -80,11 +80,16 @@
                $('#albumName').html(result.album.name);
                $('#infoMovie').css('background', 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1)), url(' + img + ') no-repeat center center fixed');
                $('#infoMovie').css('background-size', 'cover');
-               $('#songsSummary').html(result.album.wiki.summary);
+               // if(result.album.wiki.summary != null){
+               //   $('#songsSummary').html(result.album.wiki.summary);
+               // }
                $("#songslisteners").html("<strong>Listeners :</strong>"+result.album.listeners);
                $("#songsplaycount").html("<strong>Playcount :</strong>"+result.album.playcount);
                $("#artistName").html("<strong>Artist :</strong>"+result.album.artist);
-               $("#songsPublished").html("<strong>Published on :</strong>"+result.album.wiki.published);
+               // if (result.album.wiki.published != null) {
+               //     $("#songsPublished").html("<strong>Published on :</strong>"+result.album.wiki.published);
+               // }
+
 
                var trackDetails = result.album.tracks.track;
                var posterURLs = [];
@@ -198,7 +203,7 @@
                 for (var j = 0; j < numberOfCards; j++) {
                     if(carousel === '#rm' && counter === 10)
                         break;
-                    if(counter === 20)
+                    if(counter === 10)
                         break;
                     string1 += '<div onclick="showLink(this)" link="' + urls[counter] + '" class="card genre" style="width:' + width + '%"><img class="card-img-top genreImg" src="' + posterURLs[counter] + '" alt="action"> <div class="card-block"> <h4 class="card-title veryLightGrayText">' + titles[counter] + '</h4> </div></div>';
                     counter++;
