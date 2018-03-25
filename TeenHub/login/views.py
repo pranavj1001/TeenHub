@@ -52,6 +52,7 @@ def signup_user(request):
             if visitors.objects.filter(month=today.month, year=today.year).exists():
                 row = visitors.objects.get(month=today.month, year=today.year)
                 row.visits += randint(5, 20)
+                row.signups += 1
                 row.save()
             else:
                 row = visitors(visits=randint(5, 20), month=today.month, year=today.year)
@@ -78,7 +79,6 @@ def login_user(request):
                 if visitors.objects.filter(month=today.month, year=today.year).exists():
                     row = visitors.objects.get(month=today.month, year=today.year)
                     row.visits += randint(5, 20)
-                    row.signups += 1
                     row.save()
                 else:
                     row = visitors(visits=randint(5, 20), month=today.month, year=today.year, signups=129)
