@@ -176,7 +176,8 @@ def show_dashboard_movies_custom_year(request, year):
     return render(request, 'dashboard/dashboard_activities_movies.html', dictionary)
 
 def show_dashboard_change_password(request):
-    return render(request, 'dashboard/dashboard_change_password.html', {})
+    message = "not in operation"
+    return render(request, 'dashboard/dashboard_change_password.html', {"message": message})
 
 def change_password(request):
     print(request.POST['currentPassword'])
@@ -193,6 +194,10 @@ def change_password(request):
         elif request.POST['newPassword'] != request.POST['newConfirmPassword']:
             message = 'Your new password did not match. Please Enter same password in last two fields.'
             print(message)
+        elif len(request.POST['newPassword']) == 0:
+            message = 'You cannot set an empty password'
+        elif len(request.POST['newPassword']) < 4:
+            message = 'New Password\'s length should be greater than 4'
         else:
             currentUser.password = make_password(request.POST['newPassword'])
             currentUser.save()
@@ -200,4 +205,4 @@ def change_password(request):
             print(message)
 
 
-    return render(request, 'dashboard/dashboard_change_password.html', {})
+    return render(request, 'dashboard/dashboard_change_password.html', { "message": message })
