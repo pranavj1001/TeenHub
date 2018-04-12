@@ -47,7 +47,7 @@
 
                 <div class="rightLeftMargin card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-bar-chart"></i> Your ratings in the Year: {{ year }} <select id="year"></select></div>
+                        <i class="fa fa-bar-chart"></i> Your ratings in the Year: {{ year }} <select onchange="changeYear(value);" id="year"></select></div>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-sm-9 my-auto" id="ratings_bar_graph">
@@ -126,12 +126,20 @@
         var end = 1900;
         var options = "";
         for(var year = start ; year >= end; year--) {
-          options += "<option onclick='changeYear(this)'>"+ year +"</option>";
+          options += "<option value="+ year +">"+ year +"</option>";
         }
         document.getElementById("year").innerHTML = options;
 
-        function changeYear(element) {
-            window.location.href = "http://127.0.0.1:8000/dashboard/movies/" + element.text + "/";
+        var year_options = document.getElementById("year").options;
+        for(var i = 0; i < year_options.length; i++) {
+            if(year_options[i].innerHTML === String({{ year }})) {
+                year_options[i].defaultSelected = true;
+                break;
+            }
+        }
+
+        function changeYear(value) {
+            window.location.href = "http://127.0.0.1:8000/dashboard/movies/" + value + "/";
         }
 
         function toggleTableMode() {
@@ -218,7 +226,6 @@
         }
 
         function drawTable(movieids, ratings, date, edited){
-            console.log(movieNames);
             var tableData = '';
             for(var i = 0; i < movieids.length; i++) {
                 tableData += '<tr> <th scope="row">' + (i+1) + '</th> <td><a href="http://127.0.0.1:8000/movies/infoMovies/' + movieids[i] + '/">' + movieNames[i] + '</a></td> <td>' + ((edited[i] === 1) ? ratings[i]+' <sub>(edited)</sub>' : ratings[i])  + '</td> <td>' + date[i] + '</td> </tr>';
