@@ -183,4 +183,18 @@ def save_movie_rating(request, movie_rating):
             newRating.save()
             request.session['ratingsChanged'] = 1
         show_movie_info(request, request.session["movieid"])
-    return render(request, 'movies/viewInfoMovies.html', {})
+
+    ip = request.META.get("HTTP_X_FORWARDED_FOR", None)
+    #print("outside")
+    #print(ip)
+    if ip:
+        # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
+        ip = ip.split(", ")[0]
+        #print("if")
+        #print(ip)
+    else:
+        ip = request.META.get("REMOTE_ADDR", "")
+        #print("else")
+        #print(ip)
+
+    return render(request, 'movies/viewInfoMovies.html', {"ip":ip})

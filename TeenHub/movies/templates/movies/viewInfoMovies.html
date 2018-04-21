@@ -278,8 +278,10 @@
             $(cardID).html(final);
         }
 
+        var ip_address = "{{ ip }}";
+
         function showLink(element){
-          var ip_address = "{{ ip }}";
+
             window.location.href = 'http://'+ip_address+':8000/movies/' + element.attributes.link.value;
         }
 
@@ -309,7 +311,7 @@
             $('input:radio').change(
             function(){
                 var userRating = this.value;
-                var ip_address = "{{ ip }}";
+                //var ip_address = "{{ ip }}";
                 window.location.href = 'http://'+ip_address+':8000/movies/save/movie/rating/' + userRating + '/';
             });
         });
