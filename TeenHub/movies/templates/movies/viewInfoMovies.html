@@ -8,8 +8,9 @@
                 <div class="card genre" id="thumbnail"></div>
                 {% if request.session.show_rating_stars %}
                 <div class="rating" id="ratings"></div>
-                <a class="back-button" href="{% url 'show_movies_page' %}"><i class="icon-home icon-2x"></i></a>
+
                 {% endif %}
+                <a class="back-button" href="{% url 'show_movies_page' %}"><i class="icon-home icon-2x"></i></a>
             </div>
             <div class="col-md-9 spaceOnDesktop">
                 <h1 id="movieName" class="whiteText titleSpace"></h1>
@@ -278,7 +279,8 @@
         }
 
         function showLink(element){
-            window.location.href = 'http://127.0.0.1:8000/movies/' + element.attributes.link.value;
+          var ip_address = "{{ ip }}";
+            window.location.href = 'http://'+ip_address+':8000/movies/' + element.attributes.link.value;
         }
 
         function showRatings(){
@@ -307,7 +309,8 @@
             $('input:radio').change(
             function(){
                 var userRating = this.value;
-                window.location.href = 'http://127.0.0.1:8000/movies/save/movie/rating/' + userRating + '/';
+                var ip_address = "{{ ip }}";
+                window.location.href = 'http://'+ip_address+':8000/movies/save/movie/rating/' + userRating + '/';
             });
         });
 

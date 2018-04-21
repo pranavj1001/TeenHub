@@ -4,6 +4,8 @@ from .models import Links, Ratings
 import simplejson as json
 from TeenHub.settings import PROJECT_ROOT
 from datetime import date
+from django.http import HttpRequest
+import ipaddress
 
 # Create your views here.
 def logout(request):
@@ -113,6 +115,8 @@ def show_movies(request):
             else:
                 request.session["noRatings"] = 1
 
+
+
     return render(request, 'movies/session.html', {})
 
 def show_movie_info(request, movieid):
@@ -133,7 +137,21 @@ def show_movie_info(request, movieid):
         elif 'show_rating_stars' in request.session:
             del request.session["show_rating_stars"]
 
-    return render(request, 'movies/viewInfoMovies.html', {})
+    ip = request.META.get("HTTP_X_FORWARDED_FOR", None)
+    #print("outside")
+    #print(ip)
+    if ip:
+        # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
+        ip = ip.split(", ")[0]
+        #print("if")
+        #print(ip)
+    else:
+        ip = request.META.get("REMOTE_ADDR", "")
+        #print("else")
+        #print(ip)
+
+
+    return render(request, 'movies/viewInfoMovies.html', {"ip":ip})
 
 def show_genre_list(request, genre_id):
     print(genre_id)
