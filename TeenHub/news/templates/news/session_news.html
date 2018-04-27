@@ -223,21 +223,22 @@
                         var ago = differnceOfDate(article.publishedAt);
 
                     if(article.urlToImage !== null ){
-                      articleList += `
-                          <div class="news-item"><a target="_blank" href="${article.url}">
-                              <div class="news-item-image">
-                                  <img class="news-image" src="${article.urlToImage}">
-                              </div></a>
-                              <div class="news-item-info">
-                                  <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                  <div class="description"><p>${article.description}</p></div>
-                                  <div class="other-detail" >
-                                          <div class="source-name">${article.source.name}</div>
-                                          <div class="published">`+ago+`</div>
-                                  </div>
-                              </div>
-                          </div>
-                          `;
+
+                          articleList +=
+                              '<div class="news-item"><a target="_blank" href="'+article.url+'">'+
+                                  '<div class="news-item-image">'+
+                                      '<img class="news-image" src="'+article.urlToImage+'">'+
+                                  '</div></a>'+
+                                  '<div class="news-item-info">'+
+                                      '<a class="title" target="_blank" href="'+article.url+'">'+article.title+'</a>'+
+                                      '<div class="description"><p>'+article.description+'</p></div>'+
+                                      '<div class="other-detail" >'+
+                                              '<div class="source-name">'+article.source.name+'</div>'+
+                                              '<div class="published">'+ago+'</div>'+
+                                      '</div>'+
+                                  '</div>'+
+                              '</div>'
+                              ;
                     }
                 });
                 {% if request.session.id %}
@@ -603,21 +604,37 @@
 
 
                       if(article.urlToImage !== null){
-                          articleList += `
-                              <div class="news-item"><a target="_blank" href="${article.url}">
-                                  <div class="news-item-image">
-                                      <img class="news-image" src="${article.urlToImage}">
-                                  </div></a>
-                                  <div class="news-item-info">
-                                      <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                      <div class="description"><p>${article.description}</p></div>
-                                      <div class="other-detail" >
-                                              <div class="source-name">${article.source.name}</div>
-                                              <div class="published">`+ago+`</div>
-                                      </div>
-                                  </div>
-                              </div>
-                              `;
+                          // articleList += `
+                          //     <div class="news-item"><a target="_blank" href="${article.url}">
+                          //         <div class="news-item-image">
+                          //             <img class="news-image" src="${article.urlToImage}">
+                          //         </div></a>
+                          //         <div class="news-item-info">
+                          //             <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                          //             <div class="description"><p>${article.description}</p></div>
+                          //             <div class="other-detail" >
+                          //                     <div class="source-name">${article.source.name}</div>
+                          //                     <div class="published">`+ago+`</div>
+                          //             </div>
+                          //         </div>
+                          //     </div>
+                          //     `;
+
+                              articleList +=
+                                  '<div class="news-item"><a target="_blank" href="'+article.url+'">'+
+                                      '<div class="news-item-image">'+
+                                          '<img class="news-image" src="'+article.urlToImage+'">'+
+                                      '</div></a>'+
+                                      '<div class="news-item-info">'+
+                                          '<a class="title" target="_blank" href="'+article.url+'">'+article.title+'</a>'+
+                                          '<div class="description"><p>'+article.description+'</p></div>'+
+                                          '<div class="other-detail" >'+
+                                                  '<div class="source-name">'+article.source.name+'</div>'+
+                                                  '<div class="published">'+ago+'</div>'+
+                                          '</div>'+
+                                      '</div>'+
+                                  '</div>'
+                                  ;
                       }
                   });
                   {% if request.session.id %}
@@ -818,21 +835,37 @@
 
 
                       if(article.urlToImage !== null){
-                          articleList += `
-                              <div class="news-item"><a target="_blank" href="${article.url}">
-                                  <div class="news-item-image">
-                                      <img class="news-image" src="${article.urlToImage}">
-                                  </div></a>
-                                  <div class="news-item-info">
-                                      <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                      <div class="description"><p>${article.description}</p></div>
-                                      <div class="other-detail" >
-                                              <div class="source-name">${article.source.name}</div>
-                                              <div class="published">`+ago+`</div>
-                                      </div>
-                                  </div>
-                              </div>
-                              `;
+                          // articleList += `
+                          //     <div class="news-item"><a target="_blank" href="${article.url}">
+                          //         <div class="news-item-image">
+                          //             <img class="news-image" src="${article.urlToImage}">
+                          //         </div></a>
+                          //         <div class="news-item-info">
+                          //             <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                          //             <div class="description"><p>${article.description}</p></div>
+                          //             <div class="other-detail" >
+                          //                     <div class="source-name">${article.source.name}</div>
+                          //                     <div class="published">`+ago+`</div>
+                          //             </div>
+                          //         </div>
+                          //     </div>
+                          //     `;
+
+                          articleList +=
+                              '<div class="news-item"><a target="_blank" href="'+article.url+'">'+
+                                  '<div class="news-item-image">'+
+                                      '<img class="news-image" src="'+article.urlToImage+'">'+
+                                  '</div></a>'+
+                                  '<div class="news-item-info">'+
+                                      '<a class="title" target="_blank" href="'+article.url+'">'+article.title+'</a>'+
+                                      '<div class="description"><p>'+article.description+'</p></div>'+
+                                      '<div class="other-detail" >'+
+                                              '<div class="source-name">'+article.source.name+'</div>'+
+                                              '<div class="published">'+ago+'</div>'+
+                                      '</div>'+
+                                  '</div>'+
+                              '</div>'
+                              ;
                       }
                   });
                   {% if request.session.id %}
@@ -1065,21 +1098,36 @@
                          var ago = differnceOfDate(article.publishedAt);
 
                      if(article.urlToImage !== null){
-                         articleList += `
-                             <div class="news-item"><a target="_blank" href="${article.url}">
-                                 <div class="news-item-image">
-                                     <img class="news-image" src="${article.urlToImage}">
-                                 </div></a>
-                                 <div class="news-item-info">
-                                     <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                     <div class="description"><p>${article.description}</p></div>
-                                     <div class="other-detail" >
-                                             <div class="source-name">${article.source.name}</div>
-                                             <div class="published">`+ago+`</div>
-                                     </div>
-                                 </div>
-                             </div>
-                             `;
+                         // articleList += `
+                         //     <div class="news-item"><a target="_blank" href="${article.url}">
+                         //         <div class="news-item-image">
+                         //             <img class="news-image" src="${article.urlToImage}">
+                         //         </div></a>
+                         //         <div class="news-item-info">
+                         //             <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                         //             <div class="description"><p>${article.description}</p></div>
+                         //             <div class="other-detail" >
+                         //                     <div class="source-name">${article.source.name}</div>
+                         //                     <div class="published">`+ago+`</div>
+                         //             </div>
+                         //         </div>
+                         //     </div>
+                         //     `;
+                         articleList +=
+                             '<div class="news-item"><a target="_blank" href="'+article.url+'">'+
+                                 '<div class="news-item-image">'+
+                                     '<img class="news-image" src="'+article.urlToImage+'">'+
+                                 '</div></a>'+
+                                 '<div class="news-item-info">'+
+                                     '<a class="title" target="_blank" href="'+article.url+'">'+article.title+'</a>'+
+                                     '<div class="description"><p>'+article.description+'</p></div>'+
+                                     '<div class="other-detail" >'+
+                                             '<div class="source-name">'+article.source.name+'</div>'+
+                                             '<div class="published">'+ago+'</div>'+
+                                     '</div>'+
+                                 '</div>'+
+                             '</div>'
+                             ;
                      }
                  });
                  {% if request.session.id %}
@@ -1275,21 +1323,37 @@
                        var ago = differnceOfDate(article.publishedAt);
 
                    if(article.urlToImage !== null){
-                       articleList += `
-                           <div class="news-item"><a target="_blank" href="${article.url}">
-                               <div class="news-item-image">
-                                   <img class="news-image" src="${article.urlToImage}">
-                               </div></a>
-                               <div class="news-item-info">
-                                   <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                   <div class="description"><p>${article.description}</p></div>
-                                   <div class="other-detail" >
-                                           <div class="source-name">${article.source.name}</div>
-                                           <div class="published">`+ago+`</div>
-                                   </div>
-                               </div>
-                           </div>
-                           `;
+                       // articleList += `
+                       //     <div class="news-item"><a target="_blank" href="${article.url}">
+                       //         <div class="news-item-image">
+                       //             <img class="news-image" src="${article.urlToImage}">
+                       //         </div></a>
+                       //         <div class="news-item-info">
+                       //             <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                       //             <div class="description"><p>${article.description}</p></div>
+                       //             <div class="other-detail" >
+                       //                     <div class="source-name">${article.source.name}</div>
+                       //                     <div class="published">`+ago+`</div>
+                       //             </div>
+                       //         </div>
+                       //     </div>
+                       //     `;
+
+                       articleList +=
+                           '<div class="news-item"><a target="_blank" href="'+article.url+'">'+
+                               '<div class="news-item-image">'+
+                                   '<img class="news-image" src="'+article.urlToImage+'">'+
+                               '</div></a>'+
+                               '<div class="news-item-info">'+
+                                   '<a class="title" target="_blank" href="'+article.url+'">'+article.title+'</a>'+
+                                   '<div class="description"><p>'+article.description+'</p></div>'+
+                                   '<div class="other-detail" >'+
+                                           '<div class="source-name">'+article.source.name+'</div>'+
+                                           '<div class="published">'+ago+'</div>'+
+                                   '</div>'+
+                               '</div>'+
+                           '</div>'
+                           ;
                    }
                });
                {% if request.session.id %}
@@ -1404,21 +1468,36 @@
                        var ago = differnceOfDate(article.publishedAt);
 
                    if(article.urlToImage !== null){
-                       articleList += `
-                           <div class="news-item"><a target="_blank" href="${article.url}">
-                               <div class="news-item-image">
-                                   <img class="news-image" src="${article.urlToImage}">
-                               </div></a>
-                               <div class="news-item-info">
-                                   <a class="title" target="_blank" href="${article.url}">${article.title}</a>
-                                   <div class="description"><p>${article.description}</p></div>
-                                   <div class="other-detail" >
-                                           <div class="source-name">${article.source.name}</div>
-                                           <div class="published">`+ago+`</div>
-                                   </div>
-                               </div>
-                           </div>
-                           `;
+                       // articleList += `
+                       //     <div class="news-item"><a target="_blank" href="${article.url}">
+                       //         <div class="news-item-image">
+                       //             <img class="news-image" src="${article.urlToImage}">
+                       //         </div></a>
+                       //         <div class="news-item-info">
+                       //             <a class="title" target="_blank" href="${article.url}">${article.title}</a>
+                       //             <div class="description"><p>${article.description}</p></div>
+                       //             <div class="other-detail" >
+                       //                     <div class="source-name">${article.source.name}</div>
+                       //                     <div class="published">`+ago+`</div>
+                       //             </div>
+                       //         </div>
+                       //     </div>
+                       //     `;
+                       articleList +=
+                           '<div class="news-item"><a target="_blank" href="'+article.url+'">'+
+                               '<div class="news-item-image">'+
+                                   '<img class="news-image" src="'+article.urlToImage+'">'+
+                               '</div></a>'+
+                               '<div class="news-item-info">'+
+                                   '<a class="title" target="_blank" href="'+article.url+'">'+article.title+'</a>'+
+                                   '<div class="description"><p>'+article.description+'</p></div>'+
+                                   '<div class="other-detail" >'+
+                                           '<div class="source-name">'+article.source.name+'</div>'+
+                                           '<div class="published">'+ago+'</div>'+
+                                   '</div>'+
+                               '</div>'+
+                           '</div>'
+                           ;
                    }
                });
                {% if request.session.id %}
